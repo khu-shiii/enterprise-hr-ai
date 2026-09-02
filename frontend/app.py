@@ -5,11 +5,16 @@ A polished workforce intelligence dashboard with custom CSS, Plotly charts, and 
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import sys
 from pathlib import Path
+
+# Ensure project root in sys.path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from app.services.llm_chat_service import build_system_context, generate_llm_response
 
 # ── Page config ──
 st.set_page_config(
@@ -251,6 +256,49 @@ with st.sidebar:
         st.warning("⚡ Direct Mode (API offline)")
         st.caption("Using local data files")
     
+    st.markdown("---")
+    st.markdown("### 🤖 LLM Settings")
+    llm_provider = st.selectbox(
+        "Provider",
+        ["Google Gemini", "OpenAI / Compatible", "Built-in Synthesizer"],
+        index=0,
+        help="Select your generative AI model provider"
+    )
+    
+    llm_api_key = ""
+    llm_model = ""
+    llm_base_url = ""
+    
+    if llm_provider == "Google Gemini":
+        env_key = os.environ.get("GEMINI_API_KEY", "")
+        llm_api_key = st.text_input(
+            "Gemini API Key",
+            value=env_key,
+            type="password",
+            placeholder="AIzaSy...",
+            help="Get your free key at aistudio.google.com"
+        )
+        llm_model = st.selectbox(
+            "Model",
+            ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"],
+            index=0
+        )
+    elif llm_provider == "OpenAI / Compatible":
+        env_key = os.environ.get("OPENAI_API_KEY", "")
+        llm_api_key = st.text_input(
+            "API Key",
+            value=env_key,
+            type="password",
+            placeholder="sk-... or gsk_...",
+            help="OpenAI / Groq / DeepSeek API key"
+        )
+        llm_model = st.text_input("Model Name", value="gpt-4o-mini", placeholder="e.g. gpt-4o-mini, llama3-70b-8192")
+        llm_base_url = st.text_input(
+            "Base URL (Optional)",
+            value="",
+            placeholder="e.g. https://api.groq.com/openai/v1 or http://localhost:11434/v1"
+        )
+
     st.markdown("---")
     st.markdown("### Attrition Thresholds")
     st.markdown("🔴 **HIGH** ≥ 65% probability")
@@ -803,159 +851,64 @@ elif nav == "🤖 AI HR Chatbot":
             }
         ]
 
-    # Quick prompt buttons
-    st.markdown("**Quick Inquiries:**")
-    qc1, qc2, qc3, qc4 = st.columns(4)
+    # Quick prompt buttons & Clear Chat row
+    col_q, col_clear = st.columns([5, 1])
     quick_query = None
-    with qc1:
-        if st.button("🚨 Top Flight Risks", use_container_width=True):
-            quick_query = "Who are the highest flight-risk employees?"
-    with qc2:
-        if st.button("🏢 Dept Risk Summary", use_container_width=True):
-            quick_query = "Which department has the highest attrition risk?"
-    with qc3:
-        if st.button("🎯 Top Skill Gaps", use_container_width=True):
-            quick_query = "What are the most critical skill gaps in the company?"
-    with qc4:
-        if st.button("📊 Org Health Overview", use_container_width=True):
-            quick_query = "Give me an overview of company workforce health."
+    with col_q:
+        qc1, qc2, qc3, qc4 = st.columns(4)
+        with qc1:
+            if st.button("🚨 Top Flight Risks", use_container_width=True):
+                quick_query = "Who are the highest flight-risk employees in the company?"
+        with qc2:
+            if st.button("🏢 Dept Risk Breakdown", use_container_width=True):
+                quick_query = "Which department has the worst attrition risk and why?"
+        with qc3:
+            if st.button("🎯 Top Skill Gaps", use_container_width=True):
+                quick_query = "What are the most critical organization-wide skill gaps and how should we close them?"
+        with qc4:
+            if st.button("📊 Org Health Briefing", use_container_width=True):
+                quick_query = "Give me an executive briefing on overall workforce health and 3 actionable recommendations."
+    
+    with col_clear:
+        if st.button("🗑️ Clear", use_container_width=True, help="Clear chat history"):
+            st.session_state.messages = [
+                {
+                    "role": "assistant",
+                    "content": "👋 Chat history cleared. How can I assist you with your workforce intelligence today?"
+                }
+            ]
+            st.rerun()
+
+    # Provider status banner
+    status_label = f"🤖 Engine: **{llm_provider}** ({llm_model if llm_model else 'Default'})"
+    st.caption(status_label)
 
     # Render previous messages
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Helper function to generate rule/data-backed response
-    def generate_ai_response(prompt: str) -> str:
-        prompt_lower = prompt.lower().strip()
-        if intel_df is None:
-            return "⚠️ Intelligence data is not available. Please ensure notebooks 01–16 have run."
-
-        # 1. Individual employee lookup query
-        import re
-        emp_match = re.search(r'\b(?:employee|emp|id)\s*#?\s*(\d+)\b', prompt_lower)
-        if emp_match or prompt_lower.isdigit():
-            target_id = emp_match.group(1) if emp_match else prompt_lower
-            match = intel_df[intel_df["EmployeeID"].astype(str) == str(target_id)]
-            if not match.empty:
-                emp = match.iloc[0]
-                risk_emoji = "🔴" if emp["Risk_Level"] == "HIGH" else ("🟡" if emp["Risk_Level"] == "MEDIUM" else "🟢")
-                return (
-                    f"### 👤 Profile for Employee #{emp['EmployeeID']} ({emp.get('Name', 'Unknown')})\n\n"
-                    f"- **Department & Role:** {emp.get('Department')} — {emp.get('JobRole')}\n"
-                    f"- **Attrition Probability:** `{emp['Attrition_Prob']:.1%}` ({risk_emoji} **{emp['Risk_Level']} Risk**)\n"
-                    f"- **Tenure & Salary:** {emp.get('YearsAtCompany', 0):.1f} years | ${emp.get('MonthlySalary', 0):,.0f}/mo\n"
-                    f"- **Work-Life Balance / Perf:** {emp.get('WorkLifeBalanceScore', 0):.1f}/5.0 | {emp.get('PerformanceRating', 0):.1f}/5.0\n"
-                    f"- **Skill Gaps:** `{emp.get('gaps_count', 0)}` missing skills (Coverage: `{emp.get('coverage_pct', 0):.0%}`)\n"
-                    f"- **Priority Skill Gap:** `{emp.get('Top_Skill_Gap', 'None')}` (Priority: **{emp.get('Rec_Priority', 'Standard')}**)\n"
-                    f"- **Recommended Tools:** `{emp.get('Recommended_Tools', 'N/A')}`\n\n"
-                    f"💡 *Action item: {'Schedule an immediate 1-on-1 retention check-in.' if emp['Risk_Level'] == 'HIGH' else 'Monitor and support with upskilling.'}*"
-                )
-
-        # 2. Top Attrition / Flight risk queries
-        if any(w in prompt_lower for w in ["flight", "risk", "quit", "leave", "attrition", "danger"]):
-            if "department" in prompt_lower or "dept" in prompt_lower:
-                dept_risk = intel_df.groupby("Department").agg(
-                    Total=("EmployeeID", "count"),
-                    High=("Risk_Level", lambda x: (x == "HIGH").sum()),
-                    Avg_Prob=("Attrition_Prob", "mean")
-                ).reset_index()
-                dept_risk["High_Pct"] = (dept_risk["High"] / dept_risk["Total"] * 100).round(1)
-                dept_risk = dept_risk.sort_values("High_Pct", ascending=False)
-                
-                rows_md = "\n".join([
-                    f"| **{r['Department']}** | {r['Total']} | {r['High']} | {r['High_Pct']}% | {r['Avg_Prob']:.1%} |"
-                    for _, r in dept_risk.iterrows()
-                ])
-                worst = dept_risk.iloc[0]
-                return (
-                    f"### 🚨 Department Attrition Risk Breakdown\n\n"
-                    f"**{worst['Department']}** has the highest flight-risk concentration with **{worst['High_Pct']}%** of its team at high risk.\n\n"
-                    f"| Department | Total Staff | High Risk Count | % High Risk | Avg Attrition Prob |\n"
-                    f"|---|---|---|---|---|\n"
-                    f"{rows_md}\n\n"
-                    f"💡 *Recommendation: Prioritize management reviews and workload rebalancing in {worst['Department']}.*"
-                )
-            else:
-                top_risks = intel_df.nlargest(5, "Attrition_Prob")
-                rows_md = "\n".join([
-                    f"| **#{r['EmployeeID']}** | {r.get('Name', 'Unknown')} | {r.get('Department')} | {r.get('JobRole')} | `{r['Attrition_Prob']:.1%}` | 🔴 {r['Risk_Level']} |"
-                    for _, r in top_risks.iterrows()
-                ])
-                total_high = (intel_df["Risk_Level"] == "HIGH").sum()
-                return (
-                    f"### ⚠️ Top 5 Highest Attrition Risk Employees\n\n"
-                    f"There are **{total_high} employees** categorized as **HIGH risk** (≥65% probability) across the company.\n\n"
-                    f"| ID | Name | Department | Role | Attrition Prob | Risk Level |\n"
-                    f"|---|---|---|---|---|---|\n"
-                    f"{rows_md}\n\n"
-                    f"💡 *To inspect any specific person in detail, ask: \"Give me a report on employee [ID]\".*"
-                )
-
-        # 3. Skill gap queries
-        if any(w in prompt_lower for w in ["skill", "gap", "upskill", "learn", "training", "competenc"]):
-            if org_gap_df is not None:
-                high_sev = org_gap_df[org_gap_df["severity"] == "HIGH"].head(5)
-                rows_md = "\n".join([
-                    f"| **{r['skill']}** | 🔴 HIGH | {r['pct_employees_lacking']:.1f}% | {r['avg_importance']:.2f}/5.0 | {r['employees_lacking']} |"
-                    for _, r in high_sev.iterrows()
-                ])
-                return (
-                    f"### 🎯 Top Organizational Skill Gaps (High Severity)\n\n"
-                    f"These skills represent our biggest strategic deficits based on O*NET importance weights and current workforce capabilities:\n\n"
-                    f"| Skill Element | Severity | % Lacking | Avg Importance | # Employees Lacking |\n"
-                    f"|---|---|---|---|---|\n"
-                    f"{rows_md}\n\n"
-                    f"💡 *Threshold: High Severity = ≥30% of employees lacking + O*NET importance ≥ 3.5/5.0.*"
-                )
-            return "Skill gap data is being processed."
-
-        # 4. Department engagement queries
-        if any(w in prompt_lower for w in ["engagement", "attendance", "performance", "kpi"]):
-            if dept_scores_df is not None and not dept_scores_df.empty:
-                rows_md = "\n".join([
-                    f"| **{r['Department']}** | {r['Composite_Engagement_Score']*100:.1f}% |"
-                    for _, r in dept_scores_df.sort_values('Composite_Engagement_Score', ascending=False).iterrows()
-                ])
-                best = dept_scores_df.nlargest(1, "Composite_Engagement_Score").iloc[0]
-                worst = dept_scores_df.nsmallest(1, "Composite_Engagement_Score").iloc[0]
-                return (
-                    f"### 📈 Department Engagement Index (5,000-Employee Population)\n\n"
-                    f"- 🏆 **Top Performing Department:** **{best['Department']}** ({best['Composite_Engagement_Score']*100:.1f}%)\n"
-                    f"- ⚠️ **Needs Attention:** **{worst['Department']}** ({worst['Composite_Engagement_Score']*100:.1f}%)\n\n"
-                    f"| Department | Composite Engagement Score |\n"
-                    f"|---|---|\n"
-                    f"{rows_md}\n"
-                )
-
-        # 5. Overview / Health / Summary queries
-        total = len(intel_df)
-        high = (intel_df["Risk_Level"] == "HIGH").sum()
-        med = (intel_df["Risk_Level"] == "MEDIUM").sum()
-        low = (intel_df["Risk_Level"] == "LOW").sum()
-        avg_prob = intel_df["Attrition_Prob"].mean()
-        avg_gap = intel_df["gaps_count"].mean()
-        
-        return (
-            f"### 📊 Enterprise Workforce Health Summary\n\n"
-            f"- **Total Employees Monitored:** `{total:,}`\n"
-            f"- 🔴 **High Attrition Risk (≥65%):** `{high}` employees (`{high/total:.1%}`)\n"
-            f"- 🟡 **Medium Attrition Risk (40–65%):** `{med}` employees (`{med/total:.1%}`)\n"
-            f"- 🟢 **Stable / Low Risk (<40%):** `{low}` employees (`{low/total:.1%}`)\n"
-            f"- 📈 **Company-Wide Avg Attrition Probability:** `{avg_prob:.1%}`\n"
-            f"- 🎯 **Average Skill Gaps per Employee:** `{avg_gap:.1f}` skills\n\n"
-            f"Feel free to ask for deeper breakdowns by department, skill, or individual employee!"
-        )
-
     # Handle chat input or button click
-    user_input = st.chat_input("Ask a question about workforce risk, skills, or employees...") or quick_query
+    user_input = st.chat_input("Ask any question about employees, risk, skill gaps, or HR retention strategy...") or quick_query
     if user_input:
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
             st.markdown(user_input)
 
-        response = generate_ai_response(user_input)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        # Build dynamic RAG context from dataset for this specific prompt
+        system_context = build_system_context(intel_df, org_gap_df, dept_scores_df, user_input)
+        
         with st.chat_message("assistant"):
-            st.markdown(response)
+            with st.spinner("🧠 LLM is analyzing workforce telemetry & generating response..."):
+                response = generate_llm_response(
+                    messages=st.session_state.messages,
+                    system_context=system_context,
+                    api_key=llm_api_key,
+                    provider=llm_provider,
+                    model_name=llm_model,
+                    base_url=llm_base_url if 'llm_base_url' in locals() else None
+                )
+                st.markdown(response)
+
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
