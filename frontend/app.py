@@ -300,15 +300,60 @@ with st.sidebar:
         )
 
     st.markdown("---")
-    st.markdown("### Attrition Thresholds")
-    st.markdown("🔴 **HIGH** ≥ 65% probability")
-    st.markdown("🟡 **MEDIUM** 40–65%")
-    st.markdown("🟢 **LOW** < 40%")
+    st.markdown("### ⚙️ Attrition Thresholds")
+    
+    # Initialize session state for default thresholds if not present
+    if "high_thresh" not in st.session_state:
+        st.session_state.high_thresh = 65
+    if "med_thresh" not in st.session_state:
+        st.session_state.med_thresh = 40
 
-# ── Load primary data ──
+    high_risk_thresh = st.slider(
+        "🔴 High Risk Cutoff (%)",
+        min_value=45,
+        max_value=90,
+        value=st.session_state.high_thresh,
+        step=1,
+        help="Employees with attrition probability at or above this value are classified as HIGH risk."
+    )
+    
+    med_risk_thresh = st.slider(
+        "🟡 Medium Risk Cutoff (%)",
+        min_value=15,
+        max_value=min(60, high_risk_thresh - 5),
+        value=min(st.session_state.med_thresh, high_risk_thresh - 5),
+        step=1,
+        help="Employees with attrition probability between this value and High Risk Cutoff are classified as MEDIUM risk."
+    )
+    
+    st.session_state.high_thresh = high_risk_thresh
+    st.session_state.med_thresh = med_risk_thresh
+
+    st.caption(f"🔴 **HIGH**: ≥ {high_risk_thresh}% | 🟡 **MED**: {med_risk_thresh}–{high_risk_thresh}% | 🟢 **LOW**: < {med_risk_thresh}%")
+
+    if st.button("↺ Reset Thresholds (65% / 40%)", use_container_width=True):
+        st.session_state.high_thresh = 65
+        st.session_state.med_thresh = 40
+        st.rerun()
+
+# ── Load primary data & dynamically re-bucket risk based on user thresholds ──
 intel_df = load_local_intelligence()
 org_gap_df = load_org_skill_gap()
 dept_scores_df = load_dept_scores()
+
+if intel_df is not None:
+    # Dynamically apply user's custom threshold values
+    h_p = high_risk_thresh / 100.0
+    m_p = med_risk_thresh / 100.0
+    
+    def assign_user_risk(p):
+        if p >= h_p:
+            return "HIGH"
+        elif p >= m_p:
+            return "MEDIUM"
+        return "LOW"
+        
+    intel_df["Risk_Level"] = intel_df["Attrition_Prob"].apply(assign_user_risk)
 
 
 def make_kpi_card(icon, value, label, css_class):
@@ -498,10 +543,10 @@ elif nav == "⚠️ Attrition Risk":
                 title="Attrition Probability Distribution",
                 labels={"Attrition_Prob": "Attrition Probability"},
             )
-            fig.add_vline(x=0.65, line_dash="dash", line_color=PALETTE["HIGH"],
-                         annotation_text="HIGH threshold", annotation_font_color=PALETTE["HIGH"])
-            fig.add_vline(x=0.40, line_dash="dash", line_color=PALETTE["MEDIUM"],
-                         annotation_text="MEDIUM threshold", annotation_font_color=PALETTE["MEDIUM"])
+            fig.add_vline(x=h_p, line_dash="dash", line_color=PALETTE["HIGH"],
+                         annotation_text=f"HIGH (≥{high_risk_thresh}%)", annotation_font_color=PALETTE["HIGH"])
+            fig.add_vline(x=m_p, line_dash="dash", line_color=PALETTE["MEDIUM"],
+                         annotation_text=f"MEDIUM (≥{med_risk_thresh}%)", annotation_font_color=PALETTE["MEDIUM"])
             fig = apply_chart_theme(fig)
             fig.update_layout(height=320)
             st.plotly_chart(fig, use_container_width=True)
@@ -746,9 +791,9 @@ elif nav == "👤 Employee Lookup":
                         "bar": {"color": gauge_color, "thickness": 0.3},
                         "bgcolor": "#1e2533",
                         "steps": [
-                            {"range": [0, 40], "color": "rgba(72,187,120,0.1)"},
-                            {"range": [40, 65], "color": "rgba(237,137,54,0.1)"},
-                            {"range": [65, 100], "color": "rgba(245,101,101,0.1)"},
+                            {"range": [0, med_risk_thresh], "color": "rgba(72,187,120,0.1)"},
+                            {"range": [med_risk_thresh, high_risk_thresh], "color": "rgba(237,137,54,0.1)"},
+                            {"range": [high_risk_thresh, 100], "color": "rgba(245,101,101,0.1)"},
                         ],
                         "threshold": {
                             "line": {"color": gauge_color, "width": 4},
