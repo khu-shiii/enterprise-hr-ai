@@ -564,8 +564,19 @@ elif nav == "⚠️ Attrition Risk":
             fig2.update_xaxes(tickangle=45)
             st.plotly_chart(fig2, use_container_width=True)
         
-        # ── Top at-risk employees table ──
-        st.markdown('<div class="section-header">AT-RISK EMPLOYEE LIST</div>', unsafe_allow_html=True)
+        col_tbl_hdr, col_tbl_exp = st.columns([4, 1])
+        with col_tbl_hdr:
+            st.markdown('<div class="section-header">AT-RISK EMPLOYEE ROSTER</div>', unsafe_allow_html=True)
+        with col_tbl_exp:
+            csv_data = filtered.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Export CSV",
+                data=csv_data,
+                file_name=f"at_risk_employees_{dept_filter.lower()}_{risk_filter.lower()}.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+        
         display_cols = ["EmployeeID", "Name", "Department", "JobRole", "Attrition_Prob", "Risk_Level",
                         "YearsAtCompany", "Top_Skill_Gap"]
         display_cols = [c for c in display_cols if c in filtered.columns]
@@ -665,7 +676,18 @@ elif nav == "🎯 Skill Gaps":
         st.plotly_chart(fig, use_container_width=True)
         
         # ── Data table ──
-        st.markdown('<div class="section-header">SKILL GAP DETAIL TABLE</div>', unsafe_allow_html=True)
+        col_sg_hdr, col_sg_exp = st.columns([4, 1])
+        with col_sg_hdr:
+            st.markdown('<div class="section-header">SKILL GAP DETAIL TABLE</div>', unsafe_allow_html=True)
+        with col_sg_exp:
+            sg_csv = top_gaps.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Export Gaps CSV",
+                data=sg_csv,
+                file_name=f"org_skill_gaps_{sev_filter.lower()}.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
         
         display_df = top_gaps[["skill", "severity", "pct_employees_lacking",
                                  "avg_importance", "total_gap_weight", "employees_lacking"]].copy()
@@ -849,6 +871,48 @@ elif nav == "👤 Employee Lookup":
                   <div class="profile-stat-value">{rec_tools}</div>
                 </div>
                 """, unsafe_allow_html=True)
+
+            # ── Interactive Retention What-If Simulator ──
+            st.markdown('<div class="section-header">🧪 RETENTION WHAT-IF SIMULATOR (INTERVENTION LAB)</div>', unsafe_allow_html=True)
+            st.caption("Simulate managerial interventions and calculate real-time estimated reduction in employee flight risk.")
+
+            sim_col1, sim_col2, sim_col3 = st.columns(3)
+            with sim_col1:
+                sim_raise = st.slider("💰 Proposed Salary Increase (%)", min_value=0, max_value=40, value=10, step=5, key=f"sim_sal_{emp_id}")
+            with sim_col2:
+                cur_wlb = float(found_emp.get("WorkLifeBalanceScore", 3.0))
+                sim_wlb = st.slider("⚖️ Target Work-Life Balance (1-5)", min_value=1.0, max_value=5.0, value=min(5.0, max(1.0, cur_wlb + 1.0)), step=0.5, key=f"sim_wlb_{emp_id}")
+            with sim_col3:
+                sim_training = st.slider("🎓 Additional Training Hours", min_value=0, max_value=40, value=15, step=5, key=f"sim_trn_{emp_id}")
+
+            # Calculate simulated probability reduction
+            salary_factor = (sim_raise / 100.0) * 0.35
+            wlb_factor = max(0.0, (sim_wlb - cur_wlb) / 5.0) * 0.40
+            training_factor = (sim_training / 40.0) * 0.15
+            total_reduction = salary_factor + wlb_factor + training_factor
+            
+            sim_prob = max(0.05, prob * (1.0 - total_reduction))
+            sim_risk = assign_user_risk(sim_prob)
+            delta_prob = prob - sim_prob
+
+            sim_card_c1, sim_card_c2, sim_card_c3 = st.columns(3)
+            with sim_card_c1:
+                st.metric("Baseline Attrition Risk", f"{prob:.1%}", risk)
+            with sim_card_c2:
+                sim_badge = "🔴 HIGH" if sim_risk == "HIGH" else ("🟡 MEDIUM" if sim_risk == "MEDIUM" else "🟢 LOW")
+                st.metric("Simulated New Risk", f"{sim_prob:.1%}", sim_badge)
+            with sim_card_c3:
+                st.metric("Estimated Risk Reduction", f"🔻 -{delta_prob:.1%}", f"{total_reduction*100:.0f}% Intervention Power")
+
+            # ── Download Employee Dossier ──
+            dossier_json = json.dumps({k: v for k, v in found_emp.to_dict().items() if not pd.isna(v)}, indent=2)
+            st.download_button(
+                label=f"📥 Download {found_emp.get('Name', 'Employee')}'s Dossier (JSON)",
+                data=dossier_json,
+                file_name=f"employee_{emp_id}_intelligence_dossier.json",
+                mime="application/json",
+                use_container_width=True
+            )
         
         elif search_input:
             st.warning(f"No employee found for '{search_input}'. Try an Employee ID number (1–500) or partial name.")
