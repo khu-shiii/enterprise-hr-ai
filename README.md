@@ -8,6 +8,8 @@ A production-quality HR intelligence system that answers three questions:
 Built with **FastAPI** backend, **Streamlit** dashboard, and **16 executed Jupyter notebooks** documenting every step.
 
 ---
+🚀 Live Demo
+🌐 https://enterprise-hr-ai-kccjfnenkeggu3fb2nb3rp.streamlit.app/
 
 ## 📊 Final Model Metrics (XGBoost — chosen for highest recall)
 
