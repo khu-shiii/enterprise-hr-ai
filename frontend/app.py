@@ -511,8 +511,8 @@ with st.sidebar:
             st.rerun()
 
 
-# ── 7. Top Navigation Bar & Theme Pill Toggle ──
-col_head_logo, col_head_search, col_head_actions = st.columns([2.6, 3.2, 2.7])
+# ── 7. Top Navigation Bar (Header) ──
+col_head_logo, col_head_search, col_head_actions = st.columns([3.0, 3.2, 1.8])
 
 with col_head_logo:
     st.markdown(f"""
@@ -529,13 +529,7 @@ with col_head_search:
     global_search = st.text_input("Global Search", placeholder="🔍 Search employees, roles, departments...", label_visibility="collapsed")
 
 with col_head_actions:
-    c_thm, c_bell, c_usr = st.columns([1.3, 0.7, 1.4])
-    with c_thm:
-        # Elegant Theme Toggle Pill
-        toggle_label = "🌙 Dark Active" if is_dark else "☀️ Light Active"
-        if st.button(f"{'☀️ Switch Light' if is_dark else '🌙 Switch Dark'}", help="Toggle Dark / Light Theme System", use_container_width=True):
-            st.session_state.theme = "light" if is_dark else "dark"
-            st.rerun()
+    c_bell, c_usr = st.columns([0.8, 1.6])
     with c_bell:
         st.button("🔔 3", help="3 Critical Flight Risk Alerts", use_container_width=True)
     with c_usr:
@@ -963,12 +957,6 @@ elif st.session_state.active_tab == "⚙️ System Settings":
         st.session_state.high_thresh = h_s
         st.session_state.med_thresh = m_s
         st.success("✅ Threshold preferences saved and applied globally!")
-
-    st.markdown("##### 2. Theme Preference")
-    t_opt = st.radio("Active Theme", ["Dark Theme (🌙 Premium AI Enterprise)", "Light Theme (☀️ Premium Editorial SaaS)"], index=0 if is_dark else 1)
-    if st.button("Apply Theme"):
-        st.session_state.theme = "dark" if "Dark" in t_opt else "light"
-        st.rerun()
 
 # Default fallback
 elif st.session_state.active_tab in ["📈 Workforce Analytics", "🏢 Departments", "⚠️ Attrition Analytics", "⭐ Performance Analytics", "💰 Compensation Equity"]:
