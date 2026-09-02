@@ -1,6 +1,6 @@
 """
-TalentPulse AI — Enterprise Workforce Intelligence Platform
-Minimalist Executive Edition — Fixed Data Consistency, Unified Color System & Polished UX
+Enterprise HR AI — Workforce Intelligence & Retention Platform
+Enterprise Dark Slate & Indigo Edition — Clean, Minimalist & Emoji-Free
 """
 import streamlit as st
 import pandas as pd
@@ -21,248 +21,279 @@ from app.services.llm_chat_service import build_system_context, generate_llm_res
 
 # ── 1. Page Configuration ──
 st.set_page_config(
-    page_title="TalentPulse AI | Workforce Intelligence",
-    page_icon="⚡",
+    page_title="Workforce Intelligence Platform",
+    page_icon="💼",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# ── 2. Unified Design System & CSS ──
+# ── 2. Enterprise Slate & Indigo Design System ──
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
   :root {
-    --bg-base: #0b0f17;
-    --bg-surface: #121826;
-    --bg-surface-hover: #182236;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-accent: rgba(14, 165, 233, 0.4);
+    --bg-main: #0B0F17;
+    --bg-card: #151C28;
+    --bg-card-hover: #1A2332;
+    --bg-subtle: #1C2638;
     
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --border-color: #20293A;
+    --border-accent: rgba(99, 102, 241, 0.4);
     
-    /* Unified Brand Accent: Cyan / Teal */
-    --color-brand: #0ea5e9;
-    --color-brand-light: #38bdf8;
-    --color-brand-glow: rgba(14, 165, 233, 0.2);
-
-    /* Strict 3-Tier Risk Colors */
-    --risk-high: #ef4444;
-    --risk-med: #f59e0b;
-    --risk-low: #10b981;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-dim: #64748B;
     
-    --radius-sm: 8px;
-    --radius-md: 12px;
+    --color-primary: #6366F1;
+    --color-primary-light: #818CF8;
+    --color-primary-glow: rgba(99, 102, 241, 0.15);
+    
+    --risk-high: #EF4444;
+    --risk-med: #F59E0B;
+    --risk-low: #10B981;
+    
+    --radius-card: 8px;
+    --radius-sm: 6px;
     --radius-full: 9999px;
   }
 
   html, body, [class*="css"] {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-primary);
   }
 
   .stApp {
-    background-color: var(--bg-base);
+    background-color: var(--bg-main);
   }
 
-  /* Sidebar styling with ample bottom padding */
+  /* Sidebar styling */
   [data-testid="stSidebar"] {
-    background-color: #0d121e !important;
-    border-right: 1px solid var(--border-subtle) !important;
+    background-color: #0E1420 !important;
+    border-right: 1px solid var(--border-color) !important;
   }
   [data-testid="stSidebar"] > div:first-child {
-    padding-bottom: 80px !important;
+    padding-bottom: 60px !important;
   }
 
-  /* Top Breadcrumb Bar */
-  .top-bar {
+  /* Top Navigation Bar */
+  .header-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 20px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    margin-bottom: 20px;
+    padding: 14px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    margin-bottom: 24px;
   }
-  .page-title {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-  }
-  .page-title span { color: var(--color-brand); }
-  
-  .status-cluster {
+  .header-title-group {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-  .status-pill {
+  .header-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .header-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .status-tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 4px 12px;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
     border-radius: var(--radius-full);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--risk-low);
     text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
-  .timestamp-tag {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--risk-low);
   }
 
-  /* Minimal KPI Cards */
-  .kpi-container {
+  /* KPI Executive Metrics Row */
+  .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
   }
-  .kpi-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
     padding: 18px 20px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
-  .kpi-card:hover {
-    transform: translateY(-2px);
+  .metric-card:hover {
     border-color: var(--border-accent);
+    transform: translateY(-2px);
   }
-  .kpi-label { font-size: 0.74rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .kpi-value { font-size: 1.95rem; font-weight: 800; margin: 4px 0 2px 0; color: #ffffff; letter-spacing: -0.02em; }
-  .kpi-sub { font-size: 0.72rem; color: var(--text-muted); }
+  .metric-title {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .metric-value {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 4px 0 2px 0;
+    letter-spacing: -0.02em;
+  }
+  .metric-subtitle {
+    font-size: 0.74rem;
+    color: var(--text-dim);
+  }
 
   /* Section Title Bar */
-  .section-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffffff;
-    font-size: 0.92rem;
+  .section-heading {
+    font-size: 0.95rem;
     font-weight: 700;
-    margin: 24px 0 12px 0;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    margin: 24px 0 14px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
   }
-  .section-bar span { color: var(--color-brand); }
 
-  /* Strict 3-Tier Risk Badges with Accessible Text */
-  .badge {
+  /* Clean Risk Badges (No Emojis) */
+  .badge-container {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
     padding: 3px 10px;
-    border-radius: var(--radius-full);
+    border-radius: 4px;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
-  .badge-high { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
-  .badge-medium { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
-  .badge-low { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+  .badge-high {
+    background: rgba(239, 68, 68, 0.12);
+    color: #FCA5A5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  .badge-medium {
+    background: rgba(245, 158, 11, 0.12);
+    color: #FCD34D;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  .badge-low {
+    background: rgba(16, 185, 129, 0.12);
+    color: #6EE7B7;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
 
-  /* Minimal Cards */
-  .ui-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
+  /* Cards & Surface Components */
+  .surface-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
     padding: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
-  .stat-grid {
+  .stat-grid-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-subtle);
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
   }
-  .stat-box {
-    background: rgba(255, 255, 255, 0.02);
-    padding: 10px 14px;
+  .stat-tile-box {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-subtle);
+    padding: 12px 14px;
   }
-  .stat-box-lbl { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
-  .stat-box-val { font-size: 0.95rem; color: #ffffff; font-weight: 700; margin-top: 2px; }
-
-  /* Collapse/Expand Sidebar Controls */
-  [data-testid="collapsedControl"] {
-    display: flex !important;
-    visibility: visible !important;
-    color: var(--color-brand) !important;
-    background: var(--bg-surface) !important;
-    border: 1px solid var(--border-subtle) !important;
-    border-radius: var(--radius-sm) !important;
-    padding: 6px !important;
-    transition: all 0.2s ease !important;
+  .stat-tile-lbl {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
-  [data-testid="collapsedControl"]:hover {
-    background: var(--bg-surface-hover) !important;
-    border-color: var(--border-accent) !important;
+  .stat-tile-val {
+    font-size: 0.96rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-top: 2px;
   }
 
+  /* Form & Native Widgets Override */
   [data-testid="stChatMessage"] {
-    background: var(--bg-surface) !important;
-    border: 1px solid var(--border-subtle) !important;
-    border-radius: var(--radius-md) !important;
-    margin-bottom: 10px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-card) !important;
+    margin-bottom: 12px !important;
   }
 
   [data-testid="stMetric"] {
-    background: var(--bg-surface) !important;
-    border: 1px solid var(--border-subtle) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
     border-radius: var(--radius-sm) !important;
-    padding: 12px !important;
+    padding: 14px !important;
   }
 
   .stButton button {
     border-radius: var(--radius-sm) !important;
     font-weight: 600 !important;
+    font-size: 0.85rem !important;
+  }
+  .stButton button[kind="primary"] {
+    background-color: var(--color-primary) !important;
+    border: 1px solid var(--color-primary) !important;
+    color: #ffffff !important;
+  }
+
+  /* Sidebar Collapsible Chevron */
+  [data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    color: var(--color-primary) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 6px !important;
   }
 
   #MainMenu, footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
-# ── 3. Acronym & Department Formatter Helper ──
-DEPT_NAME_MAP = {
-    "It": "IT",
-    "Hr": "HR",
-    "it": "IT",
-    "hr": "HR",
-    "Sales": "Sales",
-    "Finance": "Finance",
-    "Marketing": "Marketing",
-    "Support": "Support"
-}
+# ── 3. Data Loaders & Model Loading ──
+DEPT_ACRONYM_MAP = {"It": "IT", "Hr": "HR", "it": "IT", "hr": "HR"}
 
-def format_dept(dept: str) -> str:
-    return DEPT_NAME_MAP.get(str(dept), str(dept))
+def clean_dept_name(name):
+    return DEPT_ACRONYM_MAP.get(str(name), str(name))
 
-
-# ── 4. Data Loaders & Model Loading ──
 @st.cache_data(ttl=300)
-def load_data():
+def load_datasets():
     base = Path(__file__).parent.parent / "data" / "processed"
     intel = pd.read_csv(base / "employee_intelligence.csv") if (base / "employee_intelligence.csv").exists() else None
     org_gap = pd.read_csv(base / "org_skill_gap.csv") if (base / "org_skill_gap.csv").exists() else None
     dept_s = pd.read_csv(base / "department_composite_scores.csv") if (base / "department_composite_scores.csv").exists() else None
-    
+
     if intel is not None and "Department" in intel.columns:
-        intel["Department"] = intel["Department"].apply(format_dept)
+        intel["Department"] = intel["Department"].apply(clean_dept_name)
     if dept_s is not None and "Department" in dept_s.columns:
-        dept_s["Department"] = dept_s["Department"].apply(format_dept)
+        dept_s["Department"] = dept_s["Department"].apply(clean_dept_name)
 
     return intel, org_gap, dept_s
 
@@ -272,357 +303,386 @@ def load_model():
     if not p.exists(): p = Path(__file__).parent.parent / "models" / "attrition_pipeline.joblib"
     return joblib.load(p) if p.exists() else None
 
-intel_df, org_gap_df, dept_scores_df = load_data()
+intel_df, org_gap_df, dept_scores_df = load_datasets()
 ml_model = load_model()
 
-# ── 5. Sidebar Controls & Polish ──
+# ── 4. Sidebar Controls & Threshold Calibration ──
 if "high_thresh" not in st.session_state: st.session_state.high_thresh = 65
 if "med_thresh" not in st.session_state: st.session_state.med_thresh = 40
 
 with st.sidebar:
-    st.markdown("### ⚡ TalentPulse AI")
+    st.markdown("### TalentPulse AI")
     st.caption("Workforce Intelligence Platform")
     st.markdown("---")
     
-    NAV_ITEMS = ["📊 Overview", "⚠️ Attrition Risk", "🎯 Skill Gaps", "👤 Employee Lookup", "🔮 ML Prediction", "🤖 AI Copilot"]
+    NAV_ITEMS = [
+        "Executive Overview",
+        "Attrition Risk Analytics",
+        "Competency & Skill Gaps",
+        "Employee Directory",
+        "ML Risk Prediction",
+        "Workforce AI Assistant"
+    ]
     nav = st.radio("Navigation", NAV_ITEMS, label_visibility="collapsed")
     
     st.markdown("---")
     
-    # 1. Collapsible Threshold Calibration Drawer
-    with st.expander("⚙️ Risk Thresholds", expanded=False):
-        st.session_state.high_thresh = st.slider("High Risk (≥ %)", 45, 90, st.session_state.high_thresh, 1)
-        st.session_state.med_thresh = st.slider("Medium Risk (≥ %)", 15, 60, st.session_state.med_thresh, 1)
-        st.caption(f"🔴 ≥{st.session_state.high_thresh}% | 🟡 {st.session_state.med_thresh}–{st.session_state.high_thresh}% | 🟢 <{st.session_state.med_thresh}%")
-        if st.button("↺ Reset Defaults (65/40)", use_container_width=True):
+    with st.expander("Risk Threshold Calibration", expanded=False):
+        st.session_state.high_thresh = st.slider("High Risk Cutoff (%)", 45, 90, st.session_state.high_thresh, 1)
+        st.session_state.med_thresh = st.slider("Medium Risk Cutoff (%)", 15, 60, st.session_state.med_thresh, 1)
+        st.caption(f"High: ≥{st.session_state.high_thresh}% | Medium: {st.session_state.med_thresh}%–{st.session_state.high_thresh}% | Low: <{st.session_state.med_thresh}%")
+        if st.button("Reset Defaults (65/40)", use_container_width=True):
             st.session_state.high_thresh = 65
             st.session_state.med_thresh = 40
             st.rerun()
 
-    # 2. Collapsible AI Settings Drawer
-    with st.expander("🤖 AI Copilot Engine", expanded=False):
-        ai_provider = st.selectbox("LLM Provider", ["Google Gemini", "OpenAI / Compatible", "Built-in Synthesizer"], index=0)
-        ai_key = st.text_input("API Key (Optional)", value=os.environ.get("GEMINI_API_KEY", ""), type="password", placeholder="AIzaSy...")
+    with st.expander("AI Engine Configuration", expanded=False):
+        ai_provider = st.selectbox("Provider", ["Google Gemini", "OpenAI / Compatible", "Built-in Synthesizer"], index=0)
+        ai_key = st.text_input("API Key", value=os.environ.get("GEMINI_API_KEY", ""), type="password", placeholder="AIzaSy...")
 
-    # 3. Collapsible Telemetry Info Drawer
-    with st.expander("ℹ️ Model Telemetry", expanded=False):
-        st.caption("• **Algorithm**: XGBoost Classifier\n• **Recall**: 1.00 (100%)\n• **F1-Score**: 1.00\n• **Cohort**: 500 records\n• **O*NET Scale**: IM Importance")
+    with st.expander("Model Telemetry", expanded=False):
+        st.caption("Algorithm: XGBoost Classifier\nRecall: 1.00 (100%)\nF1-Score: 1.00\nCohort: 500 Monitored Staff")
 
-# Apply dynamic risk cutoffs
+# Apply dynamic threshold segmentation
 h_p = st.session_state.high_thresh / 100.0
 m_p = st.session_state.med_thresh / 100.0
 
-def assign_user_risk(p):
-    if p >= h_p: return "HIGH"
-    elif p >= m_p: return "MEDIUM"
+def assign_risk_category(prob):
+    if prob >= h_p: return "HIGH"
+    elif prob >= m_p: return "MEDIUM"
     return "LOW"
 
 if intel_df is not None:
-    intel_df["Risk_Level"] = intel_df["Attrition_Prob"].apply(assign_user_risk)
+    intel_df["Risk_Level"] = intel_df["Attrition_Prob"].apply(assign_risk_category)
 
-# Unified 3-Tier Risk Color Palette
-RISK_PALETTE = {
-    "HIGH": "#ef4444",    # Red
-    "MEDIUM": "#f59e0b",  # Amber/Gold
-    "LOW": "#10b981",     # Emerald Green
-    "brand": "#0ea5e9"    # Brand Cyan
+# Unified Color Palette Mapping
+PALETTE = {
+    "HIGH": "#EF4444",      # Coral Red
+    "MEDIUM": "#F59E0B",    # Amber
+    "LOW": "#10B981",       # Emerald Green
+    "primary": "#6366F1",   # Indigo Blue
+    "slate": "#94A3B8"      # Slate Gray
 }
 
-def apply_chart_theme(fig):
+def style_chart(fig):
     fig.update_layout(
-        plot_bgcolor="rgba(18, 24, 38, 0.6)",
+        plot_bgcolor="#151C28",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#f8fafc", family="Plus Jakarta Sans, sans-serif"),
-        xaxis=dict(gridcolor="rgba(255, 255, 255, 0.06)", linecolor="rgba(255, 255, 255, 0.06)"),
-        yaxis=dict(gridcolor="rgba(255, 255, 255, 0.06)", linecolor="rgba(255, 255, 255, 0.06)"),
-        margin=dict(t=30, b=30, l=15, r=15),
+        font=dict(color="#F8FAFC", family="Inter, sans-serif", size=11),
+        xaxis=dict(gridcolor="#20293A", linecolor="#20293A", zerolinecolor="#20293A"),
+        yaxis=dict(gridcolor="#20293A", linecolor="#20293A", zerolinecolor="#20293A"),
+        margin=dict(t=25, b=25, l=15, r=15),
     )
     return fig
 
-def risk_badge(risk: str) -> str:
+def render_risk_badge(risk: str) -> str:
     css = {"HIGH": "badge-high", "MEDIUM": "badge-medium", "LOW": "badge-low"}.get(risk, "badge-low")
-    icon = {"HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢"}.get(risk, "🟢")
-    return f'<span class="badge {css}">{icon} {risk} RISK</span>'
+    return f'<span class="badge-container {css}">{risk} RISK</span>'
 
 
-# ── 6. Minimal Top Breadcrumb Bar ──
-now_str = datetime.now().strftime("%H:%M:%S UTC")
+# ── 5. Clean Top Navigation Header (No Emojis) ──
+now_timestamp = datetime.now().strftime("%H:%M:%S UTC")
 st.markdown(f"""
-<div class="top-bar">
-  <div class="page-title">{nav} <span>// Intelligence Console</span></div>
-  <div class="status-cluster">
-    <span class="status-pill">● System Active</span>
-    <span class="timestamp-tag">Telemetry Sync: {now_str}</span>
+<div class="header-bar">
+  <div class="header-title-group">
+    <div>
+      <div class="header-title">{nav}</div>
+      <div class="header-subtitle">Workforce analytics and predictive turnover modeling</div>
+    </div>
+  </div>
+  <div>
+    <span class="status-tag"><span class="status-dot"></span> System Active · {now_timestamp}</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
 
 # ════════════════════════════════════════════════
-# 1. OVERVIEW
+# VIEW 1: EXECUTIVE OVERVIEW
 # ════════════════════════════════════════════════
-if nav == "📊 Overview":
+if nav == "Executive Overview":
     if intel_df is not None:
-        total = len(intel_df)
-        high = (intel_df["Risk_Level"] == "HIGH").sum()
-        med = (intel_df["Risk_Level"] == "MEDIUM").sum()
-        avg_prob = intel_df["Attrition_Prob"].mean()
-        avg_sal = intel_df["MonthlySalary"].mean()
+        total_headcount = len(intel_df)
+        high_risk_count = (intel_df["Risk_Level"] == "HIGH").sum()
+        med_risk_count = (intel_df["Risk_Level"] == "MEDIUM").sum()
+        avg_flight_risk = intel_df["Attrition_Prob"].mean()
+        avg_base_salary = intel_df["MonthlySalary"].mean()
 
-        # Clean KPI Row with Accurate Subtitles
         st.markdown(f"""
-        <div class="kpi-container">
-          <div class="kpi-card"><div class="kpi-label">Total Headcount</div><div class="kpi-value">{total:,}</div><div class="kpi-sub">Active Monitored Staff</div></div>
-          <div class="kpi-card"><div class="kpi-label">High Flight Risk</div><div class="kpi-value" style="color:#ef4444;">{high}</div><div class="kpi-sub">{high/total:.1%} of Total Workforce</div></div>
-          <div class="kpi-card"><div class="kpi-label">Watchlist (Medium Risk)</div><div class="kpi-value" style="color:#f59e0b;">{med}</div><div class="kpi-sub">{f'{med} staff in {st.session_state.med_thresh}%–{st.session_state.high_thresh}% band' if med > 0 else f'0 in {st.session_state.med_thresh}%–{st.session_state.high_thresh}% band'}</div></div>
-          <div class="kpi-card"><div class="kpi-label">Avg Flight Risk</div><div class="kpi-value">{avg_prob:.1%}</div><div class="kpi-sub">Org-wide Average (15% Benchmark)</div></div>
-          <div class="kpi-card"><div class="kpi-label">Avg Annual Salary</div><div class="kpi-value">${avg_sal:,.0f}</div><div class="kpi-sub">Annual Base Compensation</div></div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-title">Total Headcount</div>
+            <div class="metric-value">{total_headcount:,}</div>
+            <div class="metric-subtitle">Active monitored staff</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">High Flight Risk</div>
+            <div class="metric-value" style="color:#EF4444;">{high_risk_count}</div>
+            <div class="metric-subtitle">{high_risk_count/total_headcount:.1%} of workforce (≥{st.session_state.high_thresh}%)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Watchlist (Medium Risk)</div>
+            <div class="metric-value" style="color:#F59E0B;">{med_risk_count}</div>
+            <div class="metric-subtitle">{f'{med_risk_count} staff in {st.session_state.med_thresh}%–{st.session_state.high_thresh}% band' if med_risk_count > 0 else '0 in configured band'}</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Average Flight Risk</div>
+            <div class="metric-value">{avg_flight_risk:.1%}</div>
+            <div class="metric-subtitle">Org-wide average (15% benchmark)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Average Base Salary</div>
+            <div class="metric-value">${avg_base_salary:,.0f}</div>
+            <div class="metric-subtitle">Annual base compensation</div>
+          </div>
         </div>
         """, unsafe_allow_html=True)
 
-        c1, c2 = st.columns([1.4, 1])
-        with c1:
-            st.markdown('<div class="section-bar">📊 <span>Department Flight-Risk Rate</span></div>', unsafe_allow_html=True)
-            dept_r = intel_df.groupby("Department").agg(
+        col_left, col_right = st.columns([1.4, 1])
+
+        with col_left:
+            st.markdown('<div class="section-heading">High-Risk Concentration by Department</div>', unsafe_allow_html=True)
+            dept_stats = intel_df.groupby("Department").agg(
                 Total=("EmployeeID", "count"),
                 High=("Risk_Level", lambda x: (x == "HIGH").sum()),
             ).reset_index()
-            dept_r["High_Pct"] = (dept_r["High"] / dept_r["Total"] * 100).round(1)
-            dept_r = dept_r.sort_values("High_Pct", ascending=True)
+            dept_stats["High_Pct"] = (dept_stats["High"] / dept_stats["Total"] * 100).round(1)
+            dept_stats = dept_stats.sort_values("High_Pct", ascending=True)
 
-            fig = go.Figure(go.Bar(
-                y=dept_r["Department"],
-                x=dept_r["High_Pct"],
+            fig_bar = go.Figure(go.Bar(
+                y=dept_stats["Department"],
+                x=dept_stats["High_Pct"],
                 orientation="h",
                 marker=dict(
-                    color=dept_r["High_Pct"],
-                    colorscale=[[0, RISK_PALETTE["LOW"]], [0.5, RISK_PALETTE["MEDIUM"]], [1.0, RISK_PALETTE["HIGH"]]],
-                    showscale=False,
+                    color=dept_stats["High_Pct"],
+                    colorscale=[[0, PALETTE["LOW"]], [0.5, PALETTE["MEDIUM"]], [1.0, PALETTE["HIGH"]]],
+                    showscale=False
                 ),
-                text=[f"{v:.1f}%" for v in dept_r["High_Pct"]],
+                text=[f"{v:.1f}%" for v in dept_stats["High_Pct"]],
                 textposition="outside",
-                hovertemplate="<b>%{y}</b><br>High Risk Rate: %{x:.1f}%<br>High-Risk Staff: %{customdata[0]}<br>Total Department Size: %{customdata[1]}<extra></extra>",
-                customdata=dept_r[["High", "Total"]].values,
+                textfont=dict(color="#F8FAFC", size=11),
+                hovertemplate="<b>%{y}</b><br>High-Risk Proportion: %{x:.1f}%<br>High-Risk Headcount: %{customdata[0]}<br>Department Total: %{customdata[1]}<extra></extra>",
+                customdata=dept_stats[["High", "Total"]].values,
             ))
-            fig.update_layout(height=300, xaxis_title="% High Risk Staff", yaxis_title="")
-            fig = apply_chart_theme(fig)
-            st.plotly_chart(fig, use_container_width=True)
+            fig_bar.update_layout(height=280, xaxis_title="% of Department Flagged High Risk", yaxis_title="")
+            fig_bar = style_chart(fig_bar)
+            st.plotly_chart(fig_bar, use_container_width=True)
 
-        with c2:
-            st.markdown('<div class="section-bar">📊 <span>Workforce Risk Breakdown</span></div>', unsafe_allow_html=True)
-            
-            # Ensure all 3 risk categories are represented in the donut series
-            risk_order = ["HIGH", "MEDIUM", "LOW"]
-            counts_dict = intel_df["Risk_Level"].value_counts().to_dict()
-            rc_labels = risk_order
-            rc_values = [counts_dict.get(r, 0) for r in risk_order]
-            rc_colors = [RISK_PALETTE[r] for r in risk_order]
+        with col_right:
+            st.markdown('<div class="section-heading">Workforce Risk Distribution</div>', unsafe_allow_html=True)
+            risk_keys = ["HIGH", "MEDIUM", "LOW"]
+            counts_map = intel_df["Risk_Level"].value_counts().to_dict()
+            pie_values = [counts_map.get(k, 0) for k in risk_keys]
+            pie_colors = [PALETTE[k] for k in risk_keys]
 
-            fig2 = go.Figure(go.Pie(
-                labels=[f"{r} RISK" for r in rc_labels],
-                values=rc_values,
+            fig_pie = go.Figure(go.Pie(
+                labels=[f"{k} RISK" for k in risk_keys],
+                values=pie_values,
                 hole=0.62,
-                marker=dict(colors=rc_colors),
+                marker=dict(colors=pie_colors),
                 textinfo="label+percent",
+                textfont=dict(color="#F8FAFC", size=11),
                 hovertemplate="<b>%{label}</b><br>Headcount: %{value} employees (%{percent})<extra></extra>",
                 sort=False
             ))
-            fig2.update_layout(
-                height=300,
+            fig_pie.update_layout(
+                height=280,
                 showlegend=True,
-                legend=dict(orientation="h", y=-0.1, x=0.5, xanchor="center", font=dict(size=10)),
-                annotations=[dict(text=f"<b>{total}</b><br>Staff", x=0.5, y=0.5, font_size=16, showarrow=False, font=dict(color="#f8fafc"))]
+                legend=dict(orientation="h", y=-0.12, x=0.5, xanchor="center", font=dict(size=11, color="#94A3B8")),
+                annotations=[dict(text=f"<b>{total_headcount}</b><br>Staff", x=0.5, y=0.5, font_size=15, showarrow=False, font=dict(color="#F8FAFC"))]
             )
-            fig2 = apply_chart_theme(fig2)
-            st.plotly_chart(fig2, use_container_width=True)
+            fig_pie = style_chart(fig_pie)
+            st.plotly_chart(fig_pie, use_container_width=True)
 
 
 # ════════════════════════════════════════════════
-# 2. ATTRITION RISK
+# VIEW 2: ATTRITION RISK ANALYTICS
 # ════════════════════════════════════════════════
-elif nav == "⚠️ Attrition Risk":
-    st.markdown('<div class="section-bar">⚠️ <span>Predictive Attrition Forensics</span></div>', unsafe_allow_html=True)
+elif nav == "Attrition Risk Analytics":
+    st.markdown('<div class="section-heading">Attrition Risk Dispersion & Identified Roster</div>', unsafe_allow_html=True)
 
     if intel_df is not None:
-        f1, f2, f3 = st.columns([1.5, 1.5, 1])
-        with f1: f_dept = st.selectbox("Department", ["All Departments"] + sorted(intel_df["Department"].dropna().unique().tolist()))
-        with f2: f_risk = st.selectbox("Risk Severity", ["All Severities", "HIGH", "MEDIUM", "LOW"])
-        with f3: max_rows = st.slider("Max Roster Display", 10, 100, 25)
+        f_c1, f_c2, f_c3 = st.columns([1.5, 1.5, 1])
+        with f_c1: filter_dept = st.selectbox("Department", ["All Departments"] + sorted(intel_df["Department"].dropna().unique().tolist()))
+        with f_c2: filter_risk = st.selectbox("Risk Level", ["All Severity Levels", "HIGH", "MEDIUM", "LOW"])
+        with f_c3: display_limit = st.slider("Display Limit", 10, 100, 25)
 
-        filtered = intel_df.copy()
-        if f_dept != "All Departments": filtered = filtered[filtered["Department"] == f_dept]
-        if f_risk != "All Severities": filtered = filtered[filtered["Risk_Level"] == f_risk]
+        filtered_data = intel_df.copy()
+        if filter_dept != "All Departments": filtered_data = filtered_data[filtered_data["Department"] == filter_dept]
+        if filter_risk != "All Severity Levels": filtered_data = filtered_data[filtered_data["Risk_Level"] == filter_risk]
 
-        c_l, c_r = st.columns(2)
-        with c_l:
-            fig = px.histogram(
-                filtered, x="Attrition_Prob", nbins=25, title="<b>Model Flight Probability Distribution</b>",
-                color_discrete_sequence=[RISK_PALETTE["brand"]],
+        chart_c1, chart_c2 = st.columns(2)
+        with chart_c1:
+            fig_hist = px.histogram(
+                filtered_data, x="Attrition_Prob", nbins=24, title="<b>Model Flight Probability Distribution</b>",
+                color_discrete_sequence=[PALETTE["primary"]],
                 labels={"Attrition_Prob": "Predicted Probability"}
             )
-            fig.add_vline(x=h_p, line_dash="dash", line_color=RISK_PALETTE["HIGH"], annotation_text=f"HIGH (≥{st.session_state.high_thresh}%)", annotation_font_color=RISK_PALETTE["HIGH"])
-            fig.add_vline(x=m_p, line_dash="dash", line_color=RISK_PALETTE["MEDIUM"], annotation_text=f"MED (≥{st.session_state.med_thresh}%)", annotation_font_color=RISK_PALETTE["MEDIUM"])
-            fig = apply_chart_theme(fig)
-            fig.update_layout(height=280)
-            st.plotly_chart(fig, use_container_width=True)
+            fig_hist.add_vline(x=h_p, line_dash="dash", line_color=PALETTE["HIGH"], annotation_text=f"HIGH (≥{st.session_state.high_thresh}%)", annotation_font_color=PALETTE["HIGH"])
+            fig_hist.add_vline(x=m_p, line_dash="dash", line_color=PALETTE["MEDIUM"], annotation_text=f"MED (≥{st.session_state.med_thresh}%)", annotation_font_color=PALETTE["MEDIUM"])
+            fig_hist = style_chart(fig_hist)
+            fig_hist.update_layout(height=280)
+            st.plotly_chart(fig_hist, use_container_width=True)
 
-        with c_r:
-            fig2 = px.box(
+        with chart_c2:
+            fig_box = px.box(
                 intel_df, x="Department", y="Attrition_Prob", color="Department",
                 title="<b>Departmental Risk Dispersion Box Plot</b>",
                 labels={"Attrition_Prob": "Flight Risk Probability"}
             )
-            fig2 = apply_chart_theme(fig2)
-            fig2.update_layout(height=280, showlegend=False)
-            st.plotly_chart(fig2, use_container_width=True)
+            fig_box = style_chart(fig_box)
+            fig_box.update_layout(height=280, showlegend=False)
+            st.plotly_chart(fig_box, use_container_width=True)
 
-        st.markdown(f"**Identified At-Risk Roster ({len(filtered)} Employees)**")
-        d_cols = ["EmployeeID", "Name", "Department", "JobRole", "Attrition_Prob", "Risk_Level", "YearsAtCompany", "Top_Skill_Gap"]
-        roster = filtered.nlargest(max_rows, "Attrition_Prob")[d_cols].copy()
-        roster["Attrition_Prob"] = roster["Attrition_Prob"].apply(lambda p: f"{p:.1%}")
-        roster["Risk_Level"] = roster["Risk_Level"].apply(lambda r: f"🔴 {r}" if r == "HIGH" else ("🟡 " + r if r == "MEDIUM" else "🟢 " + r))
+        st.markdown(f"**Identified At-Risk Employees ({len(filtered_data)} matching records)**")
+        cols_to_show = ["EmployeeID", "Name", "Department", "JobRole", "Attrition_Prob", "Risk_Level", "YearsAtCompany", "Top_Skill_Gap"]
+        roster_table = filtered_data.nlargest(display_limit, "Attrition_Prob")[cols_to_show].copy()
+        roster_table["Attrition_Prob"] = roster_table["Attrition_Prob"].apply(lambda p: f"{p:.1%}")
+        roster_table["Risk_Level"] = roster_table["Risk_Level"].apply(lambda r: f"{r} RISK")
 
         st.dataframe(
-            roster, use_container_width=True, hide_index=True,
+            roster_table, use_container_width=True, hide_index=True,
             column_config={
                 "EmployeeID": st.column_config.TextColumn("ID"),
-                "Attrition_Prob": st.column_config.TextColumn("Probability"),
-                "Risk_Level": st.column_config.TextColumn("Risk Rating"),
-                "YearsAtCompany": st.column_config.NumberColumn("Tenure (Yrs)"),
-                "Top_Skill_Gap": st.column_config.TextColumn("Primary Skill Gap"),
+                "Attrition_Prob": st.column_config.TextColumn("Flight Risk"),
+                "Risk_Level": st.column_config.TextColumn("Classification"),
+                "YearsAtCompany": st.column_config.NumberColumn("Tenure (Years)"),
+                "Top_Skill_Gap": st.column_config.TextColumn("Primary Skill Deficit"),
             }
         )
 
 
 # ════════════════════════════════════════════════
-# 3. SKILL GAPS
+# VIEW 3: COMPETENCY & SKILL GAPS
 # ════════════════════════════════════════════════
-elif nav == "🎯 Skill Gaps":
-    st.markdown('<div class="section-bar">🎯 <span>Organizational Competency & Skill Deficits</span></div>', unsafe_allow_html=True)
+elif nav == "Competency & Skill Gaps":
+    st.markdown('<div class="section-heading">Organizational Competency Architecture & Skill Deficits</div>', unsafe_allow_html=True)
 
     if org_gap_df is not None:
-        f_sev = st.selectbox("Severity Classification", ["All Deficits", "HIGH", "MEDIUM", "LOW"])
-        top_n = st.slider("Display Top N Skills", 10, 40, 15)
+        s_c1, s_c2 = st.columns([1.5, 1])
+        with s_c1: severity_choice = st.selectbox("Severity Classification", ["All Deficits", "HIGH", "MEDIUM", "LOW"])
+        with s_c2: top_count = st.slider("Number of Skills", 10, 40, 15)
 
-        gaps = org_gap_df if f_sev == "All Deficits" else org_gap_df[org_gap_df["severity"] == f_sev]
-        top_gaps = gaps.nlargest(top_n, "total_gap_weight")
+        gap_subset = org_gap_df if severity_choice == "All Deficits" else org_gap_df[org_gap_df["severity"] == severity_choice]
+        top_skills = gap_subset.nlargest(top_count, "total_gap_weight")
 
-        fig_g = px.bar(
-            top_gaps, x="total_gap_weight", y="skill", orientation="h", color="severity",
-            color_discrete_map=RISK_PALETTE, title="<b>Top Deficits by O*NET Weighted Importance</b>",
-            labels={"total_gap_weight": "Weighted Gap Score", "skill": "Skill Element"}
+        fig_skills = px.bar(
+            top_skills, x="total_gap_weight", y="skill", orientation="h", color="severity",
+            color_discrete_map=PALETTE, title="<b>Top Deficits by O*NET Weighted Importance</b>",
+            labels={"total_gap_weight": "Total Gap Score", "skill": "Skill Name"}
         )
-        fig_g = apply_chart_theme(fig_g)
-        fig_g.update_layout(height=max(360, top_n * 20), yaxis_title="", xaxis_title="Total Gap Weight (Headcount × Importance)")
-        st.plotly_chart(fig_g, use_container_width=True)
+        fig_skills = style_chart(fig_skills)
+        fig_skills.update_layout(height=max(360, top_count * 20), yaxis_title="", xaxis_title="Total Gap Score (Headcount × Importance)")
+        st.plotly_chart(fig_skills, use_container_width=True)
 
         st.dataframe(
-            top_gaps[["skill", "severity", "pct_employees_lacking", "avg_importance", "total_gap_weight", "employees_lacking"]].rename(columns={
-                "skill": "Skill Element", "severity": "Severity Tier", "pct_employees_lacking": "% Staff Lacking",
-                "avg_importance": "O*NET Importance", "total_gap_weight": "Gap Score", "employees_lacking": "Affected Staff"
+            top_skills[["skill", "severity", "pct_employees_lacking", "avg_importance", "total_gap_weight", "employees_lacking"]].rename(columns={
+                "skill": "Skill Element", "severity": "Severity Tier", "pct_employees_lacking": "% Employees Lacking",
+                "avg_importance": "O*NET Importance", "total_gap_weight": "Weighted Gap Score", "employees_lacking": "Affected Headcount"
             }),
             use_container_width=True, hide_index=True
         )
 
 
 # ════════════════════════════════════════════════
-# 4. EMPLOYEE LOOKUP
+# VIEW 4: EMPLOYEE DIRECTORY
 # ════════════════════════════════════════════════
-elif nav == "👤 Employee Lookup":
-    st.markdown('<div class="section-bar">👤 <span>Individual 360° Dossier & Retention Simulator</span></div>', unsafe_allow_html=True)
+elif nav == "Employee Directory":
+    st.markdown('<div class="section-heading">Employee Profile & Record Lookup</div>', unsafe_allow_html=True)
 
     if intel_df is not None:
-        search_q = st.text_input("Lookup Employee ID (1–500) or Name", value="1")
-        found = None
-        if search_q:
-            id_m = intel_df[intel_df["EmployeeID"].astype(str) == str(search_q.strip())]
-            if not id_m.empty: found = id_m.iloc[0]
+        search_query = st.text_input("Search Employee ID (1–500) or Full Name", value="1")
+        matched_emp = None
+        if search_query:
+            match_by_id = intel_df[intel_df["EmployeeID"].astype(str) == str(search_query.strip())]
+            if not match_by_id.empty: matched_emp = match_by_id.iloc[0]
             else:
-                nm_m = intel_df[intel_df["Name"].str.contains(search_q.strip(), case=False, na=False)]
-                if not nm_m.empty: found = nm_m.iloc[0]
+                match_by_name = intel_df[intel_df["Name"].str.contains(search_query.strip(), case=False, na=False)]
+                if not match_by_name.empty: matched_emp = match_by_name.iloc[0]
 
-        if found is not None:
-            prob = float(found["Attrition_Prob"])
-            risk = found["Risk_Level"]
+        if matched_emp is not None:
+            prob_val = float(matched_emp["Attrition_Prob"])
+            risk_val = matched_emp["Risk_Level"]
 
             st.markdown(f"""
-            <div class="ui-card">
+            <div class="surface-card">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                 <div>
-                  <div style="font-size:1.45rem; font-weight:800; color:#ffffff;">{found['Name']}</div>
-                  <div style="font-size:0.9rem; color:var(--color-brand); font-weight:600;">{found['JobRole']} · {found['Department']} Department</div>
+                  <div style="font-size:1.4rem; font-weight:700; color:#F8FAFC;">{matched_emp['Name']}</div>
+                  <div style="font-size:0.88rem; color:#94A3B8; margin-top:2px;">{matched_emp['JobRole']} · {matched_emp['Department']} Department</div>
                 </div>
-                <div>{risk_badge(risk)}</div>
+                <div>{render_risk_badge(risk_val)}</div>
               </div>
-              <div class="stat-grid">
-                <div class="stat-box"><div class="stat-box-lbl">Employee ID</div><div class="stat-box-val">#{found['EmployeeID']}</div></div>
-                <div class="stat-box"><div class="stat-box-lbl">Annual Salary</div><div class="stat-box-val">${found['MonthlySalary']:,.0f}</div></div>
-                <div class="stat-box"><div class="stat-box-lbl">Tenure</div><div class="stat-box-val">{found['YearsAtCompany']:.1f} Yrs</div></div>
-                <div class="stat-box"><div class="stat-box-lbl">Work-Life Balance</div><div class="stat-box-val">{found['WorkLifeBalanceScore']:.1f}/5.0</div></div>
-                <div class="stat-box"><div class="stat-box-lbl">Primary Skill Gap</div><div class="stat-box-val">{found.get('Top_Skill_Gap', 'None')}</div></div>
+              <div class="stat-grid-row">
+                <div class="stat-tile-box"><div class="stat-tile-lbl">Employee ID</div><div class="stat-tile-val">#{matched_emp['EmployeeID']}</div></div>
+                <div class="stat-tile-box"><div class="stat-tile-lbl">Annual Salary</div><div class="stat-tile-val">${matched_emp['MonthlySalary']:,.0f}</div></div>
+                <div class="stat-tile-box"><div class="stat-tile-lbl">Tenure</div><div class="stat-tile-val">{matched_emp['YearsAtCompany']:.1f} Years</div></div>
+                <div class="stat-tile-box"><div class="stat-tile-lbl">Work-Life Balance</div><div class="stat-tile-val">{matched_emp['WorkLifeBalanceScore']:.1f} / 5.0</div></div>
+                <div class="stat-tile-box"><div class="stat-tile-lbl">Primary Skill Deficit</div><div class="stat-tile-val">{matched_emp.get('Top_Skill_Gap', 'None')}</div></div>
               </div>
             </div>
             """, unsafe_allow_html=True)
 
-            c_g, c_sim = st.columns([1, 1.4])
-            with c_g:
-                gauge_color = RISK_PALETTE.get(risk, "#0ea5e9")
+            col_gauge, col_sim = st.columns([1, 1.4])
+            with col_gauge:
+                g_color = PALETTE.get(risk_val, "#6366F1")
                 fig_gauge = go.Figure(go.Indicator(
-                    mode="gauge+number", value=prob * 100, number={"suffix": "%", "font": {"color": "#ffffff", "size": 34}},
+                    mode="gauge+number", value=prob_val * 100, number={"suffix": "%", "font": {"color": "#F8FAFC", "size": 34}},
                     gauge={
-                        "axis": {"range": [0, 100], "tickcolor": "#94a3b8"},
-                        "bar": {"color": gauge_color},
+                        "axis": {"range": [0, 100], "tickcolor": "#94A3B8"},
+                        "bar": {"color": g_color},
                         "steps": [
                             {"range": [0, st.session_state.med_thresh], "color": "rgba(16, 185, 129, 0.15)"},
                             {"range": [st.session_state.med_thresh, st.session_state.high_thresh], "color": "rgba(245, 158, 11, 0.15)"},
                             {"range": [st.session_state.high_thresh, 100], "color": "rgba(239, 68, 68, 0.15)"},
                         ],
                     },
-                    title={"text": f"<b>Flight Risk Meter: {risk} RISK</b>", "font": {"color": gauge_color, "size": 13}}
+                    title={"text": f"<b>Flight Risk Meter: {risk_val} RISK</b>", "font": {"color": g_color, "size": 13}}
                 ))
                 fig_gauge.update_layout(height=240, margin=dict(t=20, b=10))
-                fig_gauge = apply_chart_theme(fig_gauge)
+                fig_gauge = style_chart(fig_gauge)
                 st.plotly_chart(fig_gauge, use_container_width=True)
 
-            with c_sim:
-                st.markdown("##### 🧪 Retention Intervention Simulator (What-If Lab)")
-                s_sal = st.slider("💰 Proposed Compensation Increase (%)", 0, 40, 10, 5, key="min_sim_sal")
-                s_wlb = st.slider("⚖️ Target Work-Life Balance", 1.0, 5.0, min(5.0, float(found['WorkLifeBalanceScore']) + 1.0), 0.5, key="min_sim_wlb")
+            with col_sim:
+                st.markdown("##### Retention Intervention Simulator")
+                sim_comp = st.slider("Proposed Compensation Increase (%)", 0, 40, 10, 5, key="dir_sim_comp")
+                sim_wlb = st.slider("Target Work-Life Balance", 1.0, 5.0, min(5.0, float(matched_emp['WorkLifeBalanceScore']) + 1.0), 0.5, key="dir_sim_wlb")
                 
-                red = (s_sal / 100.0) * 0.4 + max(0.0, (s_wlb - float(found['WorkLifeBalanceScore'])) / 5.0) * 0.4
-                sim_prob = max(0.05, prob * (1.0 - red))
-                sim_r = assign_user_risk(sim_prob)
+                reduction = (sim_comp / 100.0) * 0.4 + max(0.0, (sim_wlb - float(matched_emp['WorkLifeBalanceScore'])) / 5.0) * 0.4
+                sim_prob = max(0.05, prob_val * (1.0 - reduction))
+                sim_risk = assign_risk_category(sim_prob)
                 
                 m1, m2 = st.columns(2)
-                with m1: st.metric("Baseline Risk", f"{prob:.1%}", risk)
-                with m2: st.metric("Simulated Risk", f"{sim_prob:.1%}", f"🔻 -{(prob - sim_prob):.1%} ({sim_r})")
+                with m1: st.metric("Baseline Probability", f"{prob_val:.1%}", risk_val)
+                with m2: st.metric("Projected Probability", f"{sim_prob:.1%}", f"-{(prob_val - sim_prob):.1%} ({sim_risk})")
 
 
 # ════════════════════════════════════════════════
-# 5. ML PREDICTION FORM
+# VIEW 5: ML RISK PREDICTION (REAL XGBOOST)
 # ════════════════════════════════════════════════
-elif nav == "🔮 ML Prediction":
-    st.markdown('<div class="section-bar">🔮 <span>Real-Time Attrition Model Inference</span></div>', unsafe_allow_html=True)
+elif nav == "ML Risk Prediction":
+    st.markdown('<div class="section-heading">Real-Time Machine Learning Attrition Inference</div>', unsafe_allow_html=True)
+    st.caption("Execute direct inference on the production-trained XGBoost pipeline.")
 
-    with st.form("min_pred_form"):
-        p1, p2, p3 = st.columns(3)
-        with p1: in_age = st.number_input("Age", 18, 65, 32)
-        with p2: in_sal = st.number_input("Annual Salary ($)", 20000, 250000, 68000, 5000)
-        with p3: in_ot = st.number_input("Overtime Hours/Month", 0.0, 80.0, 18.0, 2.0)
+    with st.form("ml_prediction_input_form"):
+        r1_c1, r1_c2, r1_c3 = st.columns(3)
+        with r1_c1: in_age = st.number_input("Age", 18, 65, 32)
+        with r1_c2: in_sal = st.number_input("Annual Base Salary ($)", 20000, 250000, 68000, 5000)
+        with r1_c3: in_ot = st.number_input("Overtime Hours/Month", 0.0, 80.0, 18.0, 2.0)
 
-        p4, p5, p6 = st.columns(3)
-        with p4: in_dept = st.selectbox("Department", ["Sales", "IT", "Finance", "HR", "Marketing", "Support"])
-        with p5: in_role = st.selectbox("Job Role", ["Developer", "Engineer", "Sales Executive", "Auditor", "Accountant", "Hr Manager", "Seo Analyst", "Support Engineer"])
-        with p6: in_ten = st.number_input("Years at Company", 0.0, 30.0, 3.5, 0.5)
+        r2_c1, r2_c2, r2_c3 = st.columns(3)
+        with r2_c1: in_dept = st.selectbox("Department", ["Sales", "IT", "Finance", "HR", "Marketing", "Support"])
+        with r2_c2: in_role = st.selectbox("Job Role", ["Developer", "Engineer", "Sales Executive", "Auditor", "Accountant", "Hr Manager", "Seo Analyst", "Support Engineer"])
+        with r2_c3: in_ten = st.number_input("Years at Company", 0.0, 30.0, 3.5, 0.5)
 
-        p7, p8, p9 = st.columns(3)
-        with p7: in_wlb = st.slider("Work-Life Balance (1-5)", 1.0, 5.0, 2.5, 0.5)
-        with p8: in_perf = st.slider("Performance Rating (1-5)", 1.0, 5.0, 3.5, 0.5)
-        with p9: in_sat = st.slider("Customer Satisfaction (1-5)", 1.0, 5.0, 3.0, 0.5)
+        r3_c1, r3_c2, r3_c3 = st.columns(3)
+        with r3_c1: in_wlb = st.slider("Work-Life Balance Rating (1-5)", 1.0, 5.0, 2.5, 0.5)
+        with r3_c2: in_perf = st.slider("Performance Rating (1-5)", 1.0, 5.0, 3.5, 0.5)
+        with r3_c3: in_sat = st.slider("Customer Satisfaction (1-5)", 1.0, 5.0, 3.0, 0.5)
 
-        btn_pred = st.form_submit_button("⚡ Predict Flight Risk", type="primary", use_container_width=True)
+        submit_inference = st.form_submit_button("Run Model Prediction", type="primary", use_container_width=True)
 
-    if btn_pred:
+    if submit_inference:
         if ml_model is not None:
             feat_cols = pd.read_csv(Path(__file__).parent.parent / "data" / "processed" / "feature_matrix.csv").drop(columns=["EmployeeID", "AttritionRisk_Label"]).columns.tolist()
             row = {c: 0.0 for c in feat_cols}
@@ -643,7 +703,6 @@ elif nav == "🔮 ML Prediction":
             row["days_since_last_leave"] = 96.0
             row["engagement_score"] = (float(in_wlb) + float(in_perf) + float(in_sat)) / 3.0
 
-            # Categorical matching with proper casing
             d_fmt = in_dept.capitalize() if in_dept not in ["IT", "HR"] else in_dept
             d_col = f"Department_{d_fmt}"
             if d_col in row: row[d_col] = 1.0
@@ -653,39 +712,45 @@ elif nav == "🔮 ML Prediction":
             if r_col in row: row[r_col] = 1.0
 
             X_in = pd.DataFrame([row])[feat_cols]
-            pred_prob = float(ml_model.predict_proba(X_in)[0, 1])
-            pred_r = assign_user_risk(pred_prob)
+            pred_probability = float(ml_model.predict_proba(X_in)[0, 1])
+            pred_risk_level = assign_risk_category(pred_probability)
 
             st.markdown("---")
-            k1, k2 = st.columns([1, 2])
-            with k1:
-                st.metric("Predicted Flight Probability", f"{pred_prob:.1%}")
-                st.markdown(risk_badge(pred_r), unsafe_allow_html=True)
-            with k2:
-                st.markdown(f"**Action Recommendation:** {'Schedule immediate 1-on-1 retention review.' if pred_r == 'HIGH' else 'Monitor workload and growth trajectory.'}")
+            out_c1, out_c2 = st.columns([1, 2])
+            with out_c1:
+                st.metric("Predicted Flight Probability", f"{pred_probability:.1%}")
+                st.markdown(render_risk_badge(pred_risk_level), unsafe_allow_html=True)
+            with out_c2:
+                st.markdown(f"**Recommended Action:** {'Schedule immediate 1-on-1 retention review.' if pred_risk_level == 'HIGH' else 'Monitor workload and maintain growth trajectory.'}")
 
 
 # ════════════════════════════════════════════════
-# 6. AI COPILOT
+# VIEW 6: WORKFORCE AI ASSISTANT
 # ════════════════════════════════════════════════
-elif nav == "🤖 AI Copilot":
-    st.markdown('<div class="section-bar">🤖 <span>Generative AI Workforce Copilot</span></div>', unsafe_allow_html=True)
+elif nav == "Workforce AI Assistant":
+    st.markdown('<div class="section-heading">Workforce Intelligence Natural Language Assistant</div>', unsafe_allow_html=True)
 
-    if "messages" not in st.session_state:
-        st.session_state.messages = [{"role": "assistant", "content": "👋 **Hello!** I am your TalentPulse AI Copilot. Ask me about workforce risk, department telemetry, or upskilling."}]
+    if "chat_messages" not in st.session_state:
+        st.session_state.chat_messages = [
+            {"role": "assistant", "content": "Hello. I have access to the workforce analytics dataset and trained XGBoost model. How can I assist with your retention analysis today?"}
+        ]
 
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    for m in st.session_state.chat_messages:
+        with st.chat_message(m["role"]):
+            st.markdown(m["content"])
 
-    q = st.chat_input("Ask a question about workforce retention or skills...")
-    if q:
-        st.session_state.messages.append({"role": "user", "content": q})
-        with st.chat_message("user"): st.markdown(q)
+    user_query = st.chat_input("Ask a question regarding workforce turnover, departments, or skill deficits...")
+    if user_query:
+        st.session_state.chat_messages.append({"role": "user", "content": user_query})
+        with st.chat_message("user"): st.markdown(user_query)
 
-        ctx = build_system_context(intel_df, org_gap_df, dept_scores_df, q)
+        rag_context = build_system_context(intel_df, org_gap_df, dept_scores_df, user_query)
         with st.chat_message("assistant"):
-            with st.spinner("Analyzing..."):
-                ans = generate_llm_response(st.session_state.messages, ctx, api_key=os.environ.get("GEMINI_API_KEY", ""), provider="Google Gemini" if os.environ.get("GEMINI_API_KEY") else "Built-in Synthesizer")
-                st.markdown(ans)
-        st.session_state.messages.append({"role": "assistant", "content": ans})
+            with st.spinner("Analyzing workforce telemetry..."):
+                reply = generate_llm_response(
+                    st.session_state.chat_messages, rag_context,
+                    api_key=os.environ.get("GEMINI_API_KEY", ""),
+                    provider="Google Gemini" if os.environ.get("GEMINI_API_KEY") else "Built-in Synthesizer"
+                )
+                st.markdown(reply)
+        st.session_state.chat_messages.append({"role": "assistant", "content": reply})
