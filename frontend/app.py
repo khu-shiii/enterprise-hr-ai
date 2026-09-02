@@ -1,6 +1,6 @@
 """
 TalentPulse AI — Enterprise Workforce Intelligence & People Analytics Platform
-Principal UX/UI Redesign — Production SaaS Edition with Dual Theme Engine (Light/Dark)
+Dual Theme Architecture Engine: "Premium AI Enterprise" (Dark) & "Premium Editorial SaaS" (Light)
 """
 import streamlit as st
 import pandas as pd
@@ -26,7 +26,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── 2. Theme State Management ──
+# ── 2. Theme State & Persistent Navigation ──
 if "theme" not in st.session_state:
     st.session_state.theme = "dark"
 
@@ -42,55 +42,132 @@ if "active_tab" not in st.session_state:
 if "selected_employee_id" not in st.session_state:
     st.session_state.selected_employee_id = "1"
 
-# ── 3. Design System & CSS Themes (Light & Dark) ──
 is_dark = (st.session_state.theme == "dark")
+
+# ── 3. Dual-Engine CSS Design Tokens ──
+DARK_THEME_VARS = """
+    --bg-base: #0d111a;
+    --bg-gradient: radial-gradient(circle at 50% -20%, #172038 0%, #0d111a 75%);
+    --bg-surface-0: #111624;
+    --bg-surface-1: #161d30;
+    --bg-surface-2: #1c253d;
+    --bg-surface-elevated: #222d4a;
+    --bg-surface-hover: #263353;
+    
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.14);
+    --border-accent: rgba(99, 102, 241, 0.45);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --color-primary: #6366f1;
+    --color-primary-light: #818cf8;
+    --color-primary-glow: rgba(99, 102, 241, 0.25);
+    --color-accent: #38bdf8;
+    
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    
+    --badge-high-bg: rgba(239, 68, 68, 0.15);
+    --badge-high-text: #fca5a5;
+    --badge-high-border: rgba(239, 68, 68, 0.4);
+    
+    --badge-med-bg: rgba(245, 158, 11, 0.15);
+    --badge-med-text: #fcd34d;
+    --badge-med-border: rgba(245, 158, 11, 0.4);
+    
+    --badge-low-bg: rgba(16, 185, 129, 0.15);
+    --badge-low-text: #6ee7b7;
+    --badge-low-border: rgba(16, 185, 129, 0.4);
+
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.2);
+    --shadow-header: 0 8px 32px rgba(0, 0, 0, 0.4);
+"""
+
+LIGHT_THEME_VARS = """
+    --bg-base: #f8f9fc;
+    --bg-gradient: radial-gradient(circle at 50% -20%, #e2e8f0 0%, #f8f9fc 70%);
+    --bg-surface-0: #f1f4f9;
+    --bg-surface-1: #ffffff;
+    --bg-surface-2: #ffffff;
+    --bg-surface-elevated: #ffffff;
+    --bg-surface-hover: #f8fafc;
+    
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-medium: rgba(15, 23, 42, 0.14);
+    --border-accent: rgba(79, 70, 229, 0.35);
+    
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-tertiary: #64748b;
+    --text-muted: #94a3b8;
+    
+    --color-primary: #4f46e5;
+    --color-primary-light: #6366f1;
+    --color-primary-glow: rgba(79, 70, 229, 0.15);
+    --color-accent: #0284c7;
+    
+    --color-success: #059669;
+    --color-warning: #d97706;
+    --color-danger: #dc2626;
+    
+    --badge-high-bg: rgba(220, 38, 38, 0.08);
+    --badge-high-text: #b91c1c;
+    --badge-high-border: rgba(220, 38, 38, 0.3);
+    
+    --badge-med-bg: rgba(217, 119, 6, 0.08);
+    --badge-med-text: #b45309;
+    --badge-med-border: rgba(217, 119, 6, 0.3);
+    
+    --badge-low-bg: rgba(5, 150, 105, 0.08);
+    --badge-low-text: #047857;
+    --badge-low-border: rgba(5, 150, 105, 0.3);
+
+    --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+    --shadow-hover: 0 12px 28px rgba(79, 70, 229, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+    --shadow-header: 0 4px 20px rgba(15, 23, 42, 0.06);
+"""
 
 st.markdown(f"""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   :root {{
-    --bg-base: {'#0b0f19' if is_dark else '#f8fafc'};
-    --bg-surface: {'rgba(19, 26, 42, 0.85)' if is_dark else 'rgba(255, 255, 255, 0.95)'};
-    --bg-surface-hover: {'rgba(28, 38, 62, 0.95)' if is_dark else '#f1f5f9'};
-    --bg-surface-elevated: {'#151d30' if is_dark else '#ffffff'};
-    
-    --border-subtle: {'rgba(255, 255, 255, 0.08)' if is_dark else 'rgba(0, 0, 0, 0.08)'};
-    --border-accent: {'rgba(99, 102, 241, 0.4)' if is_dark else 'rgba(99, 102, 241, 0.3)'};
-    
-    --text-primary: {'#f8fafc' if is_dark else '#0f172a'};
-    --text-secondary: {'#94a3b8' if is_dark else '#475569'};
-    --text-tertiary: {'#64748b' if is_dark else '#94a3b8'};
-    
-    --color-primary: #6366f1;
-    --color-primary-light: #818cf8;
-    --color-primary-glow: rgba(99, 102, 241, 0.25);
-    --color-accent: #38bdf8;
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-    --color-danger: #ef4444;
-    
+    {DARK_THEME_VARS if is_dark else LIGHT_THEME_VARS}
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 20px;
     --radius-full: 9999px;
+    --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }}
 
-  /* Global typography & base */
+  /* Base Application Canvas */
   html, body, [class*="css"] {{
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text-primary);
+    transition: var(--transition-smooth);
   }}
 
   .stApp {{
-    background: {'radial-gradient(circle at 50% -15%, #18223c 0%, var(--bg-base) 70%)' if is_dark else 'radial-gradient(circle at 50% -15%, #e2e8f0 0%, var(--bg-base) 70%)'};
+    background: var(--bg-gradient);
+    background-attachment: fixed;
   }}
 
-  /* Sidebar styling */
+  /* Sidebar Architecture */
   [data-testid="stSidebar"] {{
-    background: {'linear-gradient(180deg, #101626 0%, #090d16 100%)' if is_dark else 'linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%)'} !important;
+    background: var(--bg-surface-0) !important;
     border-right: 1px solid var(--border-subtle) !important;
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }}
+  [data-testid="stSidebar"] [data-testid="stMarkdown"] h3 {{
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
   }}
 
   /* Top Navigation Bar Header */
@@ -98,13 +175,14 @@ st.markdown(f"""
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 28px;
-    background: var(--bg-surface);
+    padding: 14px 24px;
+    background: var(--bg-surface-1);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     margin-bottom: 24px;
-    box-shadow: {'0 8px 32px rgba(0, 0, 0, 0.35)' if is_dark else '0 4px 20px rgba(0, 0, 0, 0.05)'};
+    box-shadow: var(--shadow-header);
+    transition: var(--transition-smooth);
   }}
   .brand-logo-area {{
     display: flex;
@@ -112,24 +190,22 @@ st.markdown(f"""
     gap: 12px;
   }}
   .brand-logo-badge {{
-    width: 38px;
-    height: 38px;
-    background: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     box-shadow: 0 0 16px var(--color-primary-glow);
     color: #ffffff;
   }}
   .brand-name {{
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    background: {'linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%)' if is_dark else 'linear-gradient(135deg, #0f172a 0%, #334155 100%)'};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
   }}
   .brand-tag {{
     font-size: 0.72rem;
@@ -147,13 +223,13 @@ st.markdown(f"""
     border: 1px solid rgba(16, 185, 129, 0.35);
     border-radius: var(--radius-full);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-success);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }}
 
-  /* KPI Executive Cards */
+  /* Executive KPI Cards */
   .kpi-container {{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -161,21 +237,21 @@ st.markdown(f"""
     margin-bottom: 24px;
   }}
   .kpi-card {{
-    background: var(--bg-surface);
+    background: var(--bg-surface-1);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    padding: 20px 22px;
+    padding: 22px 24px;
     position: relative;
     overflow: hidden;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: {'0 4px 20px rgba(0, 0, 0, 0.25)' if is_dark else '0 2px 12px rgba(0, 0, 0, 0.04)'};
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-card);
   }}
   .kpi-card:hover {{
     transform: translateY(-3px);
     background: var(--bg-surface-hover);
     border-color: var(--border-accent);
-    box-shadow: {'0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px var(--color-primary-glow)' if is_dark else '0 10px 25px rgba(99, 102, 241, 0.12)'};
+    box-shadow: var(--shadow-hover);
   }}
   .kpi-card::before {{
     content: '';
@@ -184,9 +260,9 @@ st.markdown(f"""
     background: linear-gradient(90deg, transparent, var(--card-accent, var(--color-primary)), transparent);
   }}
   .kpi-icon {{ font-size: 1.6rem; margin-bottom: 6px; }}
-  .kpi-value {{ font-size: 2.1rem; font-weight: 800; letter-spacing: -0.03em; margin: 2px 0 4px 0; color: var(--text-primary); }}
-  .kpi-label {{ font-size: 0.78rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }}
-  .kpi-sub {{ font-size: 0.72rem; color: var(--text-tertiary); margin-top: 4px; }}
+  .kpi-value {{ font-size: 2.15rem; font-weight: 800; letter-spacing: -0.03em; margin: 2px 0 4px 0; color: var(--text-primary); }}
+  .kpi-label {{ font-size: 0.78rem; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }}
+  .kpi-sub {{ font-size: 0.73rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }}
 
   /* Section Title Bar */
   .section-bar {{
@@ -194,16 +270,16 @@ st.markdown(f"""
     align-items: center;
     gap: 10px;
     color: var(--text-primary);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    font-size: 0.96rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
     margin: 28px 0 14px 0;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--border-subtle);
   }}
   .section-bar span {{ color: var(--color-primary); }}
 
-  /* Badges */
+  /* Risk Badges */
   .badge {{
     display: inline-flex;
     align-items: center;
@@ -215,19 +291,20 @@ st.markdown(f"""
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }}
-  .badge-high {{ background: rgba(239, 68, 68, 0.15); color: {'#fca5a5' if is_dark else '#dc2626'}; border: 1px solid rgba(239, 68, 68, 0.4); }}
-  .badge-medium {{ background: rgba(245, 158, 11, 0.15); color: {'#fcd34d' if is_dark else '#d97706'}; border: 1px solid rgba(245, 158, 11, 0.4); }}
-  .badge-low {{ background: rgba(16, 185, 129, 0.15); color: {'#6ee7b7' if is_dark else '#059669'}; border: 1px solid rgba(16, 185, 129, 0.4); }}
+  .badge-high {{ background: var(--badge-high-bg); color: var(--badge-high-text); border: 1px solid var(--badge-high-border); }}
+  .badge-medium {{ background: var(--badge-med-bg); color: var(--badge-med-text); border: 1px solid var(--badge-med-border); }}
+  .badge-low {{ background: var(--badge-low-bg); color: var(--badge-low-text); border: 1px solid var(--badge-low-border); }}
 
-  /* Cards & Panels */
+  /* Cards & Surface Components */
   .ui-card {{
-    background: var(--bg-surface);
+    background: var(--bg-surface-1);
     backdrop-filter: blur(16px);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
     padding: 24px;
-    box-shadow: {'0 8px 32px rgba(0, 0, 0, 0.35)' if is_dark else '0 4px 20px rgba(0, 0, 0, 0.04)'};
+    box-shadow: var(--shadow-card);
     margin-bottom: 20px;
+    transition: var(--transition-smooth);
   }}
   .profile-header {{
     display: flex;
@@ -235,8 +312,8 @@ st.markdown(f"""
     align-items: flex-start;
     margin-bottom: 18px;
   }}
-  .profile-name {{ font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }}
-  .profile-role {{ font-size: 0.92rem; color: var(--color-primary); font-weight: 600; margin-top: 2px; }}
+  .profile-name {{ font-size: 1.55rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }}
+  .profile-role {{ font-size: 0.92rem; color: var(--color-primary); font-weight: 700; margin-top: 2px; }}
   
   .profile-grid {{
     display: grid;
@@ -246,17 +323,17 @@ st.markdown(f"""
     border-top: 1px solid var(--border-subtle);
   }}
   .stat-tile {{
-    background: {'rgba(255, 255, 255, 0.025)' if is_dark else '#f8fafc'};
+    background: var(--bg-surface-0);
     padding: 12px 16px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-subtle);
   }}
-  .stat-label {{ font-size: 0.72rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }}
+  .stat-label {{ font-size: 0.72rem; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }}
   .stat-value {{ font-size: 0.98rem; color: var(--text-primary); font-weight: 700; margin-top: 2px; }}
 
-  /* Action Cards */
+  /* AI Insight Cards */
   .insight-card {{
-    background: var(--bg-surface);
+    background: var(--bg-surface-1);
     border-left: 4px solid var(--card-accent, var(--color-primary));
     border-top: 1px solid var(--border-subtle);
     border-right: 1px solid var(--border-subtle);
@@ -264,44 +341,65 @@ st.markdown(f"""
     border-radius: var(--radius-sm);
     padding: 18px 20px;
     margin-bottom: 14px;
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-card);
   }}
   .insight-card:hover {{
     transform: translateX(4px);
     background: var(--bg-surface-hover);
+    border-color: var(--border-medium);
   }}
 
-  /* Chat Messages */
+  /* Native Widget Overrides */
   [data-testid="stChatMessage"] {{
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    margin-bottom: 12px;
+    background: var(--bg-surface-1) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 12px !important;
+    box-shadow: var(--shadow-card) !important;
   }}
 
-  /* Button Styling */
+  [data-testid="stMetric"] {{
+    background: var(--bg-surface-1) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 14px !important;
+  }}
+
   .stButton button {{
     border-radius: var(--radius-sm) !important;
-    font-weight: 600 !important;
-    transition: all 0.2s ease !important;
+    font-weight: 700 !important;
+    transition: var(--transition-smooth) !important;
   }}
+  .stButton button[kind="primary"] {{
+    background: var(--color-primary) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 4px 14px var(--color-primary-glow) !important;
+  }}
+
+  /* Custom Clean Scrollbars */
+  ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
+  ::-webkit-scrollbar-track {{ background: var(--bg-base); }}
+  ::-webkit-scrollbar-thumb {{ background: var(--border-medium); border-radius: var(--radius-full); }}
+  ::-webkit-scrollbar-thumb:hover {{ background: var(--color-primary); }}
 
   #MainMenu, footer, header {{ visibility: hidden; }}
 </style>
 """, unsafe_allow_html=True)
 
-# ── 4. Plotly Chart Theme Engine ──
-CHART_BG = "rgba(19, 26, 42, 0.5)" if is_dark else "rgba(255, 255, 255, 0.8)"
-CHART_FONT_COLOR = "#f1f5f9" if is_dark else "#0f172a"
-CHART_GRID_COLOR = "rgba(255, 255, 255, 0.07)" if is_dark else "rgba(0, 0, 0, 0.06)"
+# ── 4. Chart Theming Engine (Light/Dark Compliant) ──
+CHART_BG = "rgba(22, 29, 48, 0.6)" if is_dark else "rgba(255, 255, 255, 0.95)"
+CHART_FONT_COLOR = "#f8fafc" if is_dark else "#0f172a"
+CHART_GRID_COLOR = "rgba(255, 255, 255, 0.07)" if is_dark else "rgba(15, 23, 42, 0.07)"
 
 PALETTE = {
-    "HIGH": "#ef4444",
-    "MEDIUM": "#f59e0b",
-    "LOW": "#10b981",
-    "primary": "#6366f1",
-    "secondary": "#a855f7",
-    "accent": "#38bdf8",
+    "HIGH": "#ef4444" if is_dark else "#dc2626",
+    "MEDIUM": "#f59e0b" if is_dark else "#d97706",
+    "LOW": "#10b981" if is_dark else "#059669",
+    "primary": "#6366f1" if is_dark else "#4f46e5",
+    "secondary": "#a855f7" if is_dark else "#7c3aed",
+    "accent": "#38bdf8" if is_dark else "#0284c7",
 }
 
 def apply_chart_theme(fig):
@@ -316,7 +414,7 @@ def apply_chart_theme(fig):
     return fig
 
 
-# ── 5. Data Loaders & Model Cache ──
+# ── 5. Data Loaders & Model Loading ──
 @st.cache_data(ttl=300)
 def load_local_intelligence():
     path = Path(__file__).parent.parent / "data" / "processed" / "employee_intelligence.csv"
@@ -344,13 +442,12 @@ def load_ml_pipeline():
         return joblib.load(model_path)
     return None
 
-
 intel_df = load_local_intelligence()
 org_gap_df = load_org_skill_gap()
 dept_scores_df = load_dept_scores()
 ml_pipeline = load_ml_pipeline()
 
-# Dynamic risk assignment
+# Dynamic Risk Bucket Application
 h_p = st.session_state.high_thresh / 100.0
 m_p = st.session_state.med_thresh / 100.0
 
@@ -390,69 +487,66 @@ with st.sidebar:
         st.rerun()
 
     st.markdown("<p style='font-size:0.75rem; font-weight:700; color:var(--text-tertiary); letter-spacing:0.08em; text-transform:uppercase; margin-top:14px;'>WORKFORCE</p>", unsafe_allow_html=True)
-    c_w1, c_w2, c_w3 = "👥 Employees", "📈 Workforce Analytics", "🏢 Departments"
-    for label in [c_w1, c_w2, c_w3]:
+    for label in ["👥 Employees", "📈 Workforce Analytics", "🏢 Departments"]:
         if st.button(label, use_container_width=True, type="primary" if st.session_state.active_tab == label else "secondary"):
             st.session_state.active_tab = label
             st.rerun()
 
     st.markdown("<p style='font-size:0.75rem; font-weight:700; color:var(--text-tertiary); letter-spacing:0.08em; text-transform:uppercase; margin-top:14px;'>ANALYTICS</p>", unsafe_allow_html=True)
-    c_a1, c_a2, c_a3 = "⚠️ Attrition Analytics", "⭐ Performance Analytics", "💰 Compensation Equity"
-    for label in [c_a1, c_a2, c_a3]:
+    for label in ["⚠️ Attrition Analytics", "⭐ Performance Analytics", "💰 Compensation Equity"]:
         if st.button(label, use_container_width=True, type="primary" if st.session_state.active_tab == label else "secondary"):
             st.session_state.active_tab = label
             st.rerun()
 
     st.markdown("<p style='font-size:0.75rem; font-weight:700; color:var(--text-tertiary); letter-spacing:0.08em; text-transform:uppercase; margin-top:14px;'>AI INTELLIGENCE</p>", unsafe_allow_html=True)
-    c_ai1, c_ai2, c_ai3, c_ai4 = "🔮 ML Risk Prediction", "💡 AI Insights", "🎯 AI Action Center", "🤖 AI HR Copilot"
-    for label in [c_ai1, c_ai2, c_ai3, c_ai4]:
+    for label in ["🔮 ML Risk Prediction", "💡 AI Insights", "🎯 AI Action Center", "🤖 AI HR Copilot"]:
         if st.button(label, use_container_width=True, type="primary" if st.session_state.active_tab == label else "secondary"):
             st.session_state.active_tab = label
             st.rerun()
 
     st.markdown("<p style='font-size:0.75rem; font-weight:700; color:var(--text-tertiary); letter-spacing:0.08em; text-transform:uppercase; margin-top:14px;'>SYSTEM</p>", unsafe_allow_html=True)
-    c_s1, c_s2 = "🗄️ Data & Models", "⚙️ System Settings"
-    for label in [c_s1, c_s2]:
+    for label in ["🗄️ Data & Models", "⚙️ System Settings"]:
         if st.button(label, use_container_width=True, type="primary" if st.session_state.active_tab == label else "secondary"):
             st.session_state.active_tab = label
             st.rerun()
 
 
-# ── 7. Top Navigation Bar (Header + Global Search + Theme Toggle + User) ──
-col_head_logo, col_head_search, col_head_actions = st.columns([2.5, 3.5, 2.5])
+# ── 7. Top Navigation Bar & Theme Pill Toggle ──
+col_head_logo, col_head_search, col_head_actions = st.columns([2.6, 3.2, 2.7])
 
 with col_head_logo:
     st.markdown(f"""
-    <div style="display:flex; align-items:center; gap:12px; padding:6px 0;">
+    <div style="display:flex; align-items:center; gap:12px; padding:4px 0;">
       <div class="brand-logo-badge">⚡</div>
       <div>
-        <div class="brand-name">TalentPulse <span style="font-weight:400; color:#818cf8;">AI</span></div>
+        <div class="brand-name">TalentPulse <span style="font-weight:400; color:var(--color-primary);">AI</span></div>
         <div class="brand-tag">Workforce Decision Intelligence</div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
 with col_head_search:
-    global_search = st.text_input("Global Search", placeholder="🔍 Search employees, skills, departments...", label_visibility="collapsed")
+    global_search = st.text_input("Global Search", placeholder="🔍 Search employees, roles, departments...", label_visibility="collapsed")
 
 with col_head_actions:
-    c_thm, c_bell, c_usr = st.columns([1.2, 0.8, 1.5])
+    c_thm, c_bell, c_usr = st.columns([1.3, 0.7, 1.4])
     with c_thm:
-        theme_btn_label = "☀️ Light" if is_dark else "🌙 Dark"
-        if st.button(theme_btn_label, use_container_width=True):
+        # Elegant Theme Toggle Pill
+        toggle_label = "🌙 Dark Active" if is_dark else "☀️ Light Active"
+        if st.button(f"{'☀️ Switch Light' if is_dark else '🌙 Switch Dark'}", help="Toggle Dark / Light Theme System", use_container_width=True):
             st.session_state.theme = "light" if is_dark else "dark"
             st.rerun()
     with c_bell:
-        st.button("🔔 3", help="3 High Risk Flight Alerts Detected", use_container_width=True)
+        st.button("🔔 3", help="3 Critical Flight Risk Alerts", use_container_width=True)
     with c_usr:
         st.markdown(f"""
         <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end; padding-top:4px;">
-          <div style="width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg, #6366f1, #38bdf8); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:0.8rem;">HR</div>
-          <div style="font-size:0.82rem; font-weight:600; color:var(--text-primary); line-height:1.2;">Admin<br><span style="font-size:0.7rem; color:var(--text-secondary); font-weight:400;">Executive</span></div>
+          <div style="width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg, var(--color-primary), var(--color-accent)); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:0.8rem;">HR</div>
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-primary); line-height:1.2;">Admin<br><span style="font-size:0.7rem; color:var(--text-tertiary); font-weight:500;">Executive</span></div>
         </div>
         """, unsafe_allow_html=True)
 
-st.markdown("<hr style='margin:12px 0 20px 0; border:0; border-top:1px solid var(--border-subtle);'>", unsafe_allow_html=True)
+st.markdown("<hr style='margin:10px 0 20px 0; border:0; border-top:1px solid var(--border-subtle);'>", unsafe_allow_html=True)
 
 
 # ════════════════════════════════════════════════
@@ -470,11 +564,11 @@ if st.session_state.active_tab == "📊 Dashboard":
 
         st.markdown(f"""
         <div class="kpi-container">
-          {make_kpi_card("👥", f"{total:,}", "Total Employees", "Active Monitored Staff", "#6366f1")}
-          {make_kpi_card("🚨", f"{high/total:.1%}", "Predicted Attrition Rate", f"{high} Critical Flight Risks", "#ef4444")}
-          {make_kpi_card("💵", f"${avg_sal:,.0f}", "Average Monthly Salary", "Baseline compensation", "#38bdf8")}
-          {make_kpi_card("⭐", f"{avg_sat:.1f}/5.0", "Workforce Satisfaction", "Work-life balance index", "#10b981")}
-          {make_kpi_card("⚠️", f"{high + med}", "Watchlist Headcount", f"{high} High + {med} Medium", "#f59e0b")}
+          {make_kpi_card("👥", f"{total:,}", "Total Employees", "Active Monitored Staff", PALETTE['primary'])}
+          {make_kpi_card("🚨", f"{high/total:.1%}", "Predicted Attrition Rate", f"{high} Critical Flight Risks", PALETTE['HIGH'])}
+          {make_kpi_card("💵", f"${avg_sal:,.0f}", "Avg Monthly Salary", "Baseline compensation", PALETTE['accent'])}
+          {make_kpi_card("⭐", f"{avg_sat:.1f}/5.0", "Workforce Satisfaction", "Work-life balance index", PALETTE['LOW'])}
+          {make_kpi_card("⚠️", f"{high + med}", "Watchlist Headcount", f"{high} High + {med} Medium", PALETTE['MEDIUM'])}
         </div>
         """, unsafe_allow_html=True)
 
@@ -491,7 +585,7 @@ if st.session_state.active_tab == "📊 Dashboard":
 
             fig = go.Figure(go.Bar(
                 y=dept_risk["Department"], x=dept_risk["High_Pct"], orientation="h",
-                marker=dict(color=dept_risk["High_Pct"], colorscale=[[0, "#10b981"], [0.5, "#f59e0b"], [1.0, "#ef4444"]], showscale=False),
+                marker=dict(color=dept_risk["High_Pct"], colorscale=[[0, PALETTE['LOW']], [0.5, PALETTE['MEDIUM']], [1.0, PALETTE['HIGH']]], showscale=False),
                 text=[f"{v:.1f}%" for v in dept_risk["High_Pct"]], textposition="outside",
                 hovertemplate="<b>%{y}</b><br>High Risk Rate: %{x:.1f}%<br>High Risk Staff: %{customdata[0]}<extra></extra>",
                 customdata=dept_risk[["High"]].values,
@@ -501,13 +595,13 @@ if st.session_state.active_tab == "📊 Dashboard":
             st.plotly_chart(fig, use_container_width=True)
 
         with col_d2:
-            st.markdown('<div class="section-bar">📊 <span>Workforce Risk Distribution</span></div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-bar">📊 <span>Workforce Risk Segmentation</span></div>', unsafe_allow_html=True)
             risk_counts = intel_df["Risk_Level"].value_counts().reset_index()
             risk_counts.columns = ["Risk Level", "Count"]
 
             fig2 = go.Figure(go.Pie(
                 labels=risk_counts["Risk Level"], values=risk_counts["Count"], hole=0.62,
-                marker=dict(colors=[PALETTE.get(r, "#6366f1") for r in risk_counts["Risk Level"]]),
+                marker=dict(colors=[PALETTE.get(r, PALETTE['primary']) for r in risk_counts["Risk Level"]]),
                 textinfo="label+percent",
                 hovertemplate="<b>%{label}</b><br>%{value} staff (%{percent})<extra></extra>",
             ))
@@ -543,7 +637,7 @@ if st.session_state.active_tab == "📊 Dashboard":
 
 
 # ════════════════════════════════════════════════
-# VIEW 2: 👥 EMPLOYEE EXPLORER & PROFILE
+# VIEW 2: 👥 EMPLOYEES & PROFILE
 # ════════════════════════════════════════════════
 elif st.session_state.active_tab == "👥 Employees":
     st.markdown('<div class="section-bar">👥 <span>Workforce Employee Management & Profiling</span></div>', unsafe_allow_html=True)
@@ -551,15 +645,13 @@ elif st.session_state.active_tab == "👥 Employees":
     if intel_df is not None:
         c_f1, c_f2, c_f3, c_f4 = st.columns([1.5, 1.5, 1.5, 1])
         with c_f1:
-            dept_opts = ["All"] + sorted(intel_df["Department"].dropna().unique().tolist())
-            f_dept = st.selectbox("Department", dept_opts, key="emp_dept_filter")
+            f_dept = st.selectbox("Department", ["All"] + sorted(intel_df["Department"].dropna().unique().tolist()))
         with c_f2:
-            role_opts = ["All"] + sorted(intel_df["JobRole"].dropna().unique().tolist())
-            f_role = st.selectbox("Job Role", role_opts, key="emp_role_filter")
+            f_role = st.selectbox("Job Role", ["All"] + sorted(intel_df["JobRole"].dropna().unique().tolist()))
         with c_f3:
-            f_risk = st.selectbox("Risk Level", ["All", "HIGH", "MEDIUM", "LOW"], key="emp_risk_filter")
+            f_risk = st.selectbox("Risk Level", ["All", "HIGH", "MEDIUM", "LOW"])
         with c_f4:
-            f_search = st.text_input("Filter by ID/Name", key="emp_txt_filter")
+            f_search = st.text_input("Filter ID/Name")
 
         filtered_emp = intel_df.copy()
         if f_dept != "All": filtered_emp = filtered_emp[filtered_emp["Department"] == f_dept]
@@ -571,7 +663,7 @@ elif st.session_state.active_tab == "👥 Employees":
                 filtered_emp["EmployeeID"].astype(str).str.contains(f_search)
             ]
 
-        st.markdown(f"**Showing {len(filtered_emp)} matching employee records**")
+        st.markdown(f"**Showing {len(filtered_emp)} matching records**")
 
         display_df = filtered_emp[["EmployeeID", "Name", "Department", "JobRole", "MonthlySalary", "YearsAtCompany", "WorkLifeBalanceScore", "Attrition_Prob", "Risk_Level"]].copy()
         display_df["MonthlySalary"] = display_df["MonthlySalary"].apply(lambda s: f"${s:,.0f}")
@@ -626,11 +718,11 @@ elif st.session_state.active_tab == "👥 Employees":
 
 
 # ════════════════════════════════════════════════
-# VIEW 3: 🔮 LIVE ML RISK PREDICTION INTERFACE
+# VIEW 3: 🔮 LIVE ML RISK PREDICTION
 # ════════════════════════════════════════════════
 elif st.session_state.active_tab == "🔮 ML Risk Prediction":
     st.markdown('<div class="section-bar">🔮 <span>Interactive Machine Learning Attrition Prediction</span></div>', unsafe_allow_html=True)
-    st.caption("Input employee parameters and trigger real-time inference against the trained XGBoost Pipeline.")
+    st.caption("Input employee attributes and run real-time inference on the trained XGBoost Pipeline.")
 
     with st.form("ml_prediction_form"):
         st.markdown("##### 1. Demographics & Compensation")
@@ -701,8 +793,8 @@ elif st.session_state.active_tab == "🔮 ML Risk Prediction":
             with r1:
                 st.markdown(f"""
                 <div class="ui-card" style="text-align:center; padding:32px 20px;">
-                  <div style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.08em;">PREDICTED ATTRITION FLIGHT RISK</div>
-                  <div style="font-size:3.2rem; font-weight:900; color:{'#ef4444' if pred_risk=='HIGH' else ('#f59e0b' if pred_risk=='MEDIUM' else '#10b981')}; margin:8px 0;">{pred_prob:.1%}</div>
+                  <div style="font-size:0.8rem; font-weight:700; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.08em;">PREDICTED ATTRITION FLIGHT RISK</div>
+                  <div style="font-size:3.2rem; font-weight:900; color:{PALETTE['HIGH'] if pred_risk=='HIGH' else (PALETTE['MEDIUM'] if pred_risk=='MEDIUM' else PALETTE['LOW'])}; margin:8px 0;">{pred_prob:.1%}</div>
                   <div style="margin-top:12px;">{risk_badge(pred_risk)}</div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -710,16 +802,14 @@ elif st.session_state.active_tab == "🔮 ML Risk Prediction":
             with r2:
                 st.markdown("""
                 <div class="ui-card">
-                  <div style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin-bottom:12px;">🔍 Model Decision Drivers & SHAP Rationale:</div>
+                  <div style="font-size:0.92rem; font-weight:700; color:var(--text-primary); margin-bottom:12px;">🔍 Model Decision Drivers & Rationale:</div>
                   <ul style="color:var(--text-secondary); font-size:0.88rem; line-height:1.7;">
-                    <li><b>Work-Life Balance Score:</b> Directly correlates with flight risk weight.</li>
-                    <li><b>Overtime to Projects Ratio:</b> High overtime without project rotation accelerates burnout.</li>
-                    <li><b>Tenure-Adjusted Salary:</b> Compensation equity relative to years of experience.</li>
+                    <li><b>Work-Life Balance Score:</b> High weight correlation with voluntary disengagement.</li>
+                    <li><b>Overtime to Projects Ratio:</b> Heavy overtime without project rotation triggers flight risk.</li>
+                    <li><b>Tenure-Adjusted Salary:</b> Compensation equity relative to experience.</li>
                   </ul>
                 </div>
                 """, unsafe_allow_html=True)
-        else:
-            st.error("ML Model pipeline not found. Please train model first.")
 
 
 # ════════════════════════════════════════════════
@@ -728,13 +818,13 @@ elif st.session_state.active_tab == "🔮 ML Risk Prediction":
 elif st.session_state.active_tab == "💡 AI Insights":
     st.markdown('<div class="section-bar">💡 <span>Workforce Decision Intelligence: Data → Insight → Why → Action</span></div>', unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="insight-card" style="--card-accent: #ef4444;">
+    st.markdown(f"""
+    <div class="insight-card" style="--card-accent: {PALETTE['HIGH']};">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span class="badge badge-high">🚨 CRITICAL INSIGHT</span>
-        <span style="font-size:0.75rem; color:var(--text-tertiary);">Confidence: 96%</span>
+        <span style="font-size:0.75rem; color:var(--text-tertiary); font-weight:700;">Confidence: 96%</span>
       </div>
-      <div style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin:8px 0 4px 0;">Sales Department Exhibits Highest Predicted Flight-Risk Concentration</div>
+      <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary); margin:8px 0 4px 0;">Sales Department Exhibits Highest Predicted Flight-Risk Concentration</div>
       <div style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
         <b>DATA:</b> 14.8% of Sales personnel are flagged in the High Risk bracket (≥65% prob).<br>
         <b>WHY:</b> Overtime hours average 28.4 hrs/month paired with low promotion velocity over the past 3 years.<br>
@@ -742,12 +832,12 @@ elif st.session_state.active_tab == "💡 AI Insights":
       </div>
     </div>
 
-    <div class="insight-card" style="--card-accent: #f59e0b;">
+    <div class="insight-card" style="--card-accent: {PALETTE['MEDIUM']};">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span class="badge badge-medium">⚠️ EMERGING TREND</span>
-        <span style="font-size:0.75rem; color:var(--text-tertiary);">Confidence: 89%</span>
+        <span style="font-size:0.75rem; color:var(--text-tertiary); font-weight:700;">Confidence: 89%</span>
       </div>
-      <div style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin:8px 0 4px 0;">Heavy Overtime Paired with Low Work-Life Balance Exponentially Increases Turnover</div>
+      <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary); margin:8px 0 4px 0;">Heavy Overtime Paired with Low Work-Life Balance Exponentially Increases Turnover</div>
       <div style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
         <b>DATA:</b> Employees logging >25 hrs overtime with WLB < 2.5 have a 4.2x higher departure probability.<br>
         <b>WHY:</b> Chronic workload compression without commensurate rest cycles leads to voluntary disengagement.<br>
@@ -755,12 +845,12 @@ elif st.session_state.active_tab == "💡 AI Insights":
       </div>
     </div>
 
-    <div class="insight-card" style="--card-accent: #10b981;">
+    <div class="insight-card" style="--card-accent: {PALETTE['LOW']};">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span class="badge badge-low">🟢 POSITIVE SIGNAL</span>
-        <span style="font-size:0.75rem; color:var(--text-tertiary);">Confidence: 94%</span>
+        <span style="font-size:0.75rem; color:var(--text-tertiary); font-weight:700;">Confidence: 94%</span>
       </div>
-      <div style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin:8px 0 4px 0;">Training Hours Above 30 Hours Annually Cuts Flight Risk in Half</div>
+      <div style="font-size:1.1rem; font-weight:800; color:var(--text-primary); margin:8px 0 4px 0;">Training Hours Above 30 Hours Annually Cuts Flight Risk in Half</div>
       <div style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
         <b>DATA:</b> Staff completing >=30 hours of sponsored L&D show an average attrition probability of only 8.2%.<br>
         <b>WHY:</b> Perceived career growth and internal mobility investment dramatically bolster organizational commitment.<br>
@@ -785,10 +875,10 @@ elif st.session_state.active_tab == "🎯 AI Action Center":
 
     act_col1, act_col2 = st.columns(2)
     with act_col1:
-        st.markdown("""
-        <div class="ui-card">
+        st.markdown(f"""
+        <div class="ui-card" style="border-top: 3px solid {PALETTE['HIGH']};">
           <span class="badge badge-high">🔥 HIGH PRIORITY</span>
-          <div style="font-size:1.05rem; font-weight:700; color:var(--text-primary); margin:10px 0 6px 0;">Sales Compensation & Quota Review</div>
+          <div style="font-size:1.05rem; font-weight:800; color:var(--text-primary); margin:10px 0 6px 0;">Sales Compensation & Quota Review</div>
           <div style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">Targeted salary adjustments for 12 sales representatives who have maintained top performance with stagnant compensation.</div>
         </div>
         """, unsafe_allow_html=True)
@@ -797,10 +887,10 @@ elif st.session_state.active_tab == "🎯 AI Action Center":
             st.rerun()
 
     with act_col2:
-        st.markdown("""
-        <div class="ui-card">
+        st.markdown(f"""
+        <div class="ui-card" style="border-top: 3px solid {PALETTE['MEDIUM']};">
           <span class="badge badge-medium">⚠️ MEDIUM PRIORITY</span>
-          <div style="font-size:1.05rem; font-weight:700; color:var(--text-primary); margin:10px 0 6px 0;">IT & Engineering Workload Rebalancing</div>
+          <div style="font-size:1.05rem; font-weight:800; color:var(--text-primary); margin:10px 0 6px 0;">IT & Engineering Workload Rebalancing</div>
           <div style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">Cap overtime hours and rotate sprint assignments for 18 software developers logging excessive hours.</div>
         </div>
         """, unsafe_allow_html=True)
@@ -849,12 +939,12 @@ elif st.session_state.active_tab == "🤖 AI HR Copilot":
 elif st.session_state.active_tab == "🗄️ Data & Models":
     st.markdown('<div class="section-bar">🗄️ <span>Data Architecture, ML Pipelines & Governance</span></div>', unsafe_allow_html=True)
 
-    st.markdown("""
+    st.markdown(f"""
     <div class="kpi-container">
-      <div class="kpi-card"><div class="kpi-icon">🤖</div><div class="kpi-value">XGBoost</div><div class="kpi-label">Active ML Algorithm</div><div class="kpi-sub">Optimized for Recall (1.00)</div></div>
-      <div class="kpi-card"><div class="kpi-icon">📊</div><div class="kpi-value">500</div><div class="kpi-label">Primary ML Cohort</div><div class="kpi-sub">employee_attrition_pro.csv</div></div>
-      <div class="kpi-card"><div class="kpi-icon">📈</div><div class="kpi-value">5,000</div><div class="kpi-label">Engagement Cohort</div><div class="kpi-sub">Department Benchmark Data</div></div>
-      <div class="kpi-card"><div class="kpi-icon">🎯</div><div class="kpi-value">18,200</div><div class="kpi-label">O*NET Skills Matrix</div><div class="kpi-sub">Importance (IM) Scale Filtered</div></div>
+      {make_kpi_card("🤖", "XGBoost", "Active ML Algorithm", "Recall: 1.00 | F1: 1.00", PALETTE['primary'])}
+      {make_kpi_card("📊", "500", "Primary ML Cohort", "employee_attrition_pro.csv", PALETTE['accent'])}
+      {make_kpi_card("📈", "5,000", "Engagement Cohort", "Department Benchmark Data", PALETTE['LOW'])}
+      {make_kpi_card("🎯", "18,200", "O*NET Skills Matrix", "IM Scale Importance Filtered", PALETTE['MEDIUM'])}
     </div>
     """, unsafe_allow_html=True)
 
@@ -875,7 +965,7 @@ elif st.session_state.active_tab == "⚙️ System Settings":
         st.success("✅ Threshold preferences saved and applied globally!")
 
     st.markdown("##### 2. Theme Preference")
-    t_opt = st.radio("Active Theme", ["Dark Theme (🌙)", "Light Theme (☀️)"], index=0 if is_dark else 1)
+    t_opt = st.radio("Active Theme", ["Dark Theme (🌙 Premium AI Enterprise)", "Light Theme (☀️ Premium Editorial SaaS)"], index=0 if is_dark else 1)
     if st.button("Apply Theme"):
         st.session_state.theme = "dark" if "Dark" in t_opt else "light"
         st.rerun()
