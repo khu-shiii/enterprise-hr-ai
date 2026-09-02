@@ -175,6 +175,46 @@ st.markdown("""
   .stat-box-lbl { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
   .stat-box-val { font-size: 0.95rem; color: #ffffff; font-weight: 700; margin-top: 2px; }
 
+  /* Sleek Expandable/Collapsible Sidebar Controls */
+  [data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    color: var(--color-primary) !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 6px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s ease !important;
+  }
+  [data-testid="collapsedControl"]:hover {
+    background: var(--bg-surface-hover) !important;
+    border-color: var(--border-accent) !important;
+    transform: scale(1.05) !important;
+  }
+
+  [data-testid="stSidebarCollapseButton"] button {
+    color: var(--text-secondary) !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  [data-testid="stSidebarCollapseButton"] button:hover {
+    color: var(--text-primary) !important;
+    background: var(--bg-surface-hover) !important;
+  }
+
+  /* Custom Sidebar Expander Accordion */
+  [data-testid="stSidebar"] [data-testid="stExpander"] {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 10px !important;
+  }
+  [data-testid="stSidebar"] [data-testid="stExpander"] summary {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    color: var(--text-secondary) !important;
+  }
+
   [data-testid="stChatMessage"] {
     background: var(--bg-surface) !important;
     border: 1px solid var(--border-subtle) !important;
@@ -194,7 +234,7 @@ st.markdown("""
     font-weight: 600 !important;
   }
 
-  #MainMenu, footer, header { visibility: hidden; }
+  #MainMenu, footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -229,11 +269,25 @@ with st.sidebar:
     nav = st.radio("Navigation", NAV_ITEMS, label_visibility="collapsed")
     
     st.markdown("---")
-    st.markdown("##### Risk Thresholds")
-    st.session_state.high_thresh = st.slider("High Risk (≥ %)", 45, 90, st.session_state.high_thresh, 1)
-    st.session_state.med_thresh = st.slider("Medium Risk (≥ %)", 15, 60, st.session_state.med_thresh, 1)
     
-    st.caption(f"🔴 ≥{st.session_state.high_thresh}% | 🟡 {st.session_state.med_thresh}–{st.session_state.high_thresh}% | 🟢 <{st.session_state.med_thresh}%")
+    # 1. Collapsible Threshold Drawer
+    with st.expander("⚙️ Risk Thresholds", expanded=False):
+        st.session_state.high_thresh = st.slider("High Risk (≥ %)", 45, 90, st.session_state.high_thresh, 1)
+        st.session_state.med_thresh = st.slider("Medium Risk (≥ %)", 15, 60, st.session_state.med_thresh, 1)
+        st.caption(f"🔴 ≥{st.session_state.high_thresh}% | 🟡 {st.session_state.med_thresh}–{st.session_state.high_thresh}% | 🟢 <{st.session_state.med_thresh}%")
+        if st.button("↺ Reset Defaults (65/40)", use_container_width=True):
+            st.session_state.high_thresh = 65
+            st.session_state.med_thresh = 40
+            st.rerun()
+
+    # 2. Collapsible AI Settings Drawer
+    with st.expander("🤖 AI Copilot Engine", expanded=False):
+        ai_provider = st.selectbox("LLM Provider", ["Google Gemini", "OpenAI / Compatible", "Built-in Synthesizer"], index=0)
+        ai_key = st.text_input("API Key (Optional)", value=os.environ.get("GEMINI_API_KEY", ""), type="password", placeholder="AIzaSy...")
+
+    # 3. Collapsible System Telemetry Drawer
+    with st.expander("ℹ️ Model Telemetry", expanded=False):
+        st.caption("• **Algorithm**: XGBoost Classifier\n• **Recall**: 1.00 (100%)\n• **F1-Score**: 1.00\n• **Cohort**: 500 records\n• **O*NET Scale**: IM Importance")
 
 # Apply dynamic risk cutoffs
 h_p = st.session_state.high_thresh / 100.0
