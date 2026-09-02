@@ -45,7 +45,7 @@ if "selected_employee_id" not in st.session_state:
 # ── 3. Design System & CSS Themes (Light & Dark) ──
 is_dark = (st.session_state.theme == "dark")
 
-THEME_CSS = f"""
+st.markdown(f"""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
