@@ -1,0 +1,34 @@
+{
+  "version": "v1",
+  "model_name": "XGBClassifier",
+  "trained_at": "2026-09-02T14:58:34.187283",
+  "training_data": "employee_attrition_processed.csv",
+  "feature_matrix": "feature_matrix.csv",
+  "n_features": 43,
+  "n_training_samples": 400,
+  "n_test_samples": 100,
+  "class_balance": {
+    "0": 445,
+    "1": 55
+  },
+  "test_metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0
+  },
+  "selection_criterion": "highest recall \u2014 missing flight-risk employee is expensive mistake",
+  "hyperparameters": "{'memory': None, 'steps': [('sc', StandardScaler()), ('clf', XGBClassifier(base_score=None, booster=None, callbacks=None,\n              colsample_bylevel=None, colsample_bynode=None,\n              colsample_bytree=None, device=None, early_stopping_rounds=None,\n              enable_categorical=False, eval_metric='logloss',\n              feature_types=None, feature_weights=None, gamma=None,\n              grow_policy=None, importance_type=None,\n              interaction_constraints=None, learning_rate=0.1, max_bin=None,\n              max_cat_threshold=None, max_cat_to_onehot=None,\n              max_delta_step=None, max_depth=5, max_leaves=None,\n              min_child_weight=None, missing=nan, monotone_constraints=None,\n              multi_strategy=None, n_estimators=200, n_jobs=None,\n              num_parallel_tree=None, ...))], 'transform_input': None, 'verbose': False, 'sc': StandardScaler(), 'clf': XGBClassifier(base_score=None, booster=None, callbacks=None,\n              colsample_bylevel=None, colsample_bynode=None,\n              colsample_bytree=None, device=None, early_stopping_rounds=None,\n              enable_categorical=False, eval_metric='logloss',\n              feature_types=None, feature_weights=None, gamma=None,\n              grow_policy=None, importance_type=None,\n              interaction_constraints=None, learning_rate=0.1, max_bin=None,\n              max_cat_threshold=None, max_cat_to_onehot=None,\n              max_delta_step=None, max_depth=5, max_leaves=None,\n              min_child_weight=None, missing=nan, monotone_constraints=None,\n              multi_strategy=None, n_estimators=200, n_jobs=None,\n              num_parallel_tree=None, ...), 'sc__copy': True, 'sc__with_mean': True, 'sc__with_std': True, 'clf__objective': 'binary:logistic', 'clf__base_score': None, 'clf__booster': None, 'clf__callbacks': None, 'clf__colsample_bylevel': None, 'clf__colsample_bynode': None, 'clf__colsample_bytree': None, 'clf__device': None, 'clf__early_stopping_rounds': None, 'clf__enable_categorical': False, 'clf__eval_metric': 'logloss', 'clf__feature_types': None, 'clf__feature_weights': None, 'clf__gamma': None, 'clf__grow_policy': None, 'clf__importance_type': None, 'clf__interaction_constraints': None, 'clf__learning_rate': 0.1, 'clf__max_bin': None, 'clf__max_cat_threshold': None, 'clf__max_cat_to_onehot': None, 'clf__max_delta_step': None, 'clf__max_depth': 5, 'clf__max_leaves': None, 'clf__min_child_weight': None, 'clf__missing': nan, 'clf__monotone_constraints': None, 'clf__multi_strategy': None, 'clf__n_estimators': 200, 'clf__n_jobs': None, 'clf__num_parallel_tree': None, 'clf__random_state': 42, 'clf__reg_alpha': None, 'clf__reg_lambda': None, 'clf__sampling_method': None, 'clf__scale_pos_weight': np.float64(8.090909090909092), 'clf__subsample': None, 'clf__tree_method': None, 'clf__validate_parameters': None, 'clf__verbosity': 0}",
+  "feature_engineering": [
+    "tenure_adjusted_salary: salary / (years_at_company + 1)",
+    "years_since_last_promotion: 2024 - last_promotion_year",
+    "overtime_to_projects_ratio: overtime_hours / (projects + 1)",
+    "days_since_last_leave: days from last leave date",
+    "engagement_score: standardized composite of WLB + Performance + CustomerSat"
+  ],
+  "retraining_triggers": [
+    "data drift > threshold on age/salary/WLB/overtime/tenure",
+    "F1 drops below 0.60",
+    "6 months of new data collected"
+  ]
+}

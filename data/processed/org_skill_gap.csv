@@ -1,0 +1,11 @@
+skill,employees_lacking,avg_importance,total_gap_weight,pct_employees_lacking,severity
+Writing,324,3.916,1268.74,64.8,HIGH
+Reading Comprehension,309,4.05,1251.37,61.8,HIGH
+Critical Thinking,300,4.036,1210.66,60.0,HIGH
+Monitoring,312,3.738,1166.27,62.4,HIGH
+Active Listening,286,4.017,1148.88,57.2,HIGH
+Speaking,290,3.894,1129.23,58.0,HIGH
+Active Learning,299,3.346,1000.5,59.8,MEDIUM
+Mathematics,308,3.017,929.24,61.6,MEDIUM
+Learning Strategies,295,3.009,887.65,59.0,MEDIUM
+Science,298,1.823,543.26,59.6,LOW

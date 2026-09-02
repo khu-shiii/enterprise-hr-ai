@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "model": "Logistic Regression",
+      "precision": 0.7,
+      "recall": 0.6364,
+      "f1": 0.6667,
+      "roc_auc": 0.9469
+    },
+    {
+      "model": "Random Forest",
+      "precision": 1.0,
+      "recall": 0.6364,
+      "f1": 0.7778,
+      "roc_auc": 1.0
+    },
+    {
+      "model": "XGBoost",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": 1.0
+    }
+  ],
+  "winner": "XGBoost",
+  "selection_criterion": "highest recall (recall > f1 > precision)"
+}

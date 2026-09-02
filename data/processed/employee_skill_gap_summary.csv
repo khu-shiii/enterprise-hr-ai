@@ -1,0 +1,501 @@
+employee_id,role,total_required,gaps_count,weighted_gap_score,coverage_pct,gap_pct
+1,Auditor,10,7,21.51,0.3,0.7
+2,Sales Executive,10,5,18.49,0.5,0.5
+3,Helpdesk,10,7,26.49,0.3,0.7
+4,Hr Executive,10,7,24.13,0.3,0.7
+5,Account Manager,10,6,20.37,0.4,0.6
+6,Helpdesk,10,5,16.13,0.5,0.5
+7,Engineer,10,7,25.49,0.3,0.7
+8,Hr Executive,10,7,26.12,0.3,0.7
+9,Hr Executive,10,6,23.37,0.4,0.6
+10,Accountant,10,6,20.25,0.4,0.6
+11,Hr Executive,10,6,19.13,0.4,0.6
+12,Helpdesk,10,6,23.24,0.4,0.6
+13,Accountant,10,7,26.24,0.3,0.7
+14,Hr Manager,10,7,24.75,0.3,0.7
+15,Developer,10,5,15.25,0.5,0.5
+16,Seo Analyst,10,6,19.87,0.4,0.6
+17,Support Engineer,10,6,21.25,0.4,0.6
+18,Tester,10,7,25.0,0.3,0.7
+19,Helpdesk,10,5,19.12,0.5,0.5
+20,Support Engineer,10,5,18.25,0.5,0.5
+21,Support Engineer,10,7,23.01,0.3,0.7
+22,Sales Executive,10,5,18.24,0.5,0.5
+23,Tester,10,5,18.49,0.5,0.5
+24,Tester,10,5,19.12,0.5,0.5
+25,Content Lead,10,6,21.12,0.4,0.6
+26,Seo Analyst,10,5,15.0,0.5,0.5
+27,Sales Executive,10,6,20.12,0.4,0.6
+28,Content Lead,10,7,25.49,0.3,0.7
+29,Accountant,10,6,21.25,0.4,0.6
+30,Support Engineer,10,6,22.24,0.4,0.6
+31,Developer,10,7,22.5,0.3,0.7
+32,Content Lead,10,7,26.12,0.3,0.7
+33,Tester,10,6,20.88,0.4,0.6
+34,Engineer,10,6,20.24,0.4,0.6
+35,Seo Analyst,10,6,21.63,0.4,0.6
+36,Auditor,10,7,21.76,0.3,0.7
+37,Content Lead,10,5,19.61,0.5,0.5
+38,Accountant,10,6,22.37,0.4,0.6
+39,Auditor,10,7,21.64,0.3,0.7
+40,Auditor,10,6,20.51,0.4,0.6
+41,Account Manager,10,6,22.0,0.4,0.6
+42,Content Lead,10,6,21.12,0.4,0.6
+43,Content Lead,10,7,26.37,0.3,0.7
+44,Engineer,10,6,23.24,0.4,0.6
+45,Accountant,10,7,24.13,0.3,0.7
+46,Developer,10,5,14.49,0.5,0.5
+47,Account Manager,10,6,19.01,0.4,0.6
+48,Sales Executive,10,6,21.25,0.4,0.6
+49,Helpdesk,10,7,25.25,0.3,0.7
+50,Tester,10,6,21.0,0.4,0.6
+51,Sales Executive,10,7,25.49,0.3,0.7
+52,Support Engineer,10,5,17.37,0.5,0.5
+53,Seo Analyst,10,6,20.0,0.4,0.6
+54,Auditor,10,5,16.26,0.5,0.5
+55,Accountant,10,7,26.12,0.3,0.7
+56,Developer,10,5,15.37,0.5,0.5
+57,Developer,10,7,21.37,0.3,0.7
+58,Helpdesk,10,6,21.24,0.4,0.6
+59,Seo Analyst,10,7,25.63,0.3,0.7
+60,Hr Executive,10,7,25.37,0.3,0.7
+61,Hr Manager,10,6,24.5,0.4,0.6
+62,Tester,10,5,19.12,0.5,0.5
+63,Hr Manager,10,6,21.5,0.4,0.6
+64,Helpdesk,10,6,20.37,0.4,0.6
+65,Account Manager,10,6,19.88,0.4,0.6
+66,Content Lead,10,7,23.88,0.3,0.7
+67,Sales Executive,10,7,23.13,0.3,0.7
+68,Sales Executive,10,5,16.88,0.5,0.5
+69,Account Manager,10,5,18.37,0.5,0.5
+70,Accountant,10,5,18.25,0.5,0.5
+71,Hr Executive,10,7,23.37,0.3,0.7
+72,Content Lead,10,7,26.49,0.3,0.7
+73,Developer,10,7,22.5,0.3,0.7
+74,Sales Executive,10,5,19.61,0.5,0.5
+75,Developer,10,6,18.11,0.4,0.6
+76,Hr Manager,10,6,21.0,0.4,0.6
+77,Sales Executive,10,5,18.24,0.5,0.5
+78,Sales Executive,10,5,18.0,0.5,0.5
+79,Content Lead,10,7,27.24,0.3,0.7
+80,Hr Manager,10,7,26.0,0.3,0.7
+81,Helpdesk,10,6,20.88,0.4,0.6
+82,Engineer,10,7,23.13,0.3,0.7
+83,Developer,10,6,19.5,0.4,0.6
+84,Auditor,10,5,14.13,0.5,0.5
+85,Sales Executive,10,7,25.37,0.3,0.7
+86,Sales Executive,10,5,16.37,0.5,0.5
+87,Support Engineer,10,7,25.12,0.3,0.7
+88,Content Lead,10,6,23.24,0.4,0.6
+89,Seo Analyst,10,7,24.75,0.3,0.7
+90,Auditor,10,7,21.51,0.3,0.7
+91,Tester,10,7,25.37,0.3,0.7
+92,Accountant,10,6,19.13,0.4,0.6
+93,Account Manager,10,5,19.49,0.5,0.5
+94,Helpdesk,10,6,21.0,0.4,0.6
+95,Support Engineer,10,5,18.36,0.5,0.5
+96,Content Lead,10,6,21.0,0.4,0.6
+97,Hr Manager,10,7,26.0,0.3,0.7
+98,Content Lead,10,6,20.37,0.4,0.6
+99,Hr Executive,10,6,23.24,0.4,0.6
+100,Account Manager,10,7,25.25,0.3,0.7
+101,Hr Manager,10,6,21.88,0.4,0.6
+102,Hr Executive,10,7,26.49,0.3,0.7
+103,Account Manager,10,5,17.88,0.5,0.5
+104,Support Engineer,10,5,18.24,0.5,0.5
+105,Seo Analyst,10,5,19.63,0.5,0.5
+106,Accountant,10,5,17.49,0.5,0.5
+107,Developer,10,7,20.61,0.3,0.7
+108,Hr Executive,10,7,24.13,0.3,0.7
+109,Support Engineer,10,7,23.37,0.3,0.7
+110,Developer,10,5,14.62,0.5,0.5
+111,Helpdesk,10,5,18.0,0.5,0.5
+112,Engineer,10,6,19.88,0.4,0.6
+113,Developer,10,7,21.24,0.3,0.7
+114,Helpdesk,10,7,26.12,0.3,0.7
+115,Account Manager,10,5,19.12,0.5,0.5
+116,Helpdesk,10,5,16.37,0.5,0.5
+117,Seo Analyst,10,7,25.0,0.3,0.7
+118,Hr Executive,10,5,19.37,0.5,0.5
+119,Auditor,10,5,16.76,0.5,0.5
+120,Sales Executive,10,6,23.12,0.4,0.6
+121,Developer,10,7,21.87,0.3,0.7
+122,Support Engineer,10,6,21.25,0.4,0.6
+123,Auditor,10,7,21.51,0.3,0.7
+124,Engineer,10,5,18.36,0.5,0.5
+125,Accountant,10,5,19.0,0.5,0.5
+126,Developer,10,6,18.24,0.4,0.6
+127,Sales Executive,10,7,24.49,0.3,0.7
+128,Hr Executive,10,5,18.0,0.5,0.5
+129,Support Engineer,10,6,20.37,0.4,0.6
+130,Tester,10,6,19.25,0.4,0.6
+131,Helpdesk,10,7,24.25,0.3,0.7
+132,Hr Executive,10,6,21.49,0.4,0.6
+133,Auditor,10,6,17.5,0.4,0.6
+134,Hr Manager,10,6,23.5,0.4,0.6
+135,Content Lead,10,5,18.25,0.5,0.5
+136,Seo Analyst,10,6,20.0,0.4,0.6
+137,Auditor,10,7,21.51,0.3,0.7
+138,Engineer,10,7,23.88,0.3,0.7
+139,Developer,10,7,21.25,0.3,0.7
+140,Account Manager,10,5,16.25,0.5,0.5
+141,Tester,10,6,21.37,0.4,0.6
+142,Account Manager,10,6,21.37,0.4,0.6
+143,Helpdesk,10,5,17.12,0.5,0.5
+144,Account Manager,10,6,22.25,0.4,0.6
+145,Support Engineer,10,5,16.0,0.5,0.5
+146,Hr Manager,10,7,26.38,0.3,0.7
+147,Account Manager,10,6,21.13,0.4,0.6
+148,Account Manager,10,6,22.49,0.4,0.6
+149,Support Engineer,10,7,25.25,0.3,0.7
+150,Content Lead,10,5,18.0,0.5,0.5
+151,Hr Executive,10,5,19.0,0.5,0.5
+152,Account Manager,10,5,18.49,0.5,0.5
+153,Tester,10,5,18.12,0.5,0.5
+154,Seo Analyst,10,7,23.0,0.3,0.7
+155,Hr Executive,10,6,19.13,0.4,0.6
+156,Developer,10,6,20.13,0.4,0.6
+157,Hr Executive,10,6,22.24,0.4,0.6
+158,Content Lead,10,5,17.12,0.5,0.5
+159,Support Engineer,10,6,19.88,0.4,0.6
+160,Sales Executive,10,7,26.37,0.3,0.7
+161,Helpdesk,10,6,23.24,0.4,0.6
+162,Accountant,10,7,24.12,0.3,0.7
+163,Hr Executive,10,6,21.25,0.4,0.6
+164,Hr Manager,10,7,24.5,0.3,0.7
+165,Tester,10,7,24.13,0.3,0.7
+166,Tester,10,7,23.25,0.3,0.7
+167,Hr Manager,10,7,26.5,0.3,0.7
+168,Hr Executive,10,5,17.13,0.5,0.5
+169,Support Engineer,10,7,26.49,0.3,0.7
+170,Account Manager,10,5,17.49,0.5,0.5
+171,Seo Analyst,10,5,15.75,0.5,0.5
+172,Hr Manager,10,6,21.62,0.4,0.6
+173,Support Engineer,10,7,25.12,0.3,0.7
+174,Content Lead,10,5,17.49,0.5,0.5
+175,Seo Analyst,10,6,22.0,0.4,0.6
+176,Helpdesk,10,7,25.0,0.3,0.7
+177,Helpdesk,10,5,16.88,0.5,0.5
+178,Account Manager,10,5,18.0,0.5,0.5
+179,Seo Analyst,10,5,17.12,0.5,0.5
+180,Helpdesk,10,7,24.37,0.3,0.7
+181,Helpdesk,10,6,23.61,0.4,0.6
+182,Support Engineer,10,6,23.24,0.4,0.6
+183,Account Manager,10,7,24.37,0.3,0.7
+184,Auditor,10,7,21.63,0.3,0.7
+185,Sales Executive,10,5,18.25,0.5,0.5
+186,Developer,10,6,17.74,0.4,0.6
+187,Support Engineer,10,6,21.37,0.4,0.6
+188,Support Engineer,10,5,17.0,0.5,0.5
+189,Accountant,10,6,23.12,0.4,0.6
+190,Auditor,10,7,21.51,0.3,0.7
+191,Hr Executive,10,5,18.12,0.5,0.5
+192,Engineer,10,6,22.25,0.4,0.6
+193,Support Engineer,10,6,21.25,0.4,0.6
+194,Auditor,10,5,17.63,0.5,0.5
+195,Helpdesk,10,6,20.12,0.4,0.6
+196,Hr Manager,10,6,22.25,0.4,0.6
+197,Hr Executive,10,6,22.61,0.4,0.6
+198,Accountant,10,7,24.25,0.3,0.7
+199,Tester,10,6,19.25,0.4,0.6
+200,Engineer,10,7,26.36,0.3,0.7
+201,Accountant,10,7,24.37,0.3,0.7
+202,Accountant,10,5,17.88,0.5,0.5
+203,Seo Analyst,10,7,23.88,0.3,0.7
+204,Hr Executive,10,6,23.24,0.4,0.6
+205,Content Lead,10,6,21.0,0.4,0.6
+206,Sales Executive,10,7,26.12,0.3,0.7
+207,Helpdesk,10,6,22.36,0.4,0.6
+208,Support Engineer,10,7,24.12,0.3,0.7
+209,Account Manager,10,6,21.49,0.4,0.6
+210,Sales Executive,10,6,22.49,0.4,0.6
+211,Auditor,10,6,18.26,0.4,0.6
+212,Account Manager,10,6,19.25,0.4,0.6
+213,Sales Executive,10,7,24.12,0.3,0.7
+214,Account Manager,10,6,20.13,0.4,0.6
+215,Hr Manager,10,7,26.25,0.3,0.7
+216,Seo Analyst,10,5,18.0,0.5,0.5
+217,Engineer,10,5,20.12,0.5,0.5
+218,Developer,10,7,22.63,0.3,0.7
+219,Auditor,10,5,16.88,0.5,0.5
+220,Support Engineer,10,5,19.12,0.5,0.5
+221,Sales Executive,10,7,24.13,0.3,0.7
+222,Content Lead,10,5,16.0,0.5,0.5
+223,Hr Executive,10,7,23.88,0.3,0.7
+224,Account Manager,10,7,25.0,0.3,0.7
+225,Sales Executive,10,5,19.12,0.5,0.5
+226,Auditor,10,6,20.26,0.4,0.6
+227,Helpdesk,10,6,21.13,0.4,0.6
+228,Support Engineer,10,5,15.88,0.5,0.5
+229,Hr Manager,10,6,20.62,0.4,0.6
+230,Auditor,10,5,14.5,0.5,0.5
+231,Accountant,10,5,18.25,0.5,0.5
+232,Hr Manager,10,7,25.25,0.3,0.7
+233,Developer,10,5,15.12,0.5,0.5
+234,Accountant,10,6,19.25,0.4,0.6
+235,Hr Executive,10,6,20.24,0.4,0.6
+236,Accountant,10,5,18.0,0.5,0.5
+237,Account Manager,10,6,22.24,0.4,0.6
+238,Support Engineer,10,5,16.25,0.5,0.5
+239,Auditor,10,7,24.14,0.3,0.7
+240,Developer,10,5,16.0,0.5,0.5
+241,Helpdesk,10,5,17.13,0.5,0.5
+242,Content Lead,10,6,19.13,0.4,0.6
+243,Support Engineer,10,5,17.12,0.5,0.5
+244,Helpdesk,10,5,17.37,0.5,0.5
+245,Sales Executive,10,7,24.25,0.3,0.7
+246,Accountant,10,5,16.25,0.5,0.5
+247,Engineer,10,6,20.25,0.4,0.6
+248,Engineer,10,5,17.12,0.5,0.5
+249,Hr Executive,10,7,23.13,0.3,0.7
+250,Developer,10,6,20.51,0.4,0.6
+251,Accountant,10,6,19.88,0.4,0.6
+252,Helpdesk,10,5,18.37,0.5,0.5
+253,Seo Analyst,10,6,21.63,0.4,0.6
+254,Engineer,10,6,21.13,0.4,0.6
+255,Sales Executive,10,7,24.49,0.3,0.7
+256,Hr Manager,10,6,21.75,0.4,0.6
+257,Accountant,10,7,25.0,0.3,0.7
+258,Hr Executive,10,6,22.37,0.4,0.6
+259,Auditor,10,7,22.01,0.3,0.7
+260,Hr Manager,10,7,24.87,0.3,0.7
+261,Seo Analyst,10,6,21.63,0.4,0.6
+262,Tester,10,7,23.13,0.3,0.7
+263,Engineer,10,5,18.37,0.5,0.5
+264,Auditor,10,6,17.63,0.4,0.6
+265,Hr Executive,10,5,18.25,0.5,0.5
+266,Content Lead,10,5,17.25,0.5,0.5
+267,Support Engineer,10,7,25.25,0.3,0.7
+268,Content Lead,10,5,17.24,0.5,0.5
+269,Hr Executive,10,7,25.0,0.3,0.7
+270,Hr Executive,10,5,17.25,0.5,0.5
+271,Accountant,10,6,22.37,0.4,0.6
+272,Content Lead,10,5,19.25,0.5,0.5
+273,Account Manager,10,7,24.0,0.3,0.7
+274,Tester,10,7,24.37,0.3,0.7
+275,Hr Manager,10,5,20.63,0.5,0.5
+276,Engineer,10,6,23.12,0.4,0.6
+277,Account Manager,10,5,19.36,0.5,0.5
+278,Sales Executive,10,5,17.0,0.5,0.5
+279,Account Manager,10,6,22.49,0.4,0.6
+280,Auditor,10,7,21.51,0.3,0.7
+281,Account Manager,10,7,24.13,0.3,0.7
+282,Accountant,10,5,17.25,0.5,0.5
+283,Hr Manager,10,5,19.25,0.5,0.5
+284,Helpdesk,10,7,25.25,0.3,0.7
+285,Helpdesk,10,6,22.25,0.4,0.6
+286,Sales Executive,10,6,21.37,0.4,0.6
+287,Developer,10,6,18.87,0.4,0.6
+288,Seo Analyst,10,5,16.0,0.5,0.5
+289,Content Lead,10,5,19.24,0.5,0.5
+290,Sales Executive,10,6,21.37,0.4,0.6
+291,Developer,10,6,18.75,0.4,0.6
+292,Sales Executive,10,5,19.37,0.5,0.5
+293,Hr Manager,10,6,21.5,0.4,0.6
+294,Hr Manager,10,7,25.12,0.3,0.7
+295,Helpdesk,10,5,16.01,0.5,0.5
+296,Support Engineer,10,7,24.37,0.3,0.7
+297,Helpdesk,10,6,20.37,0.4,0.6
+298,Account Manager,10,7,25.49,0.3,0.7
+299,Hr Manager,10,6,20.62,0.4,0.6
+300,Accountant,10,6,22.49,0.4,0.6
+301,Content Lead,10,6,20.25,0.4,0.6
+302,Auditor,10,5,15.26,0.5,0.5
+303,Account Manager,10,7,25.0,0.3,0.7
+304,Sales Executive,10,7,23.13,0.3,0.7
+305,Developer,10,7,20.49,0.3,0.7
+306,Engineer,10,6,19.88,0.4,0.6
+307,Auditor,10,6,17.51,0.4,0.6
+308,Hr Manager,10,7,26.0,0.3,0.7
+309,Developer,10,7,22.5,0.3,0.7
+310,Hr Manager,10,6,23.12,0.4,0.6
+311,Hr Executive,10,5,16.88,0.5,0.5
+312,Helpdesk,10,6,21.37,0.4,0.6
+313,Support Engineer,10,6,20.25,0.4,0.6
+314,Hr Manager,10,7,28.0,0.3,0.7
+315,Sales Executive,10,6,22.49,0.4,0.6
+316,Accountant,10,7,24.49,0.3,0.7
+317,Account Manager,10,6,21.12,0.4,0.6
+318,Account Manager,10,5,16.0,0.5,0.5
+319,Hr Executive,10,7,23.37,0.3,0.7
+320,Seo Analyst,10,6,21.63,0.4,0.6
+321,Seo Analyst,10,7,25.63,0.3,0.7
+322,Tester,10,5,18.25,0.5,0.5
+323,Content Lead,10,5,18.37,0.5,0.5
+324,Tester,10,6,20.13,0.4,0.6
+325,Engineer,10,6,22.37,0.4,0.6
+326,Content Lead,10,7,23.25,0.3,0.7
+327,Sales Executive,10,5,16.13,0.5,0.5
+328,Accountant,10,6,20.13,0.4,0.6
+329,Hr Manager,10,5,18.0,0.5,0.5
+330,Developer,10,5,15.25,0.5,0.5
+331,Account Manager,10,5,19.12,0.5,0.5
+332,Sales Executive,10,7,23.25,0.3,0.7
+333,Hr Manager,10,6,22.25,0.4,0.6
+334,Account Manager,10,5,18.37,0.5,0.5
+335,Support Engineer,10,7,23.13,0.3,0.7
+336,Hr Executive,10,7,26.24,0.3,0.7
+337,Seo Analyst,10,7,24.63,0.3,0.7
+338,Seo Analyst,10,7,22.87,0.3,0.7
+339,Content Lead,10,7,25.49,0.3,0.7
+340,Content Lead,10,6,20.25,0.4,0.6
+341,Auditor,10,6,20.14,0.4,0.6
+342,Tester,10,7,24.37,0.3,0.7
+343,Hr Executive,10,7,26.37,0.3,0.7
+344,Auditor,10,6,20.38,0.4,0.6
+345,Accountant,10,5,18.49,0.5,0.5
+346,Hr Manager,10,6,20.88,0.4,0.6
+347,Hr Executive,10,6,20.13,0.4,0.6
+348,Developer,10,5,15.75,0.5,0.5
+349,Sales Executive,10,6,19.13,0.4,0.6
+350,Content Lead,10,5,18.25,0.5,0.5
+351,Hr Manager,10,5,20.0,0.5,0.5
+352,Helpdesk,10,5,18.25,0.5,0.5
+353,Tester,10,7,24.13,0.3,0.7
+354,Helpdesk,10,7,26.49,0.3,0.7
+355,Account Manager,10,7,24.25,0.3,0.7
+356,Tester,10,6,19.76,0.4,0.6
+357,Hr Executive,10,7,27.24,0.3,0.7
+358,Engineer,10,5,19.12,0.5,0.5
+359,Hr Executive,10,7,23.13,0.3,0.7
+360,Hr Manager,10,5,17.87,0.5,0.5
+361,Seo Analyst,10,5,18.0,0.5,0.5
+362,Helpdesk,10,5,17.25,0.5,0.5
+363,Helpdesk,10,5,17.49,0.5,0.5
+364,Tester,10,5,16.37,0.5,0.5
+365,Sales Executive,10,5,18.0,0.5,0.5
+366,Helpdesk,10,7,26.37,0.3,0.7
+367,Accountant,10,7,23.37,0.3,0.7
+368,Developer,10,5,15.75,0.5,0.5
+369,Account Manager,10,5,16.0,0.5,0.5
+370,Hr Executive,10,7,23.25,0.3,0.7
+371,Accountant,10,7,24.25,0.3,0.7
+372,Developer,10,7,22.25,0.3,0.7
+373,Auditor,10,7,22.26,0.3,0.7
+374,Accountant,10,7,25.49,0.3,0.7
+375,Seo Analyst,10,7,25.0,0.3,0.7
+376,Engineer,10,5,17.01,0.5,0.5
+377,Sales Executive,10,7,25.12,0.3,0.7
+378,Sales Executive,10,7,25.25,0.3,0.7
+379,Support Engineer,10,7,24.37,0.3,0.7
+380,Seo Analyst,10,5,16.75,0.5,0.5
+381,Tester,10,6,20.24,0.4,0.6
+382,Support Engineer,10,7,27.24,0.3,0.7
+383,Engineer,10,6,22.37,0.4,0.6
+384,Sales Executive,10,6,20.37,0.4,0.6
+385,Hr Manager,10,5,16.62,0.5,0.5
+386,Sales Executive,10,6,19.88,0.4,0.6
+387,Account Manager,10,6,23.36,0.4,0.6
+388,Content Lead,10,5,17.25,0.5,0.5
+389,Support Engineer,10,5,17.88,0.5,0.5
+390,Account Manager,10,6,20.37,0.4,0.6
+391,Content Lead,10,6,22.24,0.4,0.6
+392,Tester,10,6,20.0,0.4,0.6
+393,Helpdesk,10,6,22.24,0.4,0.6
+394,Accountant,10,5,17.12,0.5,0.5
+395,Account Manager,10,6,22.61,0.4,0.6
+396,Seo Analyst,10,7,24.87,0.3,0.7
+397,Engineer,10,7,23.25,0.3,0.7
+398,Sales Executive,10,5,18.0,0.5,0.5
+399,Sales Executive,10,7,24.24,0.3,0.7
+400,Accountant,10,7,24.13,0.3,0.7
+401,Developer,10,6,16.99,0.4,0.6
+402,Seo Analyst,10,5,17.99,0.5,0.5
+403,Account Manager,10,7,26.61,0.3,0.7
+404,Developer,10,7,21.62,0.3,0.7
+405,Tester,10,7,24.25,0.3,0.7
+406,Sales Executive,10,6,20.13,0.4,0.6
+407,Tester,10,6,22.25,0.4,0.6
+408,Support Engineer,10,5,15.76,0.5,0.5
+409,Hr Manager,10,5,18.87,0.5,0.5
+410,Content Lead,10,7,24.37,0.3,0.7
+411,Seo Analyst,10,7,24.0,0.3,0.7
+412,Support Engineer,10,7,25.24,0.3,0.7
+413,Auditor,10,5,16.88,0.5,0.5
+414,Auditor,10,6,19.88,0.4,0.6
+415,Engineer,10,5,17.0,0.5,0.5
+416,Auditor,10,7,21.13,0.3,0.7
+417,Auditor,10,5,17.51,0.5,0.5
+418,Account Manager,10,7,26.37,0.3,0.7
+419,Content Lead,10,6,21.37,0.4,0.6
+420,Account Manager,10,7,24.13,0.3,0.7
+421,Auditor,10,6,17.38,0.4,0.6
+422,Content Lead,10,6,21.37,0.4,0.6
+423,Account Manager,10,7,23.25,0.3,0.7
+424,Content Lead,10,6,21.49,0.4,0.6
+425,Seo Analyst,10,6,22.51,0.4,0.6
+426,Account Manager,10,7,26.12,0.3,0.7
+427,Accountant,10,7,24.37,0.3,0.7
+428,Account Manager,10,7,23.37,0.3,0.7
+429,Auditor,10,6,18.88,0.4,0.6
+430,Sales Executive,10,7,25.61,0.3,0.7
+431,Developer,10,5,15.5,0.5,0.5
+432,Support Engineer,10,6,20.88,0.4,0.6
+433,Sales Executive,10,7,24.37,0.3,0.7
+434,Support Engineer,10,6,19.88,0.4,0.6
+435,Support Engineer,10,5,18.0,0.5,0.5
+436,Seo Analyst,10,6,21.0,0.4,0.6
+437,Hr Executive,10,6,22.61,0.4,0.6
+438,Seo Analyst,10,7,23.99,0.3,0.7
+439,Seo Analyst,10,6,18.75,0.4,0.6
+440,Sales Executive,10,7,24.25,0.3,0.7
+441,Sales Executive,10,7,25.25,0.3,0.7
+442,Helpdesk,10,6,19.88,0.4,0.6
+443,Hr Manager,10,5,20.38,0.5,0.5
+444,Tester,10,7,23.25,0.3,0.7
+445,Account Manager,10,6,22.0,0.4,0.6
+446,Helpdesk,10,5,19.24,0.5,0.5
+447,Sales Executive,10,6,20.12,0.4,0.6
+448,Tester,10,7,26.37,0.3,0.7
+449,Accountant,10,7,25.0,0.3,0.7
+450,Developer,10,7,22.12,0.3,0.7
+451,Helpdesk,10,7,26.37,0.3,0.7
+452,Support Engineer,10,6,23.37,0.4,0.6
+453,Engineer,10,7,23.13,0.3,0.7
+454,Engineer,10,7,24.25,0.3,0.7
+455,Developer,10,5,15.37,0.5,0.5
+456,Content Lead,10,5,16.13,0.5,0.5
+457,Helpdesk,10,5,17.0,0.5,0.5
+458,Hr Executive,10,7,24.25,0.3,0.7
+459,Account Manager,10,5,19.24,0.5,0.5
+460,Seo Analyst,10,7,23.63,0.3,0.7
+461,Accountant,10,5,17.13,0.5,0.5
+462,Support Engineer,10,6,22.49,0.4,0.6
+463,Accountant,10,7,24.25,0.3,0.7
+464,Account Manager,10,7,24.12,0.3,0.7
+465,Helpdesk,10,7,24.24,0.3,0.7
+466,Developer,10,5,14.37,0.5,0.5
+467,Auditor,10,7,22.14,0.3,0.7
+468,Hr Executive,10,5,17.25,0.5,0.5
+469,Auditor,10,7,20.76,0.3,0.7
+470,Hr Executive,10,7,26.49,0.3,0.7
+471,Hr Manager,10,5,19.37,0.5,0.5
+472,Accountant,10,5,18.12,0.5,0.5
+473,Engineer,10,6,20.37,0.4,0.6
+474,Auditor,10,7,23.64,0.3,0.7
+475,Account Manager,10,5,17.25,0.5,0.5
+476,Hr Manager,10,6,21.63,0.4,0.6
+477,Sales Executive,10,6,21.49,0.4,0.6
+478,Content Lead,10,5,19.36,0.5,0.5
+479,Tester,10,5,17.25,0.5,0.5
+480,Helpdesk,10,6,20.13,0.4,0.6
+481,Developer,10,5,15.49,0.5,0.5
+482,Support Engineer,10,6,21.13,0.4,0.6
+483,Tester,10,6,20.37,0.4,0.6
+484,Sales Executive,10,6,20.37,0.4,0.6
+485,Sales Executive,10,7,26.37,0.3,0.7
+486,Sales Executive,10,7,25.25,0.3,0.7
+487,Developer,10,5,15.12,0.5,0.5
+488,Auditor,10,7,21.38,0.3,0.7
+489,Accountant,10,5,19.37,0.5,0.5
+490,Hr Manager,10,5,17.25,0.5,0.5
+491,Account Manager,10,6,21.13,0.4,0.6
+492,Seo Analyst,10,5,17.63,0.5,0.5
+493,Tester,10,5,16.13,0.5,0.5
+494,Hr Manager,10,6,24.5,0.4,0.6
+495,Developer,10,5,15.0,0.5,0.5
+496,Developer,10,5,16.0,0.5,0.5
+497,Auditor,10,7,23.76,0.3,0.7
+498,Accountant,10,6,22.24,0.4,0.6
+499,Account Manager,10,7,23.13,0.3,0.7
+500,Content Lead,10,5,16.01,0.5,0.5

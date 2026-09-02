@@ -1,0 +1,1980 @@
+employee_id,current_skill
+1,Learning Strategies
+1,Reading Comprehension
+1,Writing
+2,Monitoring
+2,Learning Strategies
+2,Speaking
+2,Science
+2,Active Listening
+3,Speaking
+3,Science
+3,Mathematics
+4,Learning Strategies
+4,Critical Thinking
+4,Active Listening
+5,Mathematics
+5,Speaking
+5,Monitoring
+5,Critical Thinking
+6,Learning Strategies
+6,Active Listening
+6,Reading Comprehension
+6,Monitoring
+6,Critical Thinking
+7,Science
+7,Critical Thinking
+7,Monitoring
+8,Critical Thinking
+8,Science
+8,Active Learning
+9,Mathematics
+9,Reading Comprehension
+9,Science
+9,Learning Strategies
+10,Critical Thinking
+10,Active Listening
+10,Monitoring
+10,Learning Strategies
+11,Speaking
+11,Active Listening
+11,Writing
+11,Reading Comprehension
+12,Speaking
+12,Mathematics
+12,Science
+12,Active Learning
+13,Science
+13,Active Learning
+13,Writing
+14,Speaking
+14,Active Learning
+14,Reading Comprehension
+15,Monitoring
+15,Speaking
+15,Writing
+15,Learning Strategies
+15,Critical Thinking
+16,Active Listening
+16,Reading Comprehension
+16,Critical Thinking
+16,Learning Strategies
+17,Reading Comprehension
+17,Mathematics
+17,Writing
+17,Learning Strategies
+18,Active Listening
+18,Mathematics
+18,Active Learning
+19,Speaking
+19,Learning Strategies
+19,Active Learning
+19,Active Listening
+19,Science
+20,Science
+20,Reading Comprehension
+20,Learning Strategies
+20,Critical Thinking
+20,Writing
+21,Critical Thinking
+21,Reading Comprehension
+21,Active Listening
+22,Science
+22,Active Learning
+22,Monitoring
+22,Reading Comprehension
+22,Speaking
+23,Reading Comprehension
+23,Learning Strategies
+23,Monitoring
+23,Writing
+23,Science
+24,Writing
+24,Science
+24,Active Learning
+24,Learning Strategies
+24,Critical Thinking
+25,Monitoring
+25,Active Learning
+25,Reading Comprehension
+25,Mathematics
+26,Active Learning
+26,Writing
+26,Critical Thinking
+26,Reading Comprehension
+26,Active Listening
+27,Reading Comprehension
+27,Writing
+27,Active Learning
+27,Monitoring
+28,Science
+28,Speaking
+28,Writing
+29,Mathematics
+29,Reading Comprehension
+29,Learning Strategies
+29,Speaking
+30,Reading Comprehension
+30,Monitoring
+30,Active Learning
+30,Science
+31,Learning Strategies
+31,Critical Thinking
+31,Science
+32,Active Learning
+32,Science
+32,Reading Comprehension
+33,Active Learning
+33,Reading Comprehension
+33,Active Listening
+33,Mathematics
+34,Writing
+34,Monitoring
+34,Active Learning
+34,Speaking
+35,Science
+35,Mathematics
+35,Writing
+35,Active Listening
+36,Monitoring
+36,Reading Comprehension
+36,Learning Strategies
+37,Learning Strategies
+37,Speaking
+37,Monitoring
+37,Mathematics
+37,Science
+38,Critical Thinking
+38,Learning Strategies
+38,Speaking
+38,Science
+39,Critical Thinking
+39,Monitoring
+39,Active Learning
+40,Speaking
+40,Monitoring
+40,Active Learning
+40,Science
+41,Active Learning
+41,Science
+41,Critical Thinking
+41,Reading Comprehension
+42,Monitoring
+42,Reading Comprehension
+42,Active Learning
+42,Learning Strategies
+43,Science
+43,Active Listening
+43,Mathematics
+44,Speaking
+44,Learning Strategies
+44,Science
+44,Active Learning
+45,Active Listening
+45,Reading Comprehension
+45,Learning Strategies
+46,Critical Thinking
+46,Monitoring
+46,Active Learning
+46,Mathematics
+46,Reading Comprehension
+47,Critical Thinking
+47,Speaking
+47,Active Listening
+47,Reading Comprehension
+48,Science
+48,Speaking
+48,Reading Comprehension
+48,Critical Thinking
+49,Critical Thinking
+49,Learning Strategies
+49,Mathematics
+50,Reading Comprehension
+50,Mathematics
+50,Active Learning
+50,Speaking
+51,Speaking
+51,Writing
+51,Science
+52,Monitoring
+52,Speaking
+52,Active Listening
+52,Critical Thinking
+52,Science
+53,Active Learning
+53,Active Listening
+53,Speaking
+53,Mathematics
+54,Science
+54,Active Listening
+54,Reading Comprehension
+54,Active Learning
+54,Critical Thinking
+55,Active Learning
+55,Science
+55,Reading Comprehension
+56,Speaking
+56,Monitoring
+56,Active Listening
+56,Mathematics
+56,Reading Comprehension
+57,Writing
+57,Monitoring
+57,Active Learning
+58,Active Learning
+58,Writing
+58,Monitoring
+58,Learning Strategies
+59,Active Listening
+59,Monitoring
+59,Science
+60,Writing
+60,Science
+60,Reading Comprehension
+61,Speaking
+61,Active Learning
+61,Mathematics
+61,Science
+62,Science
+62,Learning Strategies
+62,Active Learning
+62,Active Listening
+62,Writing
+63,Reading Comprehension
+63,Writing
+63,Active Listening
+63,Mathematics
+64,Writing
+64,Critical Thinking
+64,Monitoring
+64,Learning Strategies
+65,Reading Comprehension
+65,Speaking
+65,Active Learning
+65,Active Listening
+66,Critical Thinking
+66,Active Learning
+66,Active Listening
+67,Critical Thinking
+67,Active Listening
+67,Writing
+68,Speaking
+68,Learning Strategies
+68,Active Learning
+68,Active Listening
+68,Critical Thinking
+69,Learning Strategies
+69,Science
+69,Writing
+69,Reading Comprehension
+69,Speaking
+70,Reading Comprehension
+70,Active Listening
+70,Speaking
+70,Learning Strategies
+70,Science
+71,Writing
+71,Monitoring
+71,Reading Comprehension
+72,Writing
+72,Science
+72,Mathematics
+73,Speaking
+73,Active Listening
+73,Science
+74,Speaking
+74,Learning Strategies
+74,Mathematics
+74,Monitoring
+74,Science
+75,Critical Thinking
+75,Active Listening
+75,Monitoring
+75,Mathematics
+76,Critical Thinking
+76,Active Learning
+76,Reading Comprehension
+76,Monitoring
+77,Mathematics
+77,Active Learning
+77,Speaking
+77,Learning Strategies
+77,Monitoring
+78,Learning Strategies
+78,Reading Comprehension
+78,Speaking
+78,Mathematics
+78,Active Learning
+79,Mathematics
+79,Science
+79,Active Learning
+80,Speaking
+80,Critical Thinking
+80,Mathematics
+81,Active Listening
+81,Mathematics
+81,Critical Thinking
+81,Active Learning
+82,Active Listening
+82,Speaking
+82,Reading Comprehension
+83,Active Listening
+83,Learning Strategies
+83,Science
+83,Active Learning
+84,Monitoring
+84,Active Listening
+84,Writing
+84,Reading Comprehension
+84,Mathematics
+85,Writing
+85,Learning Strategies
+85,Mathematics
+86,Monitoring
+86,Speaking
+86,Mathematics
+86,Active Listening
+86,Writing
+87,Active Learning
+87,Speaking
+87,Learning Strategies
+88,Active Learning
+88,Mathematics
+88,Science
+88,Speaking
+89,Writing
+89,Reading Comprehension
+89,Science
+90,Learning Strategies
+90,Active Listening
+90,Reading Comprehension
+91,Science
+91,Writing
+91,Critical Thinking
+92,Writing
+92,Speaking
+92,Reading Comprehension
+92,Critical Thinking
+93,Active Listening
+93,Mathematics
+93,Learning Strategies
+93,Monitoring
+93,Science
+94,Learning Strategies
+94,Reading Comprehension
+94,Speaking
+94,Active Learning
+95,Speaking
+95,Writing
+95,Science
+95,Active Learning
+95,Monitoring
+96,Critical Thinking
+96,Active Learning
+96,Learning Strategies
+96,Writing
+97,Mathematics
+97,Monitoring
+97,Speaking
+98,Monitoring
+98,Mathematics
+98,Critical Thinking
+98,Writing
+99,Active Learning
+99,Science
+99,Writing
+99,Learning Strategies
+100,Active Listening
+100,Science
+100,Critical Thinking
+101,Active Learning
+101,Speaking
+101,Mathematics
+101,Writing
+102,Writing
+102,Mathematics
+102,Science
+103,Active Listening
+103,Active Learning
+103,Learning Strategies
+103,Reading Comprehension
+103,Mathematics
+104,Active Learning
+104,Writing
+104,Critical Thinking
+104,Science
+104,Monitoring
+105,Mathematics
+105,Learning Strategies
+105,Monitoring
+105,Science
+105,Reading Comprehension
+106,Active Listening
+106,Monitoring
+106,Writing
+106,Speaking
+106,Science
+107,Writing
+107,Critical Thinking
+107,Active Listening
+108,Learning Strategies
+108,Critical Thinking
+108,Reading Comprehension
+109,Active Listening
+109,Writing
+109,Monitoring
+110,Critical Thinking
+110,Active Learning
+110,Writing
+110,Speaking
+110,Mathematics
+111,Active Learning
+111,Mathematics
+111,Active Listening
+111,Learning Strategies
+111,Writing
+112,Writing
+112,Reading Comprehension
+112,Active Listening
+112,Active Learning
+113,Reading Comprehension
+113,Monitoring
+113,Active Listening
+114,Learning Strategies
+114,Mathematics
+114,Active Learning
+115,Active Learning
+115,Learning Strategies
+115,Speaking
+115,Science
+115,Reading Comprehension
+116,Writing
+116,Speaking
+116,Reading Comprehension
+116,Monitoring
+116,Mathematics
+117,Science
+117,Active Learning
+117,Critical Thinking
+118,Science
+118,Reading Comprehension
+118,Learning Strategies
+118,Mathematics
+118,Writing
+119,Science
+119,Speaking
+119,Critical Thinking
+119,Monitoring
+119,Active Listening
+120,Active Learning
+120,Active Listening
+120,Learning Strategies
+120,Science
+121,Writing
+121,Critical Thinking
+121,Science
+122,Writing
+122,Reading Comprehension
+122,Learning Strategies
+122,Mathematics
+123,Learning Strategies
+123,Critical Thinking
+123,Reading Comprehension
+124,Speaking
+124,Monitoring
+124,Science
+124,Writing
+124,Active Learning
+125,Active Learning
+125,Reading Comprehension
+125,Science
+125,Active Listening
+125,Learning Strategies
+126,Writing
+126,Active Listening
+126,Active Learning
+126,Mathematics
+127,Writing
+127,Learning Strategies
+127,Monitoring
+128,Active Learning
+128,Critical Thinking
+128,Mathematics
+128,Learning Strategies
+128,Writing
+129,Speaking
+129,Reading Comprehension
+129,Monitoring
+129,Mathematics
+130,Reading Comprehension
+130,Active Listening
+130,Speaking
+130,Monitoring
+131,Speaking
+131,Learning Strategies
+131,Critical Thinking
+132,Critical Thinking
+132,Monitoring
+132,Science
+132,Speaking
+133,Active Listening
+133,Mathematics
+133,Speaking
+133,Reading Comprehension
+134,Active Learning
+134,Speaking
+134,Science
+134,Monitoring
+135,Writing
+135,Reading Comprehension
+135,Active Listening
+135,Science
+135,Mathematics
+136,Speaking
+136,Monitoring
+136,Critical Thinking
+136,Active Learning
+137,Critical Thinking
+137,Mathematics
+137,Active Learning
+138,Active Listening
+138,Reading Comprehension
+138,Active Learning
+139,Writing
+139,Speaking
+139,Reading Comprehension
+140,Learning Strategies
+140,Monitoring
+140,Reading Comprehension
+140,Speaking
+140,Active Listening
+141,Monitoring
+141,Active Listening
+141,Science
+141,Reading Comprehension
+142,Active Listening
+142,Science
+142,Writing
+142,Speaking
+143,Monitoring
+143,Writing
+143,Active Learning
+143,Learning Strategies
+143,Critical Thinking
+144,Active Listening
+144,Learning Strategies
+144,Science
+144,Critical Thinking
+145,Critical Thinking
+145,Speaking
+145,Monitoring
+145,Active Learning
+145,Active Listening
+146,Writing
+146,Mathematics
+146,Learning Strategies
+147,Science
+147,Critical Thinking
+147,Active Listening
+147,Reading Comprehension
+148,Monitoring
+148,Critical Thinking
+148,Mathematics
+148,Science
+149,Reading Comprehension
+149,Critical Thinking
+149,Science
+150,Critical Thinking
+150,Active Learning
+150,Speaking
+150,Science
+150,Active Listening
+151,Active Learning
+151,Mathematics
+151,Reading Comprehension
+151,Science
+151,Active Listening
+152,Critical Thinking
+152,Science
+152,Writing
+152,Learning Strategies
+152,Monitoring
+153,Learning Strategies
+153,Monitoring
+153,Reading Comprehension
+153,Mathematics
+153,Active Learning
+154,Critical Thinking
+154,Active Listening
+154,Active Learning
+155,Speaking
+155,Reading Comprehension
+155,Critical Thinking
+155,Writing
+156,Active Learning
+156,Mathematics
+156,Science
+156,Learning Strategies
+157,Active Learning
+157,Science
+157,Monitoring
+157,Active Listening
+158,Active Learning
+158,Learning Strategies
+158,Monitoring
+158,Writing
+158,Reading Comprehension
+159,Active Listening
+159,Active Learning
+159,Speaking
+159,Reading Comprehension
+160,Mathematics
+160,Critical Thinking
+160,Science
+161,Speaking
+161,Science
+161,Active Learning
+161,Mathematics
+162,Active Learning
+162,Speaking
+162,Writing
+163,Active Listening
+163,Science
+163,Writing
+163,Critical Thinking
+164,Reading Comprehension
+164,Writing
+164,Active Listening
+165,Critical Thinking
+165,Learning Strategies
+165,Active Listening
+166,Writing
+166,Critical Thinking
+166,Speaking
+167,Learning Strategies
+167,Mathematics
+167,Critical Thinking
+168,Speaking
+168,Mathematics
+168,Critical Thinking
+168,Learning Strategies
+168,Active Listening
+169,Writing
+169,Science
+169,Learning Strategies
+170,Writing
+170,Mathematics
+170,Speaking
+170,Monitoring
+170,Learning Strategies
+171,Speaking
+171,Critical Thinking
+171,Writing
+171,Monitoring
+171,Reading Comprehension
+172,Active Learning
+172,Reading Comprehension
+172,Mathematics
+172,Active Listening
+173,Speaking
+173,Mathematics
+173,Active Learning
+174,Active Listening
+174,Monitoring
+174,Writing
+174,Science
+174,Speaking
+175,Monitoring
+175,Speaking
+175,Active Learning
+175,Science
+176,Active Learning
+176,Learning Strategies
+176,Critical Thinking
+177,Active Listening
+177,Critical Thinking
+177,Active Learning
+177,Mathematics
+177,Writing
+178,Speaking
+178,Active Listening
+178,Active Learning
+178,Critical Thinking
+178,Science
+179,Active Learning
+179,Learning Strategies
+179,Speaking
+179,Monitoring
+179,Reading Comprehension
+180,Monitoring
+180,Reading Comprehension
+180,Learning Strategies
+181,Learning Strategies
+181,Monitoring
+181,Mathematics
+181,Science
+182,Active Learning
+182,Writing
+182,Mathematics
+182,Science
+183,Monitoring
+183,Mathematics
+183,Reading Comprehension
+184,Active Learning
+184,Mathematics
+184,Speaking
+185,Learning Strategies
+185,Science
+185,Speaking
+185,Active Listening
+185,Reading Comprehension
+186,Critical Thinking
+186,Speaking
+186,Active Listening
+186,Monitoring
+187,Active Listening
+187,Science
+187,Monitoring
+187,Critical Thinking
+188,Active Learning
+188,Reading Comprehension
+188,Monitoring
+188,Learning Strategies
+188,Active Listening
+189,Reading Comprehension
+189,Science
+189,Learning Strategies
+189,Active Learning
+190,Mathematics
+190,Writing
+190,Active Learning
+191,Speaking
+191,Writing
+191,Science
+191,Critical Thinking
+191,Active Learning
+192,Reading Comprehension
+192,Learning Strategies
+192,Active Listening
+192,Science
+193,Science
+193,Reading Comprehension
+193,Speaking
+193,Active Listening
+194,Learning Strategies
+194,Science
+194,Mathematics
+194,Active Learning
+194,Speaking
+195,Monitoring
+195,Active Learning
+195,Speaking
+195,Active Listening
+196,Monitoring
+196,Active Learning
+196,Critical Thinking
+196,Mathematics
+197,Science
+197,Writing
+197,Monitoring
+197,Mathematics
+198,Active Listening
+198,Learning Strategies
+198,Writing
+199,Critical Thinking
+199,Reading Comprehension
+199,Speaking
+199,Monitoring
+200,Active Learning
+200,Monitoring
+200,Science
+201,Mathematics
+201,Critical Thinking
+201,Monitoring
+202,Active Listening
+202,Critical Thinking
+202,Active Learning
+202,Learning Strategies
+202,Mathematics
+203,Active Listening
+203,Active Learning
+203,Monitoring
+204,Learning Strategies
+204,Active Learning
+204,Science
+204,Speaking
+205,Learning Strategies
+205,Speaking
+205,Active Listening
+205,Active Learning
+206,Reading Comprehension
+206,Active Learning
+206,Science
+207,Writing
+207,Active Learning
+207,Science
+207,Monitoring
+208,Active Learning
+208,Monitoring
+208,Reading Comprehension
+209,Monitoring
+209,Science
+209,Reading Comprehension
+209,Writing
+210,Critical Thinking
+210,Science
+210,Monitoring
+210,Mathematics
+211,Active Learning
+211,Monitoring
+211,Mathematics
+211,Active Listening
+212,Monitoring
+212,Writing
+212,Reading Comprehension
+212,Active Listening
+213,Active Learning
+213,Reading Comprehension
+213,Monitoring
+214,Mathematics
+214,Critical Thinking
+214,Reading Comprehension
+214,Writing
+215,Mathematics
+215,Learning Strategies
+215,Reading Comprehension
+216,Science
+216,Active Listening
+216,Speaking
+216,Monitoring
+216,Active Learning
+217,Active Learning
+217,Science
+217,Reading Comprehension
+217,Mathematics
+217,Learning Strategies
+218,Learning Strategies
+218,Mathematics
+218,Speaking
+219,Mathematics
+219,Speaking
+219,Monitoring
+219,Science
+219,Writing
+220,Active Learning
+220,Writing
+220,Active Listening
+220,Science
+220,Mathematics
+221,Learning Strategies
+221,Active Listening
+221,Reading Comprehension
+222,Active Learning
+222,Reading Comprehension
+222,Speaking
+222,Monitoring
+222,Critical Thinking
+223,Active Listening
+223,Active Learning
+223,Critical Thinking
+224,Active Learning
+224,Active Listening
+224,Learning Strategies
+225,Active Learning
+225,Science
+225,Speaking
+225,Learning Strategies
+225,Active Listening
+226,Speaking
+226,Monitoring
+226,Science
+226,Active Listening
+227,Mathematics
+227,Learning Strategies
+227,Active Listening
+227,Critical Thinking
+228,Active Learning
+228,Writing
+228,Speaking
+228,Active Listening
+228,Reading Comprehension
+229,Active Learning
+229,Speaking
+229,Critical Thinking
+229,Active Listening
+230,Reading Comprehension
+230,Speaking
+230,Monitoring
+230,Mathematics
+230,Active Learning
+231,Science
+231,Critical Thinking
+231,Mathematics
+231,Speaking
+231,Reading Comprehension
+232,Active Learning
+232,Learning Strategies
+232,Speaking
+233,Science
+233,Speaking
+233,Active Learning
+233,Critical Thinking
+233,Active Listening
+234,Monitoring
+234,Critical Thinking
+234,Active Listening
+234,Speaking
+235,Speaking
+235,Monitoring
+235,Active Learning
+235,Writing
+236,Active Listening
+236,Mathematics
+236,Learning Strategies
+236,Active Learning
+236,Speaking
+237,Science
+237,Active Learning
+237,Critical Thinking
+237,Monitoring
+238,Learning Strategies
+238,Critical Thinking
+238,Writing
+238,Monitoring
+238,Active Listening
+239,Science
+239,Critical Thinking
+239,Learning Strategies
+240,Monitoring
+240,Writing
+240,Mathematics
+240,Learning Strategies
+240,Reading Comprehension
+241,Learning Strategies
+241,Mathematics
+241,Writing
+241,Active Listening
+241,Reading Comprehension
+242,Active Listening
+242,Speaking
+242,Writing
+242,Reading Comprehension
+243,Speaking
+243,Mathematics
+243,Critical Thinking
+243,Monitoring
+243,Active Learning
+244,Critical Thinking
+244,Writing
+244,Active Listening
+244,Monitoring
+244,Science
+245,Active Listening
+245,Learning Strategies
+245,Writing
+246,Speaking
+246,Critical Thinking
+246,Mathematics
+246,Monitoring
+246,Active Listening
+247,Monitoring
+247,Mathematics
+247,Active Listening
+247,Critical Thinking
+248,Active Listening
+248,Active Learning
+248,Writing
+248,Mathematics
+248,Monitoring
+249,Writing
+249,Reading Comprehension
+249,Active Listening
+250,Science
+250,Speaking
+250,Learning Strategies
+250,Mathematics
+251,Critical Thinking
+251,Active Listening
+251,Active Learning
+251,Speaking
+252,Monitoring
+252,Reading Comprehension
+252,Science
+252,Critical Thinking
+252,Learning Strategies
+253,Critical Thinking
+253,Writing
+253,Science
+253,Mathematics
+254,Reading Comprehension
+254,Critical Thinking
+254,Mathematics
+254,Learning Strategies
+255,Writing
+255,Monitoring
+255,Mathematics
+256,Critical Thinking
+256,Mathematics
+256,Writing
+256,Active Listening
+257,Learning Strategies
+257,Reading Comprehension
+257,Active Learning
+258,Learning Strategies
+258,Science
+258,Critical Thinking
+258,Writing
+259,Speaking
+259,Learning Strategies
+259,Critical Thinking
+260,Critical Thinking
+260,Active Listening
+260,Active Learning
+261,Monitoring
+261,Science
+261,Writing
+261,Reading Comprehension
+262,Speaking
+262,Critical Thinking
+262,Active Listening
+263,Critical Thinking
+263,Mathematics
+263,Writing
+263,Speaking
+263,Science
+264,Reading Comprehension
+264,Speaking
+264,Active Learning
+264,Writing
+265,Active Listening
+265,Mathematics
+265,Writing
+265,Reading Comprehension
+265,Science
+266,Speaking
+266,Learning Strategies
+266,Active Listening
+266,Mathematics
+266,Writing
+267,Active Listening
+267,Mathematics
+267,Learning Strategies
+268,Speaking
+268,Writing
+268,Mathematics
+268,Monitoring
+268,Active Learning
+269,Learning Strategies
+269,Reading Comprehension
+269,Active Learning
+270,Mathematics
+270,Learning Strategies
+270,Reading Comprehension
+270,Monitoring
+270,Active Listening
+271,Mathematics
+271,Writing
+271,Science
+271,Active Listening
+272,Mathematics
+272,Learning Strategies
+272,Active Listening
+272,Science
+272,Critical Thinking
+273,Writing
+273,Active Learning
+273,Reading Comprehension
+274,Mathematics
+274,Critical Thinking
+274,Monitoring
+275,Learning Strategies
+275,Mathematics
+275,Reading Comprehension
+275,Science
+275,Writing
+276,Active Learning
+276,Mathematics
+276,Reading Comprehension
+276,Science
+277,Science
+277,Active Learning
+277,Monitoring
+277,Learning Strategies
+277,Speaking
+278,Active Listening
+278,Reading Comprehension
+278,Monitoring
+278,Active Learning
+278,Mathematics
+279,Monitoring
+279,Active Listening
+279,Science
+279,Learning Strategies
+280,Learning Strategies
+280,Reading Comprehension
+280,Active Listening
+281,Reading Comprehension
+281,Learning Strategies
+281,Active Listening
+282,Active Listening
+282,Critical Thinking
+282,Mathematics
+282,Learning Strategies
+282,Monitoring
+283,Science
+283,Speaking
+283,Reading Comprehension
+283,Critical Thinking
+283,Active Learning
+284,Reading Comprehension
+284,Mathematics
+284,Learning Strategies
+285,Critical Thinking
+285,Active Listening
+285,Learning Strategies
+285,Science
+286,Mathematics
+286,Learning Strategies
+286,Speaking
+286,Writing
+287,Mathematics
+287,Reading Comprehension
+287,Learning Strategies
+287,Active Listening
+288,Reading Comprehension
+288,Active Listening
+288,Speaking
+288,Active Learning
+288,Monitoring
+289,Reading Comprehension
+289,Science
+289,Learning Strategies
+289,Active Learning
+289,Monitoring
+290,Mathematics
+290,Active Listening
+290,Monitoring
+290,Learning Strategies
+291,Speaking
+291,Learning Strategies
+291,Critical Thinking
+291,Mathematics
+292,Reading Comprehension
+292,Science
+292,Mathematics
+292,Learning Strategies
+292,Writing
+293,Learning Strategies
+293,Active Learning
+293,Critical Thinking
+293,Monitoring
+294,Active Listening
+294,Active Learning
+294,Learning Strategies
+295,Reading Comprehension
+295,Active Listening
+295,Mathematics
+295,Critical Thinking
+295,Writing
+296,Reading Comprehension
+296,Mathematics
+296,Monitoring
+297,Critical Thinking
+297,Monitoring
+297,Mathematics
+297,Writing
+298,Speaking
+298,Science
+298,Writing
+299,Active Learning
+299,Monitoring
+299,Active Listening
+299,Reading Comprehension
+300,Mathematics
+300,Monitoring
+300,Active Listening
+300,Science
+301,Active Listening
+301,Speaking
+301,Writing
+301,Mathematics
+302,Speaking
+302,Writing
+302,Critical Thinking
+302,Active Learning
+302,Learning Strategies
+303,Active Learning
+303,Learning Strategies
+303,Reading Comprehension
+304,Critical Thinking
+304,Speaking
+304,Active Listening
+305,Writing
+305,Critical Thinking
+305,Reading Comprehension
+306,Speaking
+306,Active Learning
+306,Reading Comprehension
+306,Critical Thinking
+307,Reading Comprehension
+307,Writing
+307,Active Listening
+307,Active Learning
+308,Critical Thinking
+308,Mathematics
+308,Speaking
+309,Monitoring
+309,Science
+309,Active Learning
+310,Active Learning
+310,Reading Comprehension
+310,Science
+310,Active Listening
+311,Reading Comprehension
+311,Learning Strategies
+311,Critical Thinking
+311,Active Learning
+311,Speaking
+312,Critical Thinking
+312,Monitoring
+312,Science
+312,Active Listening
+313,Critical Thinking
+313,Active Listening
+313,Monitoring
+313,Learning Strategies
+314,Learning Strategies
+314,Science
+314,Monitoring
+315,Critical Thinking
+315,Mathematics
+315,Monitoring
+315,Science
+316,Monitoring
+316,Mathematics
+316,Writing
+317,Critical Thinking
+317,Monitoring
+317,Active Learning
+317,Learning Strategies
+318,Monitoring
+318,Active Listening
+318,Critical Thinking
+318,Speaking
+318,Active Learning
+319,Monitoring
+319,Speaking
+319,Critical Thinking
+320,Learning Strategies
+320,Active Listening
+320,Mathematics
+320,Monitoring
+321,Science
+321,Mathematics
+321,Active Listening
+322,Critical Thinking
+322,Science
+322,Learning Strategies
+322,Active Listening
+322,Speaking
+323,Learning Strategies
+323,Science
+323,Reading Comprehension
+323,Monitoring
+323,Active Listening
+324,Active Listening
+324,Learning Strategies
+324,Critical Thinking
+324,Writing
+325,Science
+325,Learning Strategies
+325,Speaking
+325,Active Listening
+326,Reading Comprehension
+326,Monitoring
+326,Active Listening
+327,Speaking
+327,Active Listening
+327,Mathematics
+327,Writing
+327,Critical Thinking
+328,Mathematics
+328,Active Listening
+328,Speaking
+328,Critical Thinking
+329,Reading Comprehension
+329,Speaking
+329,Mathematics
+329,Learning Strategies
+329,Active Learning
+330,Writing
+330,Learning Strategies
+330,Monitoring
+330,Active Learning
+330,Reading Comprehension
+331,Mathematics
+331,Science
+331,Active Learning
+331,Critical Thinking
+331,Writing
+332,Speaking
+332,Critical Thinking
+332,Writing
+333,Mathematics
+333,Active Learning
+333,Critical Thinking
+333,Monitoring
+334,Speaking
+334,Critical Thinking
+334,Writing
+334,Learning Strategies
+334,Science
+335,Active Listening
+335,Speaking
+335,Critical Thinking
+336,Speaking
+336,Active Learning
+336,Science
+337,Speaking
+337,Mathematics
+337,Monitoring
+338,Reading Comprehension
+338,Active Listening
+338,Speaking
+339,Science
+339,Active Listening
+339,Monitoring
+340,Learning Strategies
+340,Speaking
+340,Writing
+340,Reading Comprehension
+341,Writing
+341,Science
+341,Monitoring
+341,Active Listening
+342,Writing
+342,Learning Strategies
+342,Speaking
+343,Science
+343,Active Listening
+343,Learning Strategies
+344,Learning Strategies
+344,Reading Comprehension
+344,Mathematics
+344,Science
+345,Monitoring
+345,Science
+345,Critical Thinking
+345,Writing
+345,Learning Strategies
+346,Writing
+346,Speaking
+346,Learning Strategies
+346,Reading Comprehension
+347,Active Listening
+347,Reading Comprehension
+347,Writing
+347,Learning Strategies
+348,Science
+348,Active Learning
+348,Speaking
+348,Active Listening
+348,Writing
+349,Critical Thinking
+349,Reading Comprehension
+349,Writing
+349,Speaking
+350,Science
+350,Critical Thinking
+350,Mathematics
+350,Active Listening
+350,Writing
+351,Writing
+351,Mathematics
+351,Speaking
+351,Active Listening
+351,Science
+352,Science
+352,Learning Strategies
+352,Reading Comprehension
+352,Speaking
+352,Active Listening
+353,Critical Thinking
+353,Learning Strategies
+353,Active Listening
+354,Learning Strategies
+354,Writing
+354,Science
+355,Writing
+355,Critical Thinking
+355,Mathematics
+356,Active Listening
+356,Reading Comprehension
+356,Critical Thinking
+356,Active Learning
+357,Learning Strategies
+357,Science
+357,Active Learning
+358,Active Learning
+358,Writing
+358,Critical Thinking
+358,Mathematics
+358,Science
+359,Speaking
+359,Critical Thinking
+359,Active Listening
+360,Reading Comprehension
+360,Active Learning
+360,Learning Strategies
+360,Active Listening
+360,Mathematics
+361,Science
+361,Critical Thinking
+361,Speaking
+361,Active Learning
+361,Monitoring
+362,Speaking
+362,Writing
+362,Mathematics
+362,Learning Strategies
+362,Reading Comprehension
+363,Monitoring
+363,Speaking
+363,Science
+363,Active Listening
+363,Writing
+364,Learning Strategies
+364,Active Listening
+364,Monitoring
+364,Speaking
+364,Writing
+365,Science
+365,Reading Comprehension
+365,Active Learning
+365,Speaking
+365,Active Listening
+366,Learning Strategies
+366,Science
+366,Critical Thinking
+367,Speaking
+367,Active Listening
+367,Monitoring
+368,Writing
+368,Monitoring
+368,Speaking
+368,Learning Strategies
+368,Active Listening
+369,Reading Comprehension
+369,Active Learning
+369,Monitoring
+369,Active Listening
+369,Speaking
+370,Reading Comprehension
+370,Speaking
+370,Writing
+371,Critical Thinking
+371,Writing
+371,Learning Strategies
+372,Mathematics
+372,Active Learning
+372,Learning Strategies
+373,Learning Strategies
+373,Active Learning
+373,Speaking
+374,Speaking
+374,Science
+374,Writing
+375,Active Learning
+375,Critical Thinking
+375,Science
+376,Critical Thinking
+376,Active Listening
+376,Reading Comprehension
+376,Learning Strategies
+376,Mathematics
+377,Learning Strategies
+377,Active Learning
+377,Writing
+378,Critical Thinking
+378,Active Listening
+378,Science
+379,Speaking
+379,Writing
+379,Mathematics
+380,Mathematics
+380,Critical Thinking
+380,Active Listening
+380,Learning Strategies
+380,Writing
+381,Writing
+381,Monitoring
+381,Active Learning
+381,Speaking
+382,Science
+382,Mathematics
+382,Active Learning
+383,Speaking
+383,Critical Thinking
+383,Science
+383,Learning Strategies
+384,Critical Thinking
+384,Monitoring
+384,Speaking
+384,Mathematics
+385,Active Listening
+385,Critical Thinking
+385,Reading Comprehension
+385,Monitoring
+385,Active Learning
+386,Critical Thinking
+386,Speaking
+386,Active Listening
+386,Active Learning
+387,Monitoring
+387,Science
+387,Active Learning
+387,Learning Strategies
+388,Mathematics
+388,Writing
+388,Speaking
+388,Active Listening
+388,Learning Strategies
+389,Mathematics
+389,Critical Thinking
+389,Active Learning
+389,Learning Strategies
+389,Active Listening
+390,Learning Strategies
+390,Speaking
+390,Active Listening
+390,Monitoring
+391,Active Learning
+391,Science
+391,Speaking
+391,Writing
+392,Active Listening
+392,Writing
+392,Active Learning
+392,Speaking
+393,Science
+393,Monitoring
+393,Critical Thinking
+393,Active Learning
+394,Active Learning
+394,Mathematics
+394,Writing
+394,Active Listening
+394,Monitoring
+395,Monitoring
+395,Science
+395,Learning Strategies
+395,Speaking
+396,Reading Comprehension
+396,Speaking
+396,Science
+397,Critical Thinking
+397,Active Listening
+397,Monitoring
+398,Critical Thinking
+398,Active Learning
+398,Active Listening
+398,Science
+398,Speaking
+399,Writing
+399,Monitoring
+399,Active Learning
+400,Reading Comprehension
+400,Learning Strategies
+400,Active Listening
+401,Critical Thinking
+401,Reading Comprehension
+401,Writing
+401,Active Learning
+402,Learning Strategies
+402,Critical Thinking
+402,Speaking
+402,Science
+402,Reading Comprehension
+403,Mathematics
+403,Monitoring
+403,Science
+404,Critical Thinking
+404,Monitoring
+404,Learning Strategies
+405,Active Listening
+405,Learning Strategies
+405,Speaking
+406,Critical Thinking
+406,Writing
+406,Reading Comprehension
+406,Mathematics
+407,Learning Strategies
+407,Reading Comprehension
+407,Critical Thinking
+407,Science
+408,Active Listening
+408,Reading Comprehension
+408,Active Learning
+408,Speaking
+408,Critical Thinking
+409,Speaking
+409,Active Listening
+409,Science
+409,Reading Comprehension
+409,Active Learning
+410,Reading Comprehension
+410,Monitoring
+410,Mathematics
+411,Mathematics
+411,Active Learning
+411,Speaking
+412,Monitoring
+412,Learning Strategies
+412,Active Learning
+413,Active Listening
+413,Science
+413,Learning Strategies
+413,Reading Comprehension
+413,Mathematics
+414,Mathematics
+414,Active Learning
+414,Reading Comprehension
+414,Science
+415,Active Learning
+415,Reading Comprehension
+415,Writing
+415,Learning Strategies
+415,Speaking
+416,Monitoring
+416,Speaking
+416,Reading Comprehension
+417,Learning Strategies
+417,Monitoring
+417,Critical Thinking
+417,Science
+417,Mathematics
+418,Learning Strategies
+418,Reading Comprehension
+418,Science
+419,Science
+419,Writing
+419,Reading Comprehension
+419,Speaking
+420,Mathematics
+420,Reading Comprehension
+420,Critical Thinking
+421,Writing
+421,Reading Comprehension
+421,Active Listening
+421,Mathematics
+422,Monitoring
+422,Mathematics
+422,Learning Strategies
+422,Reading Comprehension
+423,Speaking
+423,Writing
+423,Critical Thinking
+424,Science
+424,Monitoring
+424,Critical Thinking
+424,Speaking
+425,Science
+425,Mathematics
+425,Monitoring
+425,Reading Comprehension
+426,Mathematics
+426,Learning Strategies
+426,Active Learning
+427,Active Listening
+427,Mathematics
+427,Monitoring
+428,Monitoring
+428,Speaking
+428,Active Listening
+429,Learning Strategies
+429,Monitoring
+429,Mathematics
+429,Speaking
+430,Science
+430,Monitoring
+430,Writing
+431,Monitoring
+431,Writing
+431,Speaking
+431,Mathematics
+431,Active Learning
+432,Active Listening
+432,Learning Strategies
+432,Critical Thinking
+432,Active Learning
+433,Active Listening
+433,Learning Strategies
+433,Monitoring
+434,Speaking
+434,Active Learning
+434,Critical Thinking
+434,Reading Comprehension
+435,Active Learning
+435,Speaking
+435,Active Listening
+435,Critical Thinking
+435,Science
+436,Critical Thinking
+436,Active Learning
+436,Science
+436,Writing
+437,Learning Strategies
+437,Monitoring
+437,Science
+437,Speaking
+438,Writing
+438,Speaking
+438,Learning Strategies
+439,Reading Comprehension
+439,Critical Thinking
+439,Writing
+439,Active Listening
+440,Learning Strategies
+440,Reading Comprehension
+440,Speaking
+441,Critical Thinking
+441,Science
+441,Active Listening
+442,Active Listening
+442,Writing
+442,Critical Thinking
+442,Active Learning
+443,Monitoring
+443,Reading Comprehension
+443,Mathematics
+443,Science
+443,Writing
+444,Monitoring
+444,Reading Comprehension
+444,Active Listening
+445,Active Learning
+445,Learning Strategies
+445,Critical Thinking
+445,Mathematics
+446,Speaking
+446,Active Learning
+446,Science
+446,Learning Strategies
+446,Writing
+447,Speaking
+447,Monitoring
+447,Critical Thinking
+447,Active Learning
+448,Learning Strategies
+448,Reading Comprehension
+448,Science
+449,Active Learning
+449,Critical Thinking
+449,Learning Strategies
+450,Science
+450,Critical Thinking
+450,Monitoring
+451,Science
+451,Active Listening
+451,Mathematics
+452,Reading Comprehension
+452,Mathematics
+452,Learning Strategies
+452,Science
+453,Speaking
+453,Active Listening
+453,Critical Thinking
+454,Speaking
+454,Mathematics
+454,Reading Comprehension
+455,Monitoring
+455,Critical Thinking
+455,Active Learning
+455,Mathematics
+455,Learning Strategies
+456,Active Listening
+456,Critical Thinking
+456,Speaking
+456,Writing
+456,Mathematics
+457,Mathematics
+457,Speaking
+457,Reading Comprehension
+457,Active Learning
+457,Writing
+458,Speaking
+458,Active Listening
+458,Learning Strategies
+459,Science
+459,Critical Thinking
+459,Monitoring
+459,Learning Strategies
+459,Active Learning
+460,Active Listening
+460,Monitoring
+460,Critical Thinking
+461,Learning Strategies
+461,Speaking
+461,Critical Thinking
+461,Mathematics
+461,Reading Comprehension
+462,Learning Strategies
+462,Critical Thinking
+462,Science
+462,Monitoring
+463,Active Listening
+463,Speaking
+463,Learning Strategies
+464,Speaking
+464,Active Learning
+464,Writing
+465,Active Learning
+465,Monitoring
+465,Speaking
+466,Learning Strategies
+466,Reading Comprehension
+466,Active Learning
+466,Critical Thinking
+466,Writing
+467,Critical Thinking
+467,Learning Strategies
+467,Monitoring
+468,Critical Thinking
+468,Monitoring
+468,Learning Strategies
+468,Active Listening
+468,Mathematics
+469,Reading Comprehension
+469,Writing
+469,Critical Thinking
+470,Mathematics
+470,Science
+470,Speaking
+471,Learning Strategies
+471,Reading Comprehension
+471,Active Listening
+471,Critical Thinking
+471,Science
+472,Active Learning
+472,Active Listening
+472,Monitoring
+472,Mathematics
+472,Learning Strategies
+473,Monitoring
+473,Writing
+473,Mathematics
+473,Active Listening
+474,Monitoring
+474,Critical Thinking
+474,Science
+475,Learning Strategies
+475,Monitoring
+475,Active Listening
+475,Critical Thinking
+475,Mathematics
+476,Writing
+476,Reading Comprehension
+476,Mathematics
+476,Speaking
+477,Monitoring
+477,Reading Comprehension
+477,Science
+477,Speaking
+478,Science
+478,Learning Strategies
+478,Monitoring
+478,Writing
+478,Active Learning
+479,Critical Thinking
+479,Speaking
+479,Science
+479,Writing
+479,Reading Comprehension
+480,Reading Comprehension
+480,Speaking
+480,Active Listening
+480,Learning Strategies
+481,Active Listening
+481,Critical Thinking
+481,Science
+481,Active Learning
+481,Mathematics
+482,Reading Comprehension
+482,Critical Thinking
+482,Learning Strategies
+482,Mathematics
+483,Writing
+483,Mathematics
+483,Reading Comprehension
+483,Monitoring
+484,Active Listening
+484,Mathematics
+484,Monitoring
+484,Speaking
+485,Science
+485,Active Listening
+485,Mathematics
+486,Active Listening
+486,Reading Comprehension
+486,Science
+487,Writing
+487,Mathematics
+487,Speaking
+487,Critical Thinking
+487,Monitoring
+488,Mathematics
+488,Speaking
+488,Critical Thinking
+489,Science
+489,Critical Thinking
+489,Learning Strategies
+489,Speaking
+489,Mathematics
+490,Active Listening
+490,Speaking
+490,Writing
+490,Reading Comprehension
+490,Mathematics
+491,Critical Thinking
+491,Active Listening
+491,Mathematics
+491,Learning Strategies
+492,Learning Strategies
+492,Mathematics
+492,Reading Comprehension
+492,Monitoring
+492,Critical Thinking
+493,Reading Comprehension
+493,Writing
+493,Mathematics
+493,Speaking
+493,Critical Thinking
+494,Science
+494,Monitoring
+494,Speaking
+494,Mathematics
+495,Active Learning
+495,Speaking
+495,Learning Strategies
+495,Reading Comprehension
+495,Active Listening
+496,Active Listening
+496,Critical Thinking
+496,Learning Strategies
+496,Speaking
+496,Science
+497,Science
+497,Mathematics
+497,Active Learning
+498,Writing
+498,Active Learning
+498,Speaking
+498,Science
+499,Active Listening
+499,Reading Comprehension
+499,Writing
+500,Speaking
+500,Active Listening
+500,Reading Comprehension
+500,Mathematics
+500,Critical Thinking

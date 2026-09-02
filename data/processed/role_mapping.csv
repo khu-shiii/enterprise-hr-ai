@@ -1,0 +1,25 @@
+JobRole,ONET_Title,SOC_Code,Rationale
+Software Engineer,Software Developers,15-1252.00,Developers building software products — exact concept match
+Data Analyst,Operations Research Analysts,15-2031.00,Data-driven decision analysis role closest to O*NET category
+Hr Manager,Human Resources Managers,11-3121.00,Direct title match at managerial HR level
+Sales Manager,Sales Managers,11-2022.00,Direct title match
+Marketing Analyst,Market Research Analysts and Marketing Specialists,13-1161.00,Marketing research and analysis role
+Financial Analyst,Financial Managers,11-3031.00,Direct title match
+Product Manager,Marketing Managers,11-2021.00,Product management overlaps most with Marketing Managers in O*NET taxonomy
+Customer Support,Customer Service Representatives,43-4051.00,Front-line customer service role
+Auditor,Accountants and Auditors,13-2011.00,Audit function within accounting profession
+Developer,Software Developers,15-1252.00,General developer title maps to Software Developers
+Seo Analyst,Market Research Analysts and Marketing Specialists,13-1161.00,SEO is a specialization within digital marketing analysis
+Business Analyst,Management Analysts,13-1111.00,Business analysts align with O*NET Management Analysts for process/strategy work
+Graphic Designer,Graphic Designers,27-1024.00,Direct title match
+Network Engineer,Network and Computer Systems Administrators,15-1244.00,Network engineers administrate network infrastructure
+Cybersecurity Analyst,Information Security Analysts,15-1212.00,Direct functional match
+Hr Executive,Management Analysts,13-1111.00,Fallback for 'Hr Executive' — closest generic O*NET category
+Account Manager,Management Analysts,13-1111.00,Fallback for 'Account Manager' — closest generic O*NET category
+Helpdesk,Management Analysts,13-1111.00,Fallback for 'Helpdesk' — closest generic O*NET category
+Tester,Management Analysts,13-1111.00,Fallback for 'Tester' — closest generic O*NET category
+Sales Executive,Management Analysts,13-1111.00,Fallback for 'Sales Executive' — closest generic O*NET category
+Support Engineer,Management Analysts,13-1111.00,Fallback for 'Support Engineer' — closest generic O*NET category
+Accountant,Management Analysts,13-1111.00,Fallback for 'Accountant' — closest generic O*NET category
+Content Lead,Management Analysts,13-1111.00,Fallback for 'Content Lead' — closest generic O*NET category
+Engineer,Management Analysts,13-1111.00,Fallback for 'Engineer' — closest generic O*NET category

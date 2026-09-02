@@ -1,0 +1,6 @@
+Department,Performance Score_mean,Performance Score_std,Performance Score_count,KPI Score_mean,KPI Score_std,KPI Score_count,Attendance (%)_mean,Attendance (%)_std,Attendance (%)_count,Peer Rating_mean,Peer Rating_std,Peer Rating_count,Task Completion (%)_mean,Task Completion (%)_std,Task Completion (%)_count,Work Hours Logged_mean,Work Hours Logged_std,Work Hours Logged_count,Training Hours_mean,Training Hours_std,Training Hours_count
+Finance,75.158,14.753,1016,77.393,10.191,1016,87.55,7.162,1016,4.011,0.56,1016,84.939,8.892,1016,45.018,6.022,1016,15.474,8.921,1016
+Hr,75.826,14.755,1010,77.665,10.146,1010,87.274,7.14,1010,3.996,0.567,1010,85.398,8.807,1010,45.07,5.789,1010,14.59,9.15,1010
+It,74.681,14.163,974,77.445,10.266,974,87.662,7.199,974,3.983,0.595,974,84.813,8.652,974,44.911,5.993,974,14.637,8.902,974
+Marketing,73.859,14.718,965,76.904,10.063,965,87.257,7.287,965,4.026,0.578,965,84.96,8.563,965,44.826,6.052,965,15.051,9.125,965
+Sales,74.337,14.863,1035,77.496,10.124,1035,87.585,7.368,1035,3.986,0.604,1035,84.782,8.561,1035,44.821,5.958,1035,14.634,8.916,1035
