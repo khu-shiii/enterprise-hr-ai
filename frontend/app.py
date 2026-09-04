@@ -14,6 +14,10 @@ import sys
 import joblib
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load .env variables
+load_dotenv()
 
 # Ensure project root in sys.path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -745,12 +749,15 @@ elif nav == "Workforce AI Assistant":
         with st.chat_message("user"): st.markdown(user_query)
 
         rag_context = build_system_context(intel_df, org_gap_df, dept_scores_df, user_query)
+        active_key = ai_key if 'ai_key' in locals() and ai_key else os.environ.get("GEMINI_API_KEY", "")
+        active_provider = ai_provider if 'ai_provider' in locals() and ai_provider else ("Google Gemini" if active_key else "Built-in Synthesizer")
+
         with st.chat_message("assistant"):
             with st.spinner("Analyzing workforce telemetry..."):
                 reply = generate_llm_response(
                     st.session_state.chat_messages, rag_context,
-                    api_key=os.environ.get("GEMINI_API_KEY", ""),
-                    provider="Google Gemini" if os.environ.get("GEMINI_API_KEY") else "Built-in Synthesizer"
+                    api_key=active_key,
+                    provider=active_provider
                 )
                 st.markdown(reply)
         st.session_state.chat_messages.append({"role": "assistant", "content": reply})

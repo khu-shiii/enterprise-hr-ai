@@ -35,3 +35,8 @@ Thumbs.db
 
 # Pytest cache
 .pytest_cache/
+
+# Streamlit secrets & local config
+.streamlit/secrets.toml
+.streamlit/
+

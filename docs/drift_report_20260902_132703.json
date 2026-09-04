@@ -1,0 +1,66 @@
+{
+  "run_at": "2026-09-02T13:27:03.052909+00:00",
+  "baseline_rows": 500,
+  "production_rows": 500,
+  "features_checked": 5,
+  "features_drifted": 0,
+  "overall_drift_detected": false,
+  "drift_threshold": 0.05,
+  "feature_results": [
+    {
+      "feature": "Age",
+      "ks_statistic": 0.0,
+      "p_value": 1.0,
+      "drift_detected": false,
+      "baseline_mean": 40.86,
+      "prod_mean": 40.86,
+      "baseline_std": 12.087,
+      "prod_std": 12.087,
+      "mean_shift_pct": 0.0
+    },
+    {
+      "feature": "MonthlySalary",
+      "ks_statistic": 0.0,
+      "p_value": 1.0,
+      "drift_detected": false,
+      "baseline_mean": 103678.756,
+      "prod_mean": 103678.756,
+      "baseline_std": 46043.114,
+      "prod_std": 46043.114,
+      "mean_shift_pct": 0.0
+    },
+    {
+      "feature": "YearsAtCompany",
+      "ks_statistic": 0.0,
+      "p_value": 1.0,
+      "drift_detected": false,
+      "baseline_mean": 8.094,
+      "prod_mean": 8.094,
+      "baseline_std": 4.078,
+      "prod_std": 4.078,
+      "mean_shift_pct": 0.0
+    },
+    {
+      "feature": "WorkLifeBalanceScore",
+      "ks_statistic": 0.0,
+      "p_value": 1.0,
+      "drift_detected": false,
+      "baseline_mean": 3.706,
+      "prod_mean": 3.706,
+      "baseline_std": 2.865,
+      "prod_std": 2.865,
+      "mean_shift_pct": 0.0
+    },
+    {
+      "feature": "PerformanceRating",
+      "ks_statistic": 0.0,
+      "p_value": 1.0,
+      "drift_detected": false,
+      "baseline_mean": 3.26,
+      "prod_mean": 3.26,
+      "baseline_std": 0.939,
+      "prod_std": 0.939,
+      "mean_shift_pct": 0.0
+    }
+  ]
+}
